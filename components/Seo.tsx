@@ -12,6 +12,7 @@ const Seo: FC<{
     <Head>
       <title>{title ? `${title} - Kokua` : `kokua`}</title>
       <meta name='description' content={description} />
+      <link rel='icon' href='favicon.svg' />
     </Head>
   );
 };

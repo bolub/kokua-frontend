@@ -1,7 +1,6 @@
 import { Box, chakra } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import type { NextPage } from 'next';
-import Head from 'next/head';
 import { getFrameworksAndLibraries, getLanguages } from '../API/home';
 import DataSection from '../components/landing/DataSection';
 import Header from '../components/landing/Header';
@@ -15,15 +14,6 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Head>
-        <title> Kokua </title>
-        <meta
-          name='description'
-          content='Useful resources to help with software development'
-        />
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
-
       <Box>
         <Header />
 
