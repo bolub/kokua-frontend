@@ -28,8 +28,7 @@ const DataSection: FC<{
                 href={`/resources/${resourceData?.name}`}
                 key={resource.id}
                 title={resourceData.name}
-                logo={resourceData.logo_url || resourceData.logourl}
-                numberOfItem={resourceData?.resources?.data?.length}
+                logo={resourceData?.logo_url || resourceData?.logourl}
               />
             );
           })}

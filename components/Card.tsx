@@ -7,10 +7,9 @@ interface Data {
   href: string;
   title: string;
   logo: string;
-  numberOfItem: number;
 }
 
-const Card: FC<Data> = ({ title, logo, numberOfItem, href }) => {
+const Card: FC<Data> = ({ title, logo, href }) => {
   return (
     <Link href={href} passHref>
       <ChakraLink
@@ -26,7 +25,7 @@ const Card: FC<Data> = ({ title, logo, numberOfItem, href }) => {
         alignItems={'center'}
       >
         <Skeleton isLoaded={Boolean(logo)}>
-          <Image src={logo} alt={title} width={32} height={32} />
+          {logo && <Image src={logo} alt={title} width={32} height={32} />}
         </Skeleton>
 
         <Skeleton isLoaded={Boolean(title)}>
@@ -34,16 +33,6 @@ const Card: FC<Data> = ({ title, logo, numberOfItem, href }) => {
             {title}
           </Text>
         </Skeleton>
-
-        <HStack mt='10px'>
-          <Text as={'span'}>🪵</Text>
-
-          <Skeleton isLoaded={Boolean(numberOfItem)}>
-            <Text fontSize='sm' fontWeight={700}>
-              {numberOfItem}
-            </Text>
-          </Skeleton>
-        </HStack>
       </ChakraLink>
     </Link>
   );
