@@ -1,4 +1,4 @@
-import { Text, Link as ChakraLink, HStack, Skeleton } from '@chakra-ui/react';
+import { Text, Link as ChakraLink, Skeleton } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { FC } from 'react';
@@ -25,11 +25,16 @@ const Card: FC<Data> = ({ title, logo, href }) => {
         alignItems={'center'}
       >
         <Skeleton isLoaded={Boolean(logo)}>
-          {logo && <Image src={logo} alt={title} width={32} height={32} />}
+          <Image src={logo} alt={title} width={32} height={32} />
         </Skeleton>
 
-        <Skeleton isLoaded={Boolean(title)}>
-          <Text mt='10px' fontSize='sm' fontWeight={600}>
+        <Skeleton
+          isLoaded={Boolean(title)}
+          height={!Boolean(title) ? '10px' : ''}
+          width={!Boolean(title) ? '60px' : ''}
+          mt='10px'
+        >
+          <Text fontSize='sm' fontWeight={600}>
             {title}
           </Text>
         </Skeleton>

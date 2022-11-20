@@ -17,7 +17,7 @@ const Home: NextPage = () => {
       <Box>
         <Header />
 
-        <chakra.main id='main'>
+        <chakra.main id='main' py={'60px'}>
           {/* Programming Languages */}
           <DataSection
             title=' Programming Languages'
