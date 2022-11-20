@@ -8,6 +8,8 @@ import {
   chakra,
   Container,
   Skeleton,
+  Button,
+  Icon,
 } from '@chakra-ui/react';
 import React, { useMemo } from 'react';
 import TabBadge from '../../components/ResourcePage/TabBadge';
@@ -15,6 +17,9 @@ import ResourceDataSection from '../../components/ResourcePage/ResourceDataSecti
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { getResourceList } from '../../API/resourceList';
+import Seo from '../../components/Seo';
+import { HiOutlineArrowLeft } from 'react-icons/hi';
+import Link from 'next/link';
 
 const Resources = () => {
   const tabStyles = {
@@ -66,10 +71,35 @@ const Resources = () => {
 
   return (
     <>
+      <Seo
+        title={query?.slug as string}
+        description={`Useful Resources for ${query?.slug}`}
+      />
       {/* Header */}
       <chakra.header background={'backgrounds.200'}>
-        <Container display={'flex'} alignItems={'center'} h={'165px'}>
-          <Skeleton isLoaded={!isLoading}>
+        <Container
+          display={'flex'}
+          flexDir='column'
+          pt='40px'
+          pb='70px'
+          alignItems='start'
+        >
+          <Link href={'/'} passHref>
+            <Button
+              as='a'
+              variant='unstyled'
+              size='xs'
+              display={'flex'}
+              gap='2px'
+            >
+              <Icon as={HiOutlineArrowLeft} />
+              <Text as='span' p='10px'>
+                Back to Home
+              </Text>
+            </Button>
+          </Link>
+
+          <Skeleton isLoaded={!isLoading} mt='29px'>
             <Text fontSize={'24px'} fontWeight={'700'}>
               {query.slug}
             </Text>

@@ -52,3 +52,114 @@ export const homeData = [
     }
   }
 ]
+
+export const resourceListDataMock = [
+  {
+    "id": 1,
+    "attributes": {
+      "name": null,
+      "subtitle": null,
+      "type": "course",
+      "external_url": "",
+      "content": null,
+      "createdAt": "2022-11-15T08:30:25.003Z",
+      "updatedAt": "2022-11-20T08:52:14.096Z",
+      "publishedAt": "2022-11-15T08:30:27.671Z",
+      "tags": {
+        "data": [
+          {
+            "id": 1,
+            "attributes": {
+              "name": null,
+            }
+          },
+          {
+            "id": 2,
+            "attributes": {
+              "name": null,
+            }
+          },
+          {
+            "id": 3,
+            "attributes": {
+              "name": null,
+            }
+          },
+
+        ]
+      }
+    }
+  },
+  {
+    "id": 2,
+    "attributes": {
+      "name": null,
+      "subtitle": null,
+      "type": "course",
+      "external_url": "",
+      "content": null,
+      "createdAt": "2022-11-15T08:30:25.003Z",
+      "updatedAt": "2022-11-20T08:52:14.096Z",
+      "publishedAt": "2022-11-15T08:30:27.671Z",
+      "tags": {
+        "data": [
+          {
+            "id": 1,
+            "attributes": {
+              "name": null,
+            }
+          },
+          {
+            "id": 2,
+            "attributes": {
+              "name": null,
+            }
+          },
+          {
+            "id": 3,
+            "attributes": {
+              "name": null,
+            }
+          },
+
+        ]
+      }
+    }
+  },
+  {
+    "id": 3,
+    "attributes": {
+      "name": null,
+      "subtitle": null,
+      "type": "course",
+      "external_url": "",
+      "content": null,
+      "createdAt": "2022-11-15T08:30:25.003Z",
+      "updatedAt": "2022-11-20T08:52:14.096Z",
+      "publishedAt": "2022-11-15T08:30:27.671Z",
+      "tags": {
+        "data": [
+          {
+            "id": 1,
+            "attributes": {
+              "name": null,
+            }
+          },
+          {
+            "id": 2,
+            "attributes": {
+              "name": null,
+            }
+          },
+          {
+            "id": 3,
+            "attributes": {
+              "name": null,
+            }
+          },
+
+        ]
+      }
+    }
+  }
+]

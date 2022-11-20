@@ -10,7 +10,7 @@ const DataSection: FC<{
   type: 'framework' | 'language';
 }> = ({ title, data, type }) => {
   return (
-    <chakra.section id={title} mb='100px'>
+    <chakra.section id={title} mb={{ base: '40px', md: '60px' }}>
       <Container py={'60px'}>
         <Text fontWeight={'700'} fontSize={'15px'}>
           {title}

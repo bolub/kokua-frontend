@@ -4,6 +4,7 @@ import {
   Flex,
   Heading,
   HStack,
+  Skeleton,
   Text,
   Wrap,
   WrapItem,
@@ -30,36 +31,47 @@ const ResourceCard: FC<Data> = ({ title, description, tags }) => {
       flexDir='column'
       h='278px'
     >
-      <Heading
-        as='h2'
-        fontSize={'16px'}
-        fontWeight={'700'}
-        noOfLines={2}
-        lineHeight='28px'
+      <Skeleton height={Boolean(title) ? '' : '20px'} isLoaded={Boolean(title)}>
+        <Heading
+          as='h2'
+          fontSize={'16px'}
+          fontWeight={'700'}
+          noOfLines={2}
+          lineHeight='28px'
+        >
+          {title}
+        </Heading>
+      </Skeleton>
+
+      <Skeleton
+        height={Boolean(description) ? '' : '10px'}
+        mt='14px'
+        isLoaded={Boolean(description)}
       >
-        {title}
-      </Heading>
-      <Text mt='14px' fontSize={'14px'} fontWeight={'500'} noOfLines={2}>
-        {description}
-      </Text>
+        <Text fontSize={'14px'} fontWeight={'500'} noOfLines={2}>
+          {description}
+        </Text>
+      </Skeleton>
 
       <Wrap mt='auto' spacingX='12px' spacingY={'7px'}>
         {tags?.data?.map((t) => (
           <WrapItem key={t.id}>
-            <Badge
-              py={'1'}
-              px={'14px'}
-              borderRadius={'200px'}
-              color={'text.100'}
-              borderColor={'border.200'}
-              borderWidth={'1px'}
-              fontWeight={'600'}
-              textTransform={'capitalize'}
-              fontSize={'12px'}
-              bg='white'
-            >
-              {t.attributes.name}
-            </Badge>
+            <Skeleton isLoaded={Boolean(t.attributes.name)}>
+              <Badge
+                py={'1'}
+                px={'14px'}
+                borderRadius={'200px'}
+                color={'text.100'}
+                borderColor={'border.200'}
+                borderWidth={'1px'}
+                fontWeight={'600'}
+                textTransform={'capitalize'}
+                fontSize={'12px'}
+                bg='white'
+              >
+                {t.attributes.name}
+              </Badge>
+            </Skeleton>
           </WrapItem>
         ))}
       </Wrap>
