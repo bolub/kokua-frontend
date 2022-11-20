@@ -6,6 +6,7 @@ import { theme } from '../chakra/theme';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Navbar } from '../components/Navbar';
+import Seo from '../components/Seo';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient();
@@ -14,8 +15,12 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ChakraProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
-        <Navbar />
-        <Component {...pageProps} />
+        <>
+          <Seo />
+
+          <Navbar />
+          <Component {...pageProps} />
+        </>
       </QueryClientProvider>
     </ChakraProvider>
   );
