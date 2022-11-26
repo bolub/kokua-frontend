@@ -44,7 +44,10 @@ const Resources = () => {
   const { isLoading, data } = useQuery(
     ['resourceData', query.slug],
     () => {
-      return getResourceList(query?.slug as string);
+      return getResourceList({
+        tag: query?.slug as string,
+        search: query?.search as string,
+      });
     },
     {
       enabled: Boolean(query.slug),

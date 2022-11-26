@@ -1,9 +1,11 @@
 import { Box, chakra } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import type { NextPage } from 'next';
-import { getFrameworksAndLibraries, getLanguages } from '../API/home';
+import { useState } from 'react';
+import { getFrameworksAndLibraries, getLanguages, getTags } from '../API/home';
 import DataSection from '../components/landing/DataSection';
 import Header from '../components/landing/Header';
+import SearchSection from '../components/landing/SearchSection';
 
 const Home: NextPage = () => {
   const { data: languagesData } = useQuery(['languages'], getLanguages);
@@ -11,6 +13,7 @@ const Home: NextPage = () => {
     ['frameworks'],
     getFrameworksAndLibraries
   );
+  const { data: tagsData } = useQuery(['tags'], getTags);
 
   return (
     <>
@@ -18,6 +21,9 @@ const Home: NextPage = () => {
         <Header />
 
         <chakra.main id='main' py={'60px'}>
+          {/* Search section */}
+          <SearchSection data={tagsData} />
+
           {/* Programming Languages */}
           <DataSection
             title=' Programming Languages'

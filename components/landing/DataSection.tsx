@@ -1,4 +1,4 @@
-import { chakra, Container, SimpleGrid, Text } from '@chakra-ui/react';
+import { chakra, Container, Heading, SimpleGrid, Text } from '@chakra-ui/react';
 import { FC } from 'react';
 import { Category } from '../../utils/GeneralProps';
 import { homeData } from '../../utils/mock';
@@ -8,13 +8,13 @@ const DataSection: FC<{
   title: string;
   data: Category[];
   type: 'framework' | 'language';
-}> = ({ title, data, type }) => {
+}> = ({ title, data }) => {
   return (
     <chakra.section id={title} mb={{ base: '40px', md: '100px' }}>
       <Container>
-        <Text fontWeight={'700'} fontSize={'15px'}>
+        <Heading as='h2' fontWeight={'700'} fontSize={'15px'}>
           {title}
-        </Text>
+        </Heading>
         <SimpleGrid
           columns={{ base: 1, md: 2, lg: 3, xl: 4 }}
           gap='19px'

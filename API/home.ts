@@ -1,5 +1,5 @@
 import API from '.'
-import { Category } from '../utils/GeneralProps';
+import { Category, Tag } from '../utils/GeneralProps';
 
 export const getLanguages = async () => {
   const response = await API.get('/languages');
@@ -8,4 +8,9 @@ export const getLanguages = async () => {
 export const getFrameworksAndLibraries = async () => {
   const response = await API.get('/frameworks');
   return response.data.data as Category[];
+}
+
+export const getTags = async () => {
+  const response = await API.get('/tags');
+  return response.data.data as Tag[];
 }
