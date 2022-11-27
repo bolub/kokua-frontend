@@ -10,7 +10,7 @@ export const getResourceList = async ({ tag, search }: { tag: string, search: st
   const searchFilters = `filters[$or][0][name][$containsi]=${tag}&filters[$or][1][tags][name][$containsi]=${tag}`
 
 
-  const filters = search !== 'true' ? tagFilters : { searchFilters }
+  const filters = search === 'true' ? searchFilters : tagFilters
 
   const response = await API.get(`/resources?${filters}&${pagination}&populate=*`);
 
