@@ -11,6 +11,6 @@ export const getFrameworksAndLibraries = async () => {
 }
 
 export const getTags = async () => {
-  const response = await API.get('/tags');
+  const response = await API.get('/tags?pagination[pageSize]=100');
   return response.data.data as Tag[];
 }
