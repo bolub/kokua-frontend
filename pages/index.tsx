@@ -1,7 +1,6 @@
 import { Box, chakra } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import type { NextPage } from 'next';
-import { useState } from 'react';
 import { getFrameworksAndLibraries, getLanguages, getTags } from '../API/home';
 import DataSection from '../components/landing/DataSection';
 import Header from '../components/landing/Header';
@@ -14,6 +13,18 @@ const Home: NextPage = () => {
     getFrameworksAndLibraries
   );
   const { data: tagsData } = useQuery(['tags'], getTags);
+
+  const specialResources = [
+    {
+      id: 1,
+      attributes: {
+        name: 'Special',
+        logo_url:
+          'https://emojipedia-us.s3.amazonaws.com/source/microsoft-teams/337/grinning-face_1f600.png',
+        logourl: '',
+      },
+    },
+  ];
 
   return (
     <>
@@ -35,6 +46,13 @@ const Home: NextPage = () => {
           <DataSection
             title='Frameworks and Libraries'
             data={frameworksData}
+            type='framework'
+          />
+
+          {/* Special section */}
+          <DataSection
+            title='Special Resources'
+            data={specialResources}
             type='framework'
           />
         </chakra.main>
