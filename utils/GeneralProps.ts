@@ -2,9 +2,9 @@ export interface CategoryInner {
   name: string;
   logo_url: string;
   logourl?: string;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
+  publishedAt?: string;
   resources?: {
     data: Resources[]
   }
@@ -14,6 +14,7 @@ export interface Category {
   id: number;
   attributes: CategoryInner;
 }
+
 
 export interface Resources {
   id: string;
@@ -26,9 +27,9 @@ export interface ResourceAttributes {
   type: ResourceType;
   external_url: string;
   content: string;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
+  publishedAt?: string;
   tags: Tags;
 }
 
@@ -45,7 +46,7 @@ export interface TagInner {
 
 export interface TagAttributes {
   name: string;
-  createdAt: string;
+  createdAt?: string;
   updatedAt: string;
   publishedAt: string;
 }
@@ -59,7 +60,7 @@ export interface Tag {
 
 export interface Attributes {
   name: string;
-  createdAt: string;
+  createdAt?: string;
   updatedAt: string;
   publishedAt: string;
 }
