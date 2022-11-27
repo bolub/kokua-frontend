@@ -6,7 +6,7 @@ export const getResourceList = async ({ tag, search }: { tag: string, search: st
 
   const pagination = 'pagination[pageSize]=100';
 
-  const tagFilters = `filters[tags][name][$containsi]=${tag}`;
+  const tagFilters = `filters[tags][name][$eq]=${tag}`;
   const searchFilters = `filters[$or][0][name][$containsi]=${tag}&filters[$or][1][tags][name][$containsi]=${tag}`
 
 
