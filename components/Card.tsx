@@ -18,11 +18,16 @@ const Card: FC<Data> = ({ title, logo, href }) => {
         borderWidth={'1px'}
         h={'201px'}
         shadow={'md'}
-        bg={'shadow.100'}
+        bgColor={'shadow.100'}
         display={'flex'}
         flexDir='column'
         justifyContent={'center'}
         alignItems={'center'}
+        _hover={{
+          borderColor: 'brand.500',
+          borderWidth: '2px',
+        }}
+        transition='all .3s'
       >
         <Skeleton isLoaded={Boolean(logo)}>
           <Image src={logo} alt={title} width={32} height={32} />

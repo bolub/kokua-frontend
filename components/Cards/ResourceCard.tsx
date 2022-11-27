@@ -30,6 +30,11 @@ const ResourceCard: FC<Data> = ({ title, description, tags }) => {
       px='28px'
       flexDir='column'
       h='278px'
+      _hover={{
+        borderColor: 'brand.500',
+        borderWidth: '2px',
+      }}
+      transition='all .3s'
     >
       <Skeleton height={Boolean(title) ? '' : '20px'} isLoaded={Boolean(title)}>
         <Heading
