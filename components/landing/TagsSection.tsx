@@ -12,7 +12,7 @@ const TagsSection: FC<{
       {data?.map((t) => {
         return (
           <WrapItem key={t.id}>
-            <Skeleton isLoaded={isLoaded}>
+            <Skeleton isLoaded={!isLoaded}>
               <Link href={`/resources/${t.attributes.name}`} passHref>
                 <Badge
                   as='a'
