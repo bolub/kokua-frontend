@@ -1,0 +1,106 @@
+import {
+  Box,
+  chakra,
+  Flex,
+  VStack,
+  Text,
+  Link as ChakraLink,
+  Container,
+  Icon,
+} from '@chakra-ui/react';
+import { FC } from 'react';
+import { ArrowSlant } from '../Assets/ArrowSlant';
+import { Prose } from '@nikolovlazar/chakra-ui-prose';
+
+// markdown
+import ReactMarkdown from 'react-markdown';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { coldarkDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+
+const Content: FC<{ data: string; packageUrl: string }> = ({
+  data,
+  packageUrl,
+}) => {
+  const dummyUrls = ['Default', 'With Custom Input'];
+
+  return (
+    <chakra.section py='80px'>
+      <Container>
+        <Flex gap='125px'>
+          {/* Navigation */}
+          <Box w='full' maxWidth='189px'>
+            <Text fontWeight='semibold' color='text.100'>
+              Example Usage
+            </Text>
+
+            <VStack mt='34px' align='start' spacing='16px'>
+              {dummyUrls?.map((name, index) => {
+                const isActive = false;
+
+                return (
+                  <ChakraLink
+                    key={index}
+                    p='10px'
+                    w='full'
+                    fontSize='xs'
+                    borderRadius='4px'
+                    fontWeight={isActive ? 'bold' : 'normal'}
+                    bgColor={isActive ? 'backgrounds.300' : 'white'}
+                    href={`#${name}`}
+                  >
+                    {name}
+                  </ChakraLink>
+                );
+              })}
+
+              <ChakraLink
+                p='10px'
+                w='full'
+                fontSize='xs'
+                fontWeight='bold'
+                borderRadius='4px'
+                display='flex'
+                gap='6px'
+                href={packageUrl}
+              >
+                View Full documentation
+                <Icon width='14px' height='14px' as={ArrowSlant} />
+              </ChakraLink>
+            </VStack>
+          </Box>
+
+          {/* content */}
+          <Box>
+            <Prose>
+              <ReactMarkdown
+                //  eslint-disable-next-line
+                children={data}
+                components={{
+                  code({ node, inline, className, children, ...props }) {
+                    return (
+                      <SyntaxHighlighter
+                        //  eslint-disable-next-line
+                        children={String(children).replace(/\n$/, '')}
+                        //  @ts-ignore
+                        style={coldarkDark}
+                        customStyle={{
+                          borderRadius: '6px',
+                        }}
+                        language={'javascript'}
+                        PreTag='div'
+                        showLineNumbers
+                        {...props}
+                      />
+                    );
+                  },
+                }}
+              />
+            </Prose>
+          </Box>
+        </Flex>
+      </Container>
+    </chakra.section>
+  );
+};
+
+export default Content;
