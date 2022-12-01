@@ -114,7 +114,7 @@ const Resources = () => {
             <Tabs variant='unstyled' mb='100px'>
               <TabList mt='38px' overflowX={'auto'}>
                 <Tab {...tabStyles}>
-                  Useful Packages
+                  Useful Packages / Resource
                   <TabBadge value={UsefulPackages?.length} />
                 </Tab>
 
