@@ -1,5 +1,4 @@
 import {
-  Text,
   Tab,
   TabPanel,
   TabList,
@@ -7,19 +6,43 @@ import {
   Tabs,
   chakra,
   Container,
-  Skeleton,
-  Button,
-  Icon,
 } from '@chakra-ui/react';
 import React, { useMemo } from 'react';
 import TabBadge from '../../components/ResourcePage/TabBadge';
 import ResourceDataSection from '../../components/ResourcePage/ResourceDataSection';
-import { useQuery } from '@tanstack/react-query';
+import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { getResourceList } from '../../API/resourceList';
 import Seo from '../../components/Seo';
-import { HiOutlineArrowLeft } from 'react-icons/hi';
-import Link from 'next/link';
+import ResourceHeader from '../../components/ResourceHeader';
+import { GetStaticPaths, GetStaticProps } from 'next';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: 'blocking',
+  };
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const tag = context.params?.slug as string;
+  const search = context.params?.search as string;
+
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery(['resourceData', tag], () =>
+    getResourceList({
+      tag,
+      search,
+    })
+  );
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+};
 
 const Resources = () => {
   const tabStyles = {
@@ -41,7 +64,7 @@ const Resources = () => {
   const { query } = useRouter();
 
   // Fetch query data
-  const { isLoading, data } = useQuery(
+  const { data, status } = useQuery(
     ['resourceData', query.slug],
     () => {
       return getResourceList({
@@ -79,36 +102,10 @@ const Resources = () => {
         description={`Useful Resources for ${query?.slug}`}
       />
       {/* Header */}
-      <chakra.header background={'backgrounds.200'}>
-        <Container
-          display={'flex'}
-          flexDir='column'
-          pt='40px'
-          pb='70px'
-          alignItems='start'
-        >
-          <Link href={'/'} passHref>
-            <Button
-              as='a'
-              variant='unstyled'
-              size='xs'
-              display={'flex'}
-              gap='2px'
-            >
-              <Icon as={HiOutlineArrowLeft} />
-              <Text as='span' p='10px'>
-                Back to Home
-              </Text>
-            </Button>
-          </Link>
-
-          <Skeleton isLoaded={!isLoading} mt='29px'>
-            <Text fontSize={'24px'} fontWeight={'700'}>
-              {query.slug}
-            </Text>
-          </Skeleton>
-        </Container>
-      </chakra.header>
+      <ResourceHeader
+        isLoaded={status === 'success'}
+        title={query.slug as string}
+      />
 
       {/* main */}
       <chakra.main>
