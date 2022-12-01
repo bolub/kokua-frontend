@@ -12,10 +12,10 @@ import { useRouter } from 'next/router';
 import { FC, useState } from 'react';
 
 import { HiOutlineSearch, HiOutlineX } from 'react-icons/hi';
-import { Tag } from '../../utils/GeneralProps';
+import { TagInner } from '../../utils/GeneralProps';
 import TagsSection from './TagsSection';
 
-const SearchSection: FC<{ data: Tag[] }> = ({ data }) => {
+const SearchSection: FC<{ data: TagInner[] }> = ({ data }) => {
   const [showTags, setShowTags] = useState(false);
   const [value, setValue] = useState('');
   const router = useRouter();
