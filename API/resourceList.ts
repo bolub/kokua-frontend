@@ -1,5 +1,5 @@
 import API from '.'
-import { Resources } from '../utils/GeneralProps';
+import { Resource } from '../utils/GeneralProps';
 
 
 export const getResourceList = async ({ tag, search }: { tag: string, search: string }) => {
@@ -14,6 +14,6 @@ export const getResourceList = async ({ tag, search }: { tag: string, search: st
 
   const response = await API.get(`/resources?${filters}&${pagination}&populate=*`);
 
-  return response.data.data as Resources[]
+  return response.data.data as Resource[]
 }
 

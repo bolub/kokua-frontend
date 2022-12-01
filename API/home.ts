@@ -1,5 +1,5 @@
 import API from '.'
-import { Category, Tag } from '../utils/GeneralProps';
+import { Category, TagInner } from '../utils/GeneralProps';
 
 export const getLanguages = async () => {
   const response = await API.get('/languages');
@@ -12,5 +12,5 @@ export const getFrameworksAndLibraries = async () => {
 
 export const getTags = async () => {
   const response = await API.get('/tags?pagination[pageSize]=100');
-  return response.data.data as Tag[];
+  return response.data.data as TagInner[];
 }

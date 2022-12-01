@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   chakra,
   Container,
@@ -11,10 +12,10 @@ import { useRouter } from 'next/router';
 import { FC, useState } from 'react';
 
 import { HiOutlineSearch, HiOutlineX } from 'react-icons/hi';
-import { Tag } from '../../utils/GeneralProps';
+import { TagInner } from '../../utils/GeneralProps';
 import TagsSection from './TagsSection';
 
-const SearchSection: FC<{ data: Tag[] }> = ({ data }) => {
+const SearchSection: FC<{ data: TagInner[] }> = ({ data }) => {
   const [showTags, setShowTags] = useState(false);
   const [value, setValue] = useState('');
   const router = useRouter();
@@ -60,7 +61,7 @@ const SearchSection: FC<{ data: Tag[] }> = ({ data }) => {
 
         {/* Tags */}
         {showTags && (
-          <>
+          <Box mt='20px'>
             <TagsSection data={data} />
             <Button
               size='xs'
@@ -72,7 +73,7 @@ const SearchSection: FC<{ data: Tag[] }> = ({ data }) => {
             >
               Close
             </Button>
-          </>
+          </Box>
         )}
       </Container>
     </chakra.section>
