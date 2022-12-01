@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   chakra,
   Container,
@@ -60,7 +61,7 @@ const SearchSection: FC<{ data: Tag[] }> = ({ data }) => {
 
         {/* Tags */}
         {showTags && (
-          <>
+          <Box mt='20px'>
             <TagsSection data={data} />
             <Button
               size='xs'
@@ -72,7 +73,7 @@ const SearchSection: FC<{ data: Tag[] }> = ({ data }) => {
             >
               Close
             </Button>
-          </>
+          </Box>
         )}
       </Container>
     </chakra.section>
