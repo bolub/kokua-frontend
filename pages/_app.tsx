@@ -56,6 +56,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           />
 
           <Script
+            id='plausible'
             defer
             data-domain='kokua.wiki'
             src='https://plausible.io/js/script.js'
