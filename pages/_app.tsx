@@ -13,6 +13,7 @@ import { Navbar } from '../components/Navbar';
 import Seo from '../components/Seo';
 import { useState } from 'react';
 import NextNProgress from 'nextjs-progressbar';
+import Script from 'next/script';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(
@@ -34,6 +35,38 @@ function MyApp({ Component, pageProps }: AppProps) {
           <ReactQueryDevtools initialIsOpen={false} />
 
           <Seo />
+
+          <Script
+            id='show-banner'
+            dangerouslySetInnerHTML={{
+              __html: `
+                 window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+
+                gtag('config', 'G-EBF9RHVBLZ');
+              `,
+            }}
+          />
+
+          <Script
+            id='initializeGoogleTag'
+            async
+            src='https://www.googletagmanager.com/gtag/js?id=G-EBF9RHVBLZ'
+          />
+
+          <Script
+            id='tagCode'
+            dangerouslySetInnerHTML={{
+              __html: `
+                 window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+
+                gtag('config', 'G-EBF9RHVBLZ');
+              `,
+            }}
+          />
 
           <Navbar />
           <Component {...pageProps} />
