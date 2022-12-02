@@ -37,19 +37,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Seo />
 
           <Script
-            id='show-banner'
-            dangerouslySetInnerHTML={{
-              __html: `
-                 window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-
-                gtag('config', 'G-EBF9RHVBLZ');
-              `,
-            }}
-          />
-
-          <Script
             id='initializeGoogleTag'
             async
             src='https://www.googletagmanager.com/gtag/js?id=G-EBF9RHVBLZ'
@@ -66,6 +53,12 @@ function MyApp({ Component, pageProps }: AppProps) {
                 gtag('config', 'G-EBF9RHVBLZ');
               `,
             }}
+          />
+
+          <Script
+            defer
+            data-domain='kokua.wiki'
+            src='https://plausible.io/js/script.js'
           />
 
           <Navbar />
