@@ -17,6 +17,11 @@ export function CodeCopy({ children }) {
       right='10px'
       colorScheme='black'
       bgColor='black'
+      fontFamily='figtree'
+      borderRadius='8px'
+      py='8px'
+      px='14px'
+      fontWeight='semibold'
     >
       {hasCopied ? 'Copied!' : 'Copy'}
     </Button>
