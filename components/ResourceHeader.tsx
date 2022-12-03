@@ -16,6 +16,7 @@ import { HiOutlineArrowLeft } from 'react-icons/hi';
 import TagsSection from './landing/TagsSection';
 import { TagInner } from '../utils/GeneralProps';
 import { ArrowSlant } from './Assets/ArrowSlant';
+import { useRouter } from 'next/router';
 
 const testTags = [
   {
@@ -51,9 +52,11 @@ const ResourceHeader: FC<{
   title = 'Dummy',
   subtitle = 'My dummy subtitle for my resource',
   href,
-  tags = testTags,
+  tags,
   isPackagePage = false,
 }) => {
+  const { back } = useRouter();
+
   return (
     <chakra.header background={'backgrounds.200'}>
       <Container
@@ -63,20 +66,18 @@ const ResourceHeader: FC<{
         pb='70px'
         alignItems='start'
       >
-        <Link href={'/'} passHref>
-          <Button
-            as='a'
-            variant='unstyled'
-            size='xs'
-            display={'flex'}
-            gap='2px'
-          >
-            <Icon as={HiOutlineArrowLeft} />
-            <Text as='span' p='10px'>
-              Back to Home
-            </Text>
-          </Button>
-        </Link>
+        <Button
+          variant='unstyled'
+          size='xs'
+          display={'flex'}
+          gap='2px'
+          onClick={back}
+        >
+          <Icon as={HiOutlineArrowLeft} />
+          <Text as='span' p='10px'>
+            Go Back
+          </Text>
+        </Button>
 
         <Flex w='full' flexDir={{ base: 'column', md: 'row' }}>
           <Box maxW='612px'>
@@ -104,7 +105,7 @@ const ResourceHeader: FC<{
             {/* Tags */}
             {isPackagePage && tags && (
               <Box mt={{ base: '30px', md: '54px' }}>
-                <TagsSection data={tags} isLoaded={isLoaded} />
+                <TagsSection data={tags} />
               </Box>
             )}
           </Box>

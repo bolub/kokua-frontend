@@ -16,6 +16,14 @@ import { Prose } from '@nikolovlazar/chakra-ui-prose';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { coldarkDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { CodeCopy } from './CodeCopy';
+
+const Pre = ({ children }) => (
+  <pre>
+    <CodeCopy>{children}</CodeCopy>
+    {children}
+  </pre>
+);
 
 const Content: FC<{ data: string; packageUrl: string }> = ({
   data,
@@ -76,6 +84,7 @@ const Content: FC<{ data: string; packageUrl: string }> = ({
                 //  eslint-disable-next-line
                 children={data}
                 components={{
+                  pre: Pre,
                   code({ node, inline, className, children, ...props }) {
                     return (
                       <SyntaxHighlighter

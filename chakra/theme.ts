@@ -16,7 +16,11 @@ export const theme = extendTheme({
       baseStyle: {
         pre: {
           padding: '0px',
-          backgroundColor: 'unset'
+          backgroundColor: 'unset',
+          pos: 'relative'
+        },
+        'h2::first': {
+          mt: 0
         }
       }
     }
