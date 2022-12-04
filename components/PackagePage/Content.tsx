@@ -17,6 +17,7 @@ import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { coldarkDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import { CodeCopy } from './CodeCopy';
+import rehypeRaw from 'rehype-raw';
 
 const Pre = ({ children }) => (
   <pre>
@@ -103,7 +104,9 @@ const Content: FC<{ data: string; packageUrl: string }> = ({
                     );
                   },
                 }}
+                rehypePlugins={[rehypeRaw]}
               />
+              {/* <div dangerouslySetInnerHTML={{ __html: data }} /> */}
             </Prose>
           </Box>
         </Flex>
