@@ -12,7 +12,7 @@ export const getResourceList = async ({ tag, search }: { tag: string, search: st
 
   const filters = search === 'true' ? searchFilters : tagFilters
 
-  const response = await API.get(`/resources?${filters}&${pagination}&populate=*`);
+  const response = await API.get(`/resources?${filters}&${pagination}&sort=name:desc&populate=*`);
 
   return response.data.data as Resource[]
 }
