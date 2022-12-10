@@ -56,6 +56,7 @@ const Package: NextPage = () => {
       <chakra.main>
         <Content
           data={data?.attributes?.content}
+          contentIds={data?.attributes?.content_ids}
           packageUrl={data?.attributes?.external_url}
         />
       </chakra.main>
