@@ -14,12 +14,30 @@ export const theme = extendTheme({
   withProse(
     {
       baseStyle: {
+        p: {
+          mb: '0px'
+        },
+
         pre: {
           padding: '0px',
           backgroundColor: 'unset',
-          pos: 'relative'
+          pos: 'relative',
         },
+
         'h2::first': {
+          mt: 0
+        },
+        a: {
+          color: 'brand.500',
+        },
+        '.right': {
+          textAlign: 'right',
+          display: 'flex',
+          width: '100%',
+          justifyContent: 'end',
+          fontSize: 'sm'
+        },
+        h2: {
           mt: 0
         }
       }
