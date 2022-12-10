@@ -17,38 +17,38 @@ const ResourceDataSection: FC<{ data: Resource[]; type: ResourceType }> = ({
       {(data || resourceListDataMock)?.map((resource) => {
         const resourceData = resource.attributes;
 
-        // if (type === 'package') {
-        // const hasQueryParams = asPath.includes('?');
-        // const urlToUse = hasQueryParams
-        //   ? asPath?.replace('?', `/${resource?.id}?`)
-        //   : `${asPath}/${resource?.id}`;
+        if (type === 'package') {
+          const hasQueryParams = asPath.includes('?');
+          const urlToUse = hasQueryParams
+            ? asPath?.replace('?', `/${resource?.id}?`)
+            : `${asPath}/${resource?.id}`;
 
-        // return (
-        //   <Link key={resource.id} href={urlToUse} passHref>
-        //     <ChakraLink>
-        //       <ResourceCard
-        //         title={resourceData.name}
-        //         description={resourceData.subtitle}
-        //         tags={resourceData.tags}
-        //       />
-        //     </ChakraLink>
-        //   </Link>
-        // );
-        // } else {
-        return (
-          <ChakraLink
-            key={resource.id}
-            href={resourceData.external_url}
-            isExternal
-          >
-            <ResourceCard
-              title={resourceData.name}
-              description={resourceData.subtitle}
-              tags={resourceData.tags}
-            />
-          </ChakraLink>
-        );
-        // }
+          return (
+            <Link key={resource.id} href={urlToUse} passHref>
+              <ChakraLink>
+                <ResourceCard
+                  title={resourceData.name}
+                  description={resourceData.subtitle}
+                  tags={resourceData.tags}
+                />
+              </ChakraLink>
+            </Link>
+          );
+        } else {
+          return (
+            <ChakraLink
+              key={resource.id}
+              href={resourceData.external_url}
+              isExternal
+            >
+              <ResourceCard
+                title={resourceData.name}
+                description={resourceData.subtitle}
+                tags={resourceData.tags}
+              />
+            </ChakraLink>
+          );
+        }
       })}
     </SimpleGrid>
   );
