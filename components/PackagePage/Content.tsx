@@ -26,11 +26,18 @@ const Pre = ({ children }) => (
   </pre>
 );
 
-const Content: FC<{ data: string; packageUrl: string }> = ({
-  data,
-  packageUrl,
-}) => {
-  const dummyUrls = ['Default', 'With Custom Input'];
+const Content: FC<{
+  data: string;
+  packageUrl: string;
+  contentIds?: string;
+}> = ({ data, packageUrl, contentIds }) => {
+  const ids = contentIds?.split(',');
+
+  console.log(data);
+  const contentData =
+    data === '-' || !data
+      ? 'Currently updating documentation, will be available soon, 😁'
+      : data;
 
   return (
     <chakra.section py='80px'>
@@ -38,52 +45,56 @@ const Content: FC<{ data: string; packageUrl: string }> = ({
         <Flex gap='125px'>
           {/* Navigation */}
           <Box w='full' maxWidth='189px'>
-            <Text fontWeight='semibold' color='text.100'>
-              Example Usage
-            </Text>
+            <Box position='sticky' top={16}>
+              <Text fontWeight='semibold' color='text.100'>
+                Example Usage
+              </Text>
 
-            <VStack mt='34px' align='start' spacing='16px'>
-              {dummyUrls?.map((name, index) => {
-                const isActive = false;
+              <VStack mt='34px' align='start' spacing='16px'>
+                {ids?.map((name, index) => {
+                  const isActive = false;
+                  console.log(name);
+                  return (
+                    <ChakraLink
+                      key={index}
+                      p='10px'
+                      w='full'
+                      fontSize='xs'
+                      borderRadius='4px'
+                      fontWeight={isActive ? 'bold' : 'normal'}
+                      bgColor={isActive ? 'backgrounds.300' : 'white'}
+                      href={`#${name}`}
+                      textTransform='capitalize'
+                    >
+                      {name?.replace(/-/g, ' ')}
+                    </ChakraLink>
+                  );
+                })}
 
-                return (
-                  <ChakraLink
-                    key={index}
-                    p='10px'
-                    w='full'
-                    fontSize='xs'
-                    borderRadius='4px'
-                    fontWeight={isActive ? 'bold' : 'normal'}
-                    bgColor={isActive ? 'backgrounds.300' : 'white'}
-                    href={`#${name}`}
-                  >
-                    {name}
-                  </ChakraLink>
-                );
-              })}
-
-              <ChakraLink
-                p='10px'
-                w='full'
-                fontSize='xs'
-                fontWeight='bold'
-                borderRadius='4px'
-                display='flex'
-                gap='6px'
-                href={packageUrl}
-              >
-                View Full documentation
-                <Icon width='14px' height='14px' as={ArrowSlant} />
-              </ChakraLink>
-            </VStack>
+                <ChakraLink
+                  p='10px'
+                  w='full'
+                  fontSize='xs'
+                  fontWeight='bold'
+                  borderRadius='4px'
+                  display='flex'
+                  gap='6px'
+                  href={packageUrl}
+                  isExternal
+                >
+                  View Full documentation
+                  <Icon width='14px' height='14px' as={ArrowSlant} />
+                </ChakraLink>
+              </VStack>
+            </Box>
           </Box>
 
           {/* content */}
-          <Box>
+          <Box w='full'>
             <Prose>
               <ReactMarkdown
                 //  eslint-disable-next-line
-                children={data}
+                children={contentData}
                 components={{
                   pre: Pre,
                   code({ node, inline, className, children, ...props }) {
