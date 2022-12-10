@@ -5,7 +5,7 @@ export function CodeCopy({ children }) {
   const { onCopy, setValue, hasCopied } = useClipboard('');
 
   useEffect(() => {
-    setValue(children[0].props.children[0]);
+    setValue(children[0]?.props?.children[0]);
   }, [children, setValue]);
 
   return (
