@@ -27,6 +27,7 @@ export interface ResourceAttributes {
   type: ResourceType;
   external_url: string;
   content: string;
+  content_ids?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
