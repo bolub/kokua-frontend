@@ -11,14 +11,16 @@ import {
 } from '@chakra-ui/react';
 import React, { FC } from 'react';
 import { Tags } from '../../utils/GeneralProps';
+import useContentIcon from '../useContentIcon';
 
 interface Data {
   title: string;
   description: string;
   tags: Tags;
+  contentType: string;
 }
 
-const ResourceCard: FC<Data> = ({ title, description, tags }) => {
+const ResourceCard: FC<Data> = ({ title, description, tags, contentType }) => {
   return (
     <Flex
       borderRadius={'6px'}
@@ -36,6 +38,7 @@ const ResourceCard: FC<Data> = ({ title, description, tags }) => {
       }}
       transition='all .3s'
     >
+      <Box display='flex' marginTop={"-20px"} justifyContent={"right"}>{useContentIcon(contentType)}</Box>
       <Skeleton height={Boolean(title) ? '' : '20px'} isLoaded={Boolean(title)}>
         <Heading
           as='h2'

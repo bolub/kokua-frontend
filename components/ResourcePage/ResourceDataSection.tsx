@@ -30,6 +30,7 @@ const ResourceDataSection: FC<{ data: Resource[]; type: ResourceType }> = ({
                   title={resourceData.name}
                   description={resourceData.subtitle}
                   tags={resourceData.tags}
+                  contentType={resourceData.contentType}
                 />
               </ChakraLink>
             </Link>
@@ -45,6 +46,7 @@ const ResourceDataSection: FC<{ data: Resource[]; type: ResourceType }> = ({
                 title={resourceData.name}
                 description={resourceData.subtitle}
                 tags={resourceData.tags}
+                contentType={resourceData.contentType}
               />
             </ChakraLink>
           );
