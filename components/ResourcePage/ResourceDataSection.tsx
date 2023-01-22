@@ -24,17 +24,16 @@ const ResourceDataSection: FC<{ data: Resource[]; type: ResourceType }> = ({
         //     : `${asPath}/${resource?.id}`;
 
         //   return (
-        //     <>
-        //       <Link key={resource.id} href={urlToUse} passHref>
-        //         <ChakraLink>
-        //           <ResourceCard
-        //             title={resourceData.name}
-        //             description={resourceData.subtitle}
-        //             tags={resourceData.tags}
-        //           />
-        //         </ChakraLink>
-        //       </Link>
-        //     </>
+        //     <Link key={resource.id} href={urlToUse} passHref>
+        //       <ChakraLink>
+        //         <ResourceCard
+        //           title={resourceData.name}
+        //           description={resourceData.subtitle}
+        //           tags={resourceData.tags}
+        //           contentType={resourceData.contentType}
+        //         />
+        //       </ChakraLink>
+        //     </Link>
         //   );
         // } else {
         return (
@@ -47,6 +46,7 @@ const ResourceDataSection: FC<{ data: Resource[]; type: ResourceType }> = ({
               title={resourceData.name}
               description={resourceData.subtitle}
               tags={resourceData.tags}
+              contentType={resourceData.contentType}
             />
           </ChakraLink>
         );
