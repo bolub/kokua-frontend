@@ -24,6 +24,11 @@ const TagsSection: FC<{
                 textTransform={'capitalize'}
                 fontSize={'12px'}
                 bg='white'
+                _hover={{
+                  bg: 'black',
+                  color: 'white',
+                }}
+                transition='all .3s'
               >
                 {t.attributes.name}
               </Badge>
