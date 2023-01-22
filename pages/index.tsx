@@ -1,10 +1,24 @@
 import { Box, chakra } from '@chakra-ui/react';
-import { useQuery } from '@tanstack/react-query';
-import type { NextPage } from 'next';
+import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
+import type { GetStaticProps, NextPage } from 'next';
 import { getFrameworksAndLibraries, getLanguages, getTags } from '../API/home';
 import DataSection from '../components/landing/DataSection';
 import Header from '../components/landing/Header';
 import SearchSection from '../components/landing/SearchSection';
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery(['languages'], getLanguages);
+  await queryClient.prefetchQuery(['frameworks'], getLanguages);
+  await queryClient.prefetchQuery(['tags'], getLanguages);
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+};
 
 const Home: NextPage = () => {
   const { data: languagesData } = useQuery(['languages'], getLanguages);
