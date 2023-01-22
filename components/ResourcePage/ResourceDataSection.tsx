@@ -1,5 +1,4 @@
-import { SimpleGrid, Link as ChakraLink } from '@chakra-ui/react';
-import Link from 'next/link';
+import { SimpleGrid } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React, { FC } from 'react';
 import { Resource, ResourceType } from '../../utils/GeneralProps';
@@ -37,18 +36,14 @@ const ResourceDataSection: FC<{ data: Resource[]; type: ResourceType }> = ({
         //   );
         // } else {
         return (
-          <ChakraLink
+          <ResourceCard
             key={resource.id}
-            href={resourceData.external_url}
-            isExternal
-          >
-            <ResourceCard
-              title={resourceData.name}
-              description={resourceData.subtitle}
-              tags={resourceData.tags}
-              contentType={resourceData.contentType}
-            />
-          </ChakraLink>
+            url={resourceData.external_url}
+            title={resourceData.name}
+            description={resourceData.subtitle}
+            tags={resourceData.tags}
+            contentType={resourceData.contentType}
+          />
         );
         // }
       })}
