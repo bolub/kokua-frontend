@@ -1,16 +1,16 @@
 import {
-  Badge,
   Box,
   Flex,
   Heading,
-  HStack,
+  LinkBox,
+  LinkOverlay,
   Skeleton,
   Text,
-  Wrap,
-  WrapItem,
+  Tooltip,
 } from '@chakra-ui/react';
 import React, { FC } from 'react';
 import { Tags } from '../../utils/GeneralProps';
+import TagsSection from '../landing/TagsSection';
 import useContentIcon from '../useContentIcon';
 
 interface Data {
@@ -18,72 +18,77 @@ interface Data {
   description: string;
   tags: Tags;
   contentType: string;
+  url: string;
 }
-
-const ResourceCard: FC<Data> = ({ title, description, tags, contentType }) => {
+const ContentTypeDisplay = ({ contentType }) => {
   return (
-    <Flex
-      borderRadius={'6px'}
-      borderColor={'border.100'}
-      borderWidth={'1px'}
-      boxShadow='0px 3px 1px rgba(0, 0, 0, 0.03);'
-      bg={'shadow.100'}
-      py='32px'
-      px='28px'
-      flexDir='column'
-      h='278px'
-      _hover={{
-        borderColor: 'brand.500',
-        borderWidth: '2px',
-      }}
-      transition='all .3s'
-    >
-      <Box display='flex' marginTop={"-20px"} justifyContent={"right"}>{useContentIcon(contentType)}</Box>
-      <Skeleton height={Boolean(title) ? '' : '20px'} isLoaded={Boolean(title)}>
-        <Heading
-          as='h2'
-          fontSize={'16px'}
-          fontWeight={'700'}
-          noOfLines={2}
-          lineHeight='28px'
-        >
-          {title}
-        </Heading>
-      </Skeleton>
+    <Box pos='absolute' top='5' right='5'>
+      {useContentIcon(contentType)}
+    </Box>
+  );
+};
 
-      <Skeleton
-        height={Boolean(description) ? '' : '10px'}
-        mt='14px'
-        isLoaded={Boolean(description)}
+const ResourceCard: FC<Data> = ({
+  title,
+  description,
+  tags,
+  contentType,
+  url,
+}) => {
+  return (
+    <LinkBox as='article' pos='relative'>
+      <Flex
+        borderRadius={'6px'}
+        borderColor={'border.100'}
+        borderWidth={'1px'}
+        boxShadow='0px 3px 1px rgba(0, 0, 0, 0.03);'
+        bg={'shadow.100'}
+        py='32px'
+        px='28px'
+        flexDir='column'
+        h='278px'
+        _hover={{
+          borderColor: 'brand.500',
+          borderWidth: '2px',
+        }}
+        transition='all .3s'
       >
-        <Text fontSize={'14px'} fontWeight={'500'} noOfLines={2}>
-          {description}
-        </Text>
-      </Skeleton>
+        <Tooltip label={contentType}>
+          <ContentTypeDisplay contentType={contentType} />
+        </Tooltip>
 
-      <Wrap mt='auto' spacingX='12px' spacingY={'7px'}>
-        {tags?.data?.map((t) => (
-          <WrapItem key={t.id}>
-            <Skeleton isLoaded={Boolean(t.attributes.name)}>
-              <Badge
-                py={'1'}
-                px={'14px'}
-                borderRadius={'200px'}
-                color={'text.100'}
-                borderColor={'border.200'}
-                borderWidth={'1px'}
-                fontWeight={'600'}
-                textTransform={'capitalize'}
-                fontSize={'12px'}
-                bg='white'
-              >
-                {t.attributes.name}
-              </Badge>
-            </Skeleton>
-          </WrapItem>
-        ))}
-      </Wrap>
-    </Flex>
+        <LinkOverlay href={url} isExternal>
+          <Skeleton
+            height={Boolean(title) ? '' : '20px'}
+            isLoaded={Boolean(title)}
+          >
+            <Heading
+              as='h2'
+              fontSize={'16px'}
+              fontWeight={'700'}
+              noOfLines={2}
+              lineHeight='28px'
+            >
+              {title}
+            </Heading>
+          </Skeleton>
+        </LinkOverlay>
+
+        <Skeleton
+          height={Boolean(description) ? '' : '10px'}
+          mt='14px'
+          isLoaded={Boolean(description)}
+        >
+          <Text fontSize={'14px'} fontWeight={'500'} noOfLines={2}>
+            {description}
+          </Text>
+        </Skeleton>
+
+        <Box mt='auto'>
+          <TagsSection data={tags?.data} />
+        </Box>
+      </Flex>
+    </LinkBox>
   );
 };
 
