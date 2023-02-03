@@ -8,10 +8,11 @@ import {
   Text,
   Tooltip,
 } from '@chakra-ui/react';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Tags } from '../../utils/GeneralProps';
 import TagsSection from '../landing/TagsSection';
 import useContentIcon from '../useContentIcon';
+import { getLinkPreview, getPreviewFromContent } from 'link-preview-js';
 
 interface Data {
   title: string;
@@ -35,6 +36,16 @@ const ResourceCard: FC<Data> = ({
   contentType,
   url,
 }) => {
+  const test = () => {
+    getLinkPreview('https://www.youtube.com/watch?v=MejbOFk7H6c').then((data) =>
+      console.log(data)
+    );
+  };
+
+  useEffect(() => {
+    test();
+  }, []);
+
   return (
     <LinkBox as='article' pos='relative'>
       <Flex
