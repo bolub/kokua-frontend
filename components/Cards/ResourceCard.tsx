@@ -2,16 +2,18 @@ import {
   Box,
   Flex,
   Heading,
+  Image as ChakraImage,
   LinkBox,
   LinkOverlay,
   Skeleton,
   Text,
   Tooltip,
 } from '@chakra-ui/react';
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Tags } from '../../utils/GeneralProps';
 import TagsSection from '../landing/TagsSection';
 import useContentIcon from '../useContentIcon';
+import { getLinkPreview } from 'link-preview-js';
 
 interface Data {
   title: string;
@@ -35,6 +37,21 @@ const ResourceCard: FC<Data> = ({
   contentType,
   url,
 }) => {
+  const [previewData, setPreviewData] = useState<any>();
+
+  useEffect(() => {
+    const getPreviewData = async () => {
+      try {
+        const data = await getLinkPreview(url);
+        setPreviewData(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getPreviewData();
+  }, [url]);
+
   return (
     <LinkBox as='article' pos='relative'>
       <Flex
@@ -46,12 +63,12 @@ const ResourceCard: FC<Data> = ({
         py='32px'
         px='28px'
         flexDir='column'
-        h='278px'
         _hover={{
           borderColor: 'brand.500',
           borderWidth: '2px',
         }}
         transition='all .3s'
+        h='full'
       >
         <Tooltip label={contentType}>
           <ContentTypeDisplay contentType={contentType} />
@@ -64,7 +81,7 @@ const ResourceCard: FC<Data> = ({
           >
             <Heading
               as='h2'
-              fontSize={'16px'}
+              fontSize={'18px'}
               fontWeight={'700'}
               noOfLines={2}
               lineHeight='28px'
@@ -82,6 +99,16 @@ const ResourceCard: FC<Data> = ({
           <Text fontSize={'14px'} fontWeight={'500'} noOfLines={2}>
             {description}
           </Text>
+
+          <ChakraImage
+            src={previewData?.images[0] || '/Placeholder.png'}
+            w='full'
+            h='300px'
+            objectFit='cover'
+            alt={title}
+            rounded='sm'
+            my='20px'
+          />
         </Skeleton>
 
         <Box mt='auto'>
