@@ -12,7 +12,7 @@ const ResourceDataSection: FC<{ data: Resource[]; type: ResourceType }> = ({
   const { asPath } = useRouter();
 
   return (
-    <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing='20px'>
+    <SimpleGrid columns={{ base: 1, md: 2 }} spacing='20px'>
       {(data || resourceListDataMock)?.map((resource) => {
         const resourceData = resource.attributes;
 
