@@ -101,7 +101,10 @@ const ResourceCard: FC<Data> = ({
           </Text>
 
           <ChakraImage
-            src={previewData?.images[0] || '/Placeholder.png'}
+            src={
+              (previewData?.images && previewData?.images[0]) ||
+              '/Placeholder.png'
+            }
             w='full'
             h='300px'
             objectFit='cover'
