@@ -111,8 +111,8 @@ const ResourceCard: FC<Data> = ({
             alt={title}
             rounded='sm'
             my='20px'
-            onError={() => {
-              setPreviewImage('/Placeholder.png');
+            onError={(e) => {
+              e.currentTarget.src = '/Placeholder.png';
             }}
           />
         </Skeleton>
