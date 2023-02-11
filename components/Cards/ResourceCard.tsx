@@ -37,13 +37,16 @@ const ResourceCard: FC<Data> = ({
   contentType,
   url,
 }) => {
-  const [previewData, setPreviewData] = useState<any>();
+  const [previewImage, setPreviewImage] = useState('');
 
   useEffect(() => {
     const getPreviewData = async () => {
       try {
         const data = await getLinkPreview(url);
-        setPreviewData(data);
+        setPreviewImage(
+          // @ts-ignore
+          (data?.images && data?.images[0]) || '/Placeholder.png'
+        );
       } catch (error) {
         console.log(error);
       }
@@ -101,16 +104,16 @@ const ResourceCard: FC<Data> = ({
           </Text>
 
           <ChakraImage
-            src={
-              (previewData?.images && previewData?.images[0]) ||
-              '/Placeholder.png'
-            }
+            src={previewImage}
             w='full'
             h='300px'
             objectFit='cover'
             alt={title}
             rounded='sm'
             my='20px'
+            onError={() => {
+              setPreviewImage('/Placeholder.png');
+            }}
           />
         </Skeleton>
 
