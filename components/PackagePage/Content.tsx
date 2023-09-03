@@ -33,7 +33,6 @@ const Content: FC<{
 }> = ({ data, packageUrl, contentIds }) => {
   const ids = contentIds?.split(',');
 
-  console.log(data);
   const contentData =
     data === '-' || !data
       ? 'Currently updating documentation, will be available soon, 😁'
@@ -53,7 +52,6 @@ const Content: FC<{
               <VStack mt='34px' align='start' spacing='16px'>
                 {ids?.map((name, index) => {
                   const isActive = false;
-                  console.log(name);
                   return (
                     <ChakraLink
                       key={index}
