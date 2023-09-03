@@ -14,6 +14,7 @@ import Seo from '../components/Seo';
 import { useState } from 'react';
 import NextNProgress from 'nextjs-progressbar';
 import Script from 'next/script';
+import { trpc } from '../utils/trpc';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(
@@ -71,4 +72,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default MyApp;
+export default trpc.withTRPC(MyApp);

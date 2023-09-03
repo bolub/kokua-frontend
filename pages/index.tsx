@@ -5,6 +5,7 @@ import { getFrameworksAndLibraries, getLanguages, getTags } from '../API/home';
 import DataSection from '../components/landing/DataSection';
 import Header from '../components/landing/Header';
 import SearchSection from '../components/landing/SearchSection';
+import { trpc } from '../utils/trpc';
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const queryClient = new QueryClient();

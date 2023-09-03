@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tag {
+  id              String @id @default(cuid())
+  name            String
+  resourceId      Int
+  resources       Resource[]
+}
+
+enum ResourceType {
+   package
+   course
+   how_to_or_blog_post
+}
+
+enum ContentType {
+   video
+   audio
+   article
+   documentation
+   document
+}
+
+model Resource {
+  id             String @id @default(cuid())
+  name           String
+  subtitle       String
+  type           ResourceType
+  external_url   String
+  content        String
+  contentType    ContentType
+  tags           Tag[]
+  
+}
