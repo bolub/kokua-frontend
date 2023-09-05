@@ -1,45 +1,47 @@
 import { Box, chakra } from '@chakra-ui/react';
-import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import type { GetStaticProps, NextPage } from 'next';
-import { getFrameworksAndLibraries, getLanguages, getTags } from '../API/home';
 import DataSection from '../components/landing/DataSection';
 import Header from '../components/landing/Header';
 import SearchSection from '../components/landing/SearchSection';
 import { trpc } from '../utils/trpc';
+import superjson from 'superjson';
+import { createServerSideHelpers } from '@trpc/react-query/server';
+import { appRouter } from '../server/_app';
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const queryClient = new QueryClient();
+  const helpers = createServerSideHelpers({
+    router: appRouter,
+    ctx: {},
+    transformer: superjson, // optional - adds superjson serialization
+  });
 
-  await queryClient.prefetchQuery(['languages'], getLanguages);
-  await queryClient.prefetchQuery(['frameworks'], getLanguages);
-  await queryClient.prefetchQuery(['tags'], getLanguages);
+  helpers.languages.all.prefetch();
+  helpers.frameworks.all.prefetch();
 
   return {
     props: {
-      dehydratedState: dehydrate(queryClient),
+      trpcState: helpers.dehydrate(),
     },
+    revalidate: 1,
   };
 };
 
 const Home: NextPage = () => {
-  const { data: languagesData } = useQuery(['languages'], getLanguages);
-  const { data: frameworksData } = useQuery(
-    ['frameworks'],
-    getFrameworksAndLibraries
-  );
-  const { data: tagsData } = useQuery(['tags'], getTags);
+  const { data: languagesData } = trpc.languages.all.useQuery();
+  const { data: frameworksData } = trpc.frameworks.all.useQuery();
 
   const specialResources = [
     {
-      id: 1,
-      attributes: {
-        name: 'Special',
-        logo_url:
-          'https://emojipedia-us.s3.amazonaws.com/source/microsoft-teams/337/grinning-face_1f600.png',
-        logourl: '',
-      },
+      id: '1',
+      name: 'Special',
+      logo_url:
+        'https://emojipedia-us.s3.amazonaws.com/source/microsoft-teams/337/grinning-face_1f600.png',
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
   ];
+
+  const { data: tagsData } = trpc.tags.all.useQuery();
 
   return (
     <>
@@ -47,7 +49,6 @@ const Home: NextPage = () => {
         <Header />
 
         <chakra.main id='main' py={'60px'}>
-          {/* Search section */}
           <SearchSection data={tagsData} />
 
           {/* Programming Languages */}

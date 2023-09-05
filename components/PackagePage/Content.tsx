@@ -8,7 +8,7 @@ import {
   Container,
   Icon,
 } from '@chakra-ui/react';
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { ArrowSlant } from '../Assets/ArrowSlant';
 import { Prose } from '@nikolovlazar/chakra-ui-prose';
 
@@ -19,7 +19,7 @@ import { coldarkDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import { CodeCopy } from './CodeCopy';
 import rehypeRaw from 'rehype-raw';
 
-const Pre = ({ children }) => (
+const Pre = ({ children }: { children: ReactNode }) => (
   <pre>
     <CodeCopy>{children}</CodeCopy>
     {children}

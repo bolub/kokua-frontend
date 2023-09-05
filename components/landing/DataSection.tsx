@@ -1,12 +1,11 @@
-import { chakra, Container, Heading, SimpleGrid, Text } from '@chakra-ui/react';
+import { chakra, Container, Heading, SimpleGrid } from '@chakra-ui/react';
 import { FC } from 'react';
-import { Category } from '../../utils/GeneralProps';
-import { homeData } from '../../utils/mock';
 import Card from '../Card';
+import { Framework, Language as PrismaLanguage } from '@prisma/client';
 
 const DataSection: FC<{
   title: string;
-  data: Category[];
+  data?: Framework[] | PrismaLanguage[];
   type: 'framework' | 'language';
 }> = ({ title, data }) => {
   return (
@@ -20,15 +19,13 @@ const DataSection: FC<{
           gap='19px'
           mt='25px'
         >
-          {(data || homeData)?.map((resource) => {
-            const resourceData = resource.attributes;
-
+          {data?.map((resource) => {
             return (
               <Card
-                href={`/resources/${resourceData?.name}`}
+                href={`/resources/${resource.name}?type=search`}
                 key={resource.id}
-                title={resourceData.name}
-                logo={resourceData?.logo_url || resourceData?.logourl}
+                title={resource.name}
+                logo={resource.logo_url}
               />
             );
           })}

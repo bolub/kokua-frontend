@@ -1,7 +1,7 @@
 import { Button, useClipboard } from '@chakra-ui/react';
-import { useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 
-export function CodeCopy({ children }) {
+export function CodeCopy({ children }: { children: any }) {
   const { onCopy, setValue, hasCopied } = useClipboard('');
 
   useEffect(() => {
