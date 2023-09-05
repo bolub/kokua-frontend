@@ -10,39 +10,51 @@ import {
 import React, { useMemo } from 'react';
 import TabBadge from '../../components/ResourcePage/TabBadge';
 import ResourceDataSection from '../../components/ResourcePage/ResourceDataSection';
-import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import { getResourceList } from '../../API/resourceList';
 import Seo from '../../components/Seo';
 import ResourceHeader from '../../components/ResourceHeader';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import { trpc } from '../../utils/trpc';
+import { createServerSideHelpers } from '@trpc/react-query/server';
+import { appRouter } from '../../server/_app';
+import superjson from 'superjson';
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [],
-    fallback: 'blocking',
-  };
-};
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   return {
+//     paths: [],
+//     fallback: 'blocking',
+//   };
+// };
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const tag = context.params?.slug as string;
-  const search = context.params?.search as string;
+// export const getStaticProps: GetStaticProps = async (context) => {
+//   // trpc time
+//   const { slug } = context.params as {
+//     slug: string;
+//     type: 'tag' | 'search';
+//     search: string;
+//   };
 
-  const queryClient = new QueryClient();
+//   const helpers = createServerSideHelpers({
+//     router: appRouter,
+//     ctx: {},
+//     transformer: superjson, // optional - adds superjson serialization
+//   });
 
-  await queryClient.prefetchQuery(['resourceData', tag], () =>
-    getResourceList({
-      tag,
-      search,
-    })
-  );
+//   await helpers.resources.findByTagName.prefetch({
+//     name: slug,
+//   });
 
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
-};
+//   await helpers.resources.find.prefetch({
+//     name: slug,
+//   });
+
+//   return {
+//     props: {
+//       trpcState: helpers.dehydrate(),
+//     },
+//     revalidate: 1,
+//   };
+// };
 
 const Resources = () => {
   const tabStyles = {
@@ -61,36 +73,57 @@ const Resources = () => {
     },
   };
 
-  const { query } = useRouter();
+  const router = useRouter();
+  const { slug, type } = router.query as {
+    slug: string;
+    type: 'tag' | 'search';
+  };
 
-  // Fetch query data
-  const { data, status } = useQuery(
-    ['resourceData', query.slug],
-    () => {
-      return getResourceList({
-        tag: query?.slug as string,
-        search: query?.search as string,
-      });
+  const {
+    data: dataByTag,
+    error: dataByTagError,
+    isLoading: dataByTagLoading,
+  } = trpc.resources.findByTagName.useQuery(
+    {
+      name: slug,
     },
     {
-      enabled: Boolean(query.slug),
+      enabled: !!slug && type === 'tag',
     }
   );
+
+  const {
+    data: dataBySearch,
+    error: dataBySearchError,
+    isLoading: dataBySearchLoading,
+  } = trpc.resources.find.useQuery(
+    {
+      name: slug,
+    },
+    {
+      enabled: !!slug && type === 'search',
+    }
+  );
+
+  const data = dataBySearch || dataByTag;
+
+  console.log({
+    dataBySearch,
+    dataBySearchError,
+  });
 
   //====================== Split data into 3 parts for the 3 tabs ======================
 
   const UsefulPackages = useMemo(() => {
-    return data?.filter((resource) => resource?.attributes?.type === 'package');
+    return data?.filter((resource) => resource?.type === 'package');
   }, [data]);
 
   const HowTosBlogPosts = useMemo(() => {
-    return data?.filter(
-      (resource) => resource?.attributes?.type === 'hotTo_or_blog_post'
-    );
+    return data?.filter((resource) => resource?.type === 'howTo_or_blog_post');
   }, [data]);
 
   const RecommendedCourses = useMemo(() => {
-    return data?.filter((resource) => resource?.attributes?.type === 'course');
+    return data?.filter((resource) => resource?.type === 'course');
   }, [data]);
 
   // =====================================================================================
@@ -98,14 +131,11 @@ const Resources = () => {
   return (
     <>
       <Seo
-        title={query?.slug as string}
-        description={`Useful Resources for ${query?.slug}`}
+        title={slug as string}
+        description={`Useful Resources for ${slug}`}
       />
       {/* Header */}
-      <ResourceHeader
-        isLoaded={status === 'success'}
-        title={query.slug as string}
-      />
+      <ResourceHeader isLoaded={!!data} title={slug as string} />
 
       {/* main */}
       <chakra.main>
@@ -115,33 +145,36 @@ const Resources = () => {
               <TabList mt='38px' overflowX={'auto'}>
                 <Tab {...tabStyles}>
                   Useful Packages / Resource
-                  <TabBadge value={UsefulPackages?.length} />
+                  <TabBadge value={UsefulPackages?.length || 0} />
                 </Tab>
 
                 <Tab mx='30px' {...tabStyles}>
                   How Tos and Blog Posts
-                  <TabBadge value={HowTosBlogPosts?.length} />
+                  <TabBadge value={HowTosBlogPosts?.length || 0} />
                 </Tab>
                 <Tab {...tabStyles}>
                   Recommended Courses
-                  <TabBadge value={RecommendedCourses?.length} />
+                  <TabBadge value={RecommendedCourses?.length || 0} />
                 </Tab>
               </TabList>
 
               <TabPanels mt='44px'>
                 <TabPanel px={0}>
-                  <ResourceDataSection data={UsefulPackages} type='package' />
+                  <ResourceDataSection
+                    data={UsefulPackages || []}
+                    type='package'
+                  />
                 </TabPanel>
 
                 <TabPanel px={0}>
                   <ResourceDataSection
-                    data={HowTosBlogPosts}
-                    type='hotTo_or_blog_post'
+                    data={HowTosBlogPosts || []}
+                    type='howTo_or_blog_post'
                   />
                 </TabPanel>
                 <TabPanel px={0}>
                   <ResourceDataSection
-                    data={RecommendedCourses}
+                    data={RecommendedCourses || []}
                     type='course'
                   />
                 </TabPanel>

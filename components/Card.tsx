@@ -11,40 +11,40 @@ interface Data {
 
 const Card: FC<Data> = ({ title, logo, href }) => {
   return (
-    <Link href={href} passHref>
-      <ChakraLink
-        borderRadius={'6px'}
-        borderColor={'border.100'}
-        borderWidth={'1px'}
-        h={'201px'}
-        shadow={'md'}
-        bgColor={'shadow.100'}
-        display={'flex'}
-        flexDir='column'
-        justifyContent={'center'}
-        alignItems={'center'}
-        _hover={{
-          borderColor: 'brand.500',
-          borderWidth: '2px',
-        }}
-        transition='all .3s'
-      >
-        <Skeleton isLoaded={Boolean(logo)}>
-          <Image src={logo} alt={title} width={32} height={32} />
-        </Skeleton>
+    <ChakraLink
+      as={Link}
+      href={href}
+      borderRadius={'6px'}
+      borderColor={'border.100'}
+      borderWidth={'1px'}
+      h={'201px'}
+      shadow={'md'}
+      bgColor={'shadow.100'}
+      display={'flex'}
+      flexDir='column'
+      justifyContent={'center'}
+      alignItems={'center'}
+      _hover={{
+        borderColor: 'brand.500',
+        borderWidth: '2px',
+      }}
+      transition='all .3s'
+    >
+      <Skeleton isLoaded={Boolean(logo)}>
+        <Image src={logo} alt={title} width={32} height={32} />
+      </Skeleton>
 
-        <Skeleton
-          isLoaded={Boolean(title)}
-          height={!Boolean(title) ? '10px' : ''}
-          width={!Boolean(title) ? '60px' : ''}
-          mt='10px'
-        >
-          <Text fontSize='sm' fontWeight={600}>
-            {title}
-          </Text>
-        </Skeleton>
-      </ChakraLink>
-    </Link>
+      <Skeleton
+        isLoaded={Boolean(title)}
+        height={!Boolean(title) ? '10px' : ''}
+        width={!Boolean(title) ? '60px' : ''}
+        mt='10px'
+      >
+        <Text fontSize='sm' fontWeight={600}>
+          {title}
+        </Text>
+      </Skeleton>
+    </ChakraLink>
   );
 };
 
