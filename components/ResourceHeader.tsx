@@ -11,41 +11,18 @@ import {
   Flex,
   Link as ChakraLink,
 } from '@chakra-ui/react';
-import Link from 'next/link';
 import { HiOutlineArrowLeft } from 'react-icons/hi';
 import TagsSection from './landing/TagsSection';
-import { TagInner } from '../utils/GeneralProps';
 import { ArrowSlant } from './Assets/ArrowSlant';
 import { useRouter } from 'next/router';
-
-const testTags = [
-  {
-    id: 1,
-    attributes: {
-      name: 'Tag1',
-    },
-  },
-
-  {
-    id: 2,
-    attributes: {
-      name: 'Tag2',
-    },
-  },
-  {
-    id: 3,
-    attributes: {
-      name: 'Tag3',
-    },
-  },
-] as TagInner[];
+import { Tag } from '@prisma/client';
 
 const ResourceHeader: FC<{
   isLoaded: boolean;
   title: string;
   subtitle?: string;
   href?: string;
-  tags?: TagInner[];
+  tags?: Tag[];
   isPackagePage?: boolean;
 }> = ({
   isLoaded,

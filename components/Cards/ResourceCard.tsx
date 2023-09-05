@@ -10,19 +10,23 @@ import {
   Tooltip,
 } from '@chakra-ui/react';
 import React, { FC, useEffect, useState } from 'react';
-import { Tags } from '../../utils/GeneralProps';
 import TagsSection from '../landing/TagsSection';
 import useContentIcon from '../useContentIcon';
 import { getLinkPreview } from 'link-preview-js';
+import { ContentType, Tag } from '@prisma/client';
 
 interface Data {
   title: string;
   description: string;
-  tags: Tags;
-  contentType: string;
+  tags: Tag[];
+  contentType?: ContentType | null;
   url: string;
 }
-const ContentTypeDisplay = ({ contentType }) => {
+const ContentTypeDisplay = ({
+  contentType,
+}: {
+  contentType?: ContentType | null;
+}) => {
   return (
     <Box pos='absolute' top='5' right='5'>
       {useContentIcon(contentType)}
@@ -118,7 +122,7 @@ const ResourceCard: FC<Data> = ({
         </Skeleton>
 
         <Box mt='auto'>
-          <TagsSection data={tags?.data} />
+          <TagsSection data={tags} />
         </Box>
       </Flex>
     </LinkBox>

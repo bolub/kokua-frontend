@@ -12,10 +12,10 @@ import { useRouter } from 'next/router';
 import { FC, useState } from 'react';
 
 import { HiOutlineSearch, HiOutlineX } from 'react-icons/hi';
-import { TagInner } from '../../utils/GeneralProps';
 import TagsSection from './TagsSection';
+import { Tag } from '@prisma/client';
 
-const SearchSection: FC<{ data: TagInner[] }> = ({ data }) => {
+const SearchSection: FC<{ data?: Tag[] }> = ({ data }) => {
   const [showTags, setShowTags] = useState(false);
   const [value, setValue] = useState('');
   const router = useRouter();
@@ -27,7 +27,7 @@ const SearchSection: FC<{ data: TagInner[] }> = ({ data }) => {
           onSubmit={(e) => {
             e.preventDefault();
 
-            router.push(`/resources/${value}?search=true`);
+            router.push(`/resources/${value}?type=search`);
           }}
         >
           <InputGroup>

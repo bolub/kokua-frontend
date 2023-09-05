@@ -1,17 +1,17 @@
 import { Badge, Skeleton, Wrap, WrapItem } from '@chakra-ui/react';
 import Link from 'next/link';
 import { FC } from 'react';
-import { TagInner } from '../../utils/GeneralProps';
+import { Tag } from '@prisma/client';
 
 const TagsSection: FC<{
-  data: TagInner[];
+  data?: Tag[];
 }> = ({ data }) => {
   return (
     <Wrap spacingX='12px' spacingY={'7px'}>
       {data?.map((t) => {
         return (
           <WrapItem key={t.id}>
-            <Link href={`/resources/${t.attributes.name}`} passHref>
+            <Link href={`/resources/${t.name}?type=tag`} passHref>
               <Badge
                 as='a'
                 py={'1'}
@@ -30,7 +30,7 @@ const TagsSection: FC<{
                 }}
                 transition='all .3s'
               >
-                {t.attributes.name}
+                {t.name}
               </Badge>
             </Link>
           </WrapItem>
