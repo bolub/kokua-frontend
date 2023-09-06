@@ -13,11 +13,7 @@ import ResourceDataSection from '../../components/ResourcePage/ResourceDataSecti
 import { useRouter } from 'next/router';
 import Seo from '../../components/Seo';
 import ResourceHeader from '../../components/ResourceHeader';
-import { GetStaticPaths, GetStaticProps } from 'next';
 import { trpc } from '../../utils/trpc';
-import { createServerSideHelpers } from '@trpc/react-query/server';
-import { appRouter } from '../../server/_app';
-import superjson from 'superjson';
 
 // export const getStaticPaths: GetStaticPaths = async () => {
 //   return {
