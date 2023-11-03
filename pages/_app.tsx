@@ -1,20 +1,20 @@
-import '../styles/globals.css';
-import type { AppProps } from 'next/app';
-import { ChakraProvider } from '@chakra-ui/react';
-import { theme } from '../chakra/theme';
+import "../styles/globals.css";
+import type { AppProps } from "next/app";
+import { ChakraProvider } from "@chakra-ui/react";
+import { theme } from "../chakra/theme";
 
 import {
   Hydrate,
   QueryClient,
   QueryClientProvider,
-} from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { Navbar } from '../components/Navbar';
-import Seo from '../components/Seo';
-import { useState } from 'react';
-import NextNProgress from 'nextjs-progressbar';
-import Script from 'next/script';
-import { trpc } from '../utils/trpc';
+} from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Navbar } from "../components/Navbar";
+import Seo from "../components/Seo";
+import { useState } from "react";
+import NextNProgress from "nextjs-progressbar";
+import Script from "next/script";
+import { trpc } from "../utils/trpc";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(
@@ -31,20 +31,19 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
-        {/* @ts-ignore */}
         <Hydrate state={pageProps.dehydratedState}>
           <ReactQueryDevtools initialIsOpen={false} />
 
           <Seo />
 
           <Script
-            id='initializeGoogleTag'
+            id="initializeGoogleTag"
             async
-            src='https://www.googletagmanager.com/gtag/js?id=G-EBF9RHVBLZ'
+            src="https://www.googletagmanager.com/gtag/js?id=G-EBF9RHVBLZ"
           />
 
           <Script
-            id='tagCode'
+            id="tagCode"
             dangerouslySetInnerHTML={{
               __html: `
                  window.dataLayer = window.dataLayer || [];
@@ -57,15 +56,15 @@ function MyApp({ Component, pageProps }: AppProps) {
           />
 
           <Script
-            id='plausible'
+            id="plausible"
             defer
-            data-domain='kokua.wiki'
-            src='https://plausible.io/js/script.js'
+            data-domain="kokua.wiki"
+            src="https://plausible.io/js/script.js"
           />
 
           <Navbar />
           <Component {...pageProps} />
-          <NextNProgress color='#0018E7' />
+          <NextNProgress color="#0018E7" />
         </Hydrate>
       </QueryClientProvider>
     </ChakraProvider>
