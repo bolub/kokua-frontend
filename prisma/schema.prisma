@@ -13,7 +13,7 @@ model Tag {
   resourceId      Int?
   resources       Resource[]
    updatedAt      DateTime @updatedAt 
-  createdAt      DateTime @default(now())
+  createdAt       DateTime @default(now())
 }
 
 enum ResourceType {
