@@ -1,12 +1,12 @@
-import { Box, chakra } from '@chakra-ui/react';
-import type { GetStaticProps, NextPage } from 'next';
-import DataSection from '../components/landing/DataSection';
-import Header from '../components/landing/Header';
-import SearchSection from '../components/landing/SearchSection';
-import { trpc } from '../utils/trpc';
-import superjson from 'superjson';
-import { createServerSideHelpers } from '@trpc/react-query/server';
-import { appRouter } from '../server/_app';
+import { Box, chakra } from "@chakra-ui/react";
+import type { GetStaticProps, NextPage } from "next";
+import DataSection from "../components/landing/DataSection";
+import Header from "../components/landing/Header";
+import SearchSection from "../components/landing/SearchSection";
+import { trpc } from "../utils/trpc";
+import superjson from "superjson";
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import { appRouter } from "../server/_app";
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const helpers = createServerSideHelpers({
@@ -32,10 +32,10 @@ const Home: NextPage = () => {
 
   const specialResources = [
     {
-      id: '1',
-      name: 'Special',
+      id: "1",
+      name: "Special",
       logo_url:
-        'https://emojipedia-us.s3.amazonaws.com/source/microsoft-teams/337/grinning-face_1f600.png',
+        "https://emojipedia-us.s3.amazonaws.com/source/microsoft-teams/337/grinning-face_1f600.png",
       createdAt: new Date(),
       updatedAt: new Date(),
     },
@@ -48,28 +48,25 @@ const Home: NextPage = () => {
       <Box>
         <Header />
 
-        <chakra.main id='main' py={'60px'}>
+        <chakra.main id="main" py={"60px"}>
           <SearchSection data={tagsData} />
 
-          {/* Programming Languages */}
           <DataSection
-            title=' Programming Languages'
+            title=" Programming Languages"
             data={languagesData}
-            type='language'
+            type="language"
           />
 
-          {/* Frameworks and Libraries */}
           <DataSection
-            title='Frameworks and Libraries'
+            title="Frameworks and Libraries"
             data={frameworksData}
-            type='framework'
+            type="framework"
           />
 
-          {/* Special section */}
           <DataSection
-            title='Special Resources'
+            title="Special Resources"
             data={specialResources}
-            type='framework'
+            type="framework"
           />
         </chakra.main>
       </Box>
