@@ -6,65 +6,28 @@ import {
   Tabs,
   chakra,
   Container,
-} from '@chakra-ui/react';
-import React, { useMemo } from 'react';
-import TabBadge from '../../components/ResourcePage/TabBadge';
-import ResourceDataSection from '../../components/ResourcePage/ResourceDataSection';
-import { useRouter } from 'next/router';
-import Seo from '../../components/Seo';
-import ResourceHeader from '../../components/ResourceHeader';
-import { trpc } from '../../utils/trpc';
-
-// export const getStaticPaths: GetStaticPaths = async () => {
-//   return {
-//     paths: [],
-//     fallback: 'blocking',
-//   };
-// };
-
-// export const getStaticProps: GetStaticProps = async (context) => {
-//   // trpc time
-//   const { slug } = context.params as {
-//     slug: string;
-//     type: 'tag' | 'search';
-//     search: string;
-//   };
-
-//   const helpers = createServerSideHelpers({
-//     router: appRouter,
-//     ctx: {},
-//     transformer: superjson, // optional - adds superjson serialization
-//   });
-
-//   await helpers.resources.findByTagName.prefetch({
-//     name: slug,
-//   });
-
-//   await helpers.resources.find.prefetch({
-//     name: slug,
-//   });
-
-//   return {
-//     props: {
-//       trpcState: helpers.dehydrate(),
-//     },
-//     revalidate: 1,
-//   };
-// };
+} from "@chakra-ui/react";
+import React, { useMemo } from "react";
+import TabBadge from "../../components/ResourcePage/TabBadge";
+import ResourceDataSection from "../../components/ResourcePage/ResourceDataSection";
+import { useRouter } from "next/router";
+import Seo from "../../components/Seo";
+import ResourceHeader from "../../components/ResourceHeader";
+import { trpc } from "../../utils/trpc";
 
 const Resources = () => {
   const tabStyles = {
-    _selected: { color: 'white', bg: 'black.100' },
-    bg: 'backgrounds.300',
-    borderRadius: '4px',
-    h: '40px',
-    px: '10px',
-    fontWeight: '700',
-    minW: { base: '260px', md: 'fit-content' },
+    _selected: { color: "white", bg: "black.100" },
+    bg: "backgrounds.300",
+    borderRadius: "4px",
+    h: "40px",
+    px: "10px",
+    fontWeight: "700",
+    minW: { base: "260px", md: "fit-content" },
     sx: {
       div: {
-        bg: 'white',
-        color: 'black',
+        bg: "white",
+        color: "black",
       },
     },
   };
@@ -72,7 +35,7 @@ const Resources = () => {
   const router = useRouter();
   const { slug, type } = router.query as {
     slug: string;
-    type: 'tag' | 'search';
+    type: "tag" | "search";
   };
 
   const {
@@ -84,7 +47,7 @@ const Resources = () => {
       name: slug,
     },
     {
-      enabled: !!slug && type === 'tag',
+      enabled: !!slug && type === "tag",
     }
   );
 
@@ -97,29 +60,24 @@ const Resources = () => {
       name: slug,
     },
     {
-      enabled: !!slug && type === 'search',
+      enabled: !!slug && type === "search",
     }
   );
 
   const data = dataBySearch || dataByTag;
 
-  console.log({
-    dataBySearch,
-    dataBySearchError,
-  });
-
   //====================== Split data into 3 parts for the 3 tabs ======================
 
   const UsefulPackages = useMemo(() => {
-    return data?.filter((resource) => resource?.type === 'package');
+    return data?.filter((resource) => resource?.type === "package");
   }, [data]);
 
   const HowTosBlogPosts = useMemo(() => {
-    return data?.filter((resource) => resource?.type === 'howTo_or_blog_post');
+    return data?.filter((resource) => resource?.type === "howTo_or_blog_post");
   }, [data]);
 
   const RecommendedCourses = useMemo(() => {
-    return data?.filter((resource) => resource?.type === 'course');
+    return data?.filter((resource) => resource?.type === "course");
   }, [data]);
 
   // =====================================================================================
@@ -135,16 +93,16 @@ const Resources = () => {
 
       {/* main */}
       <chakra.main>
-        <chakra.section id='data'>
+        <chakra.section id="data">
           <Container>
-            <Tabs variant='unstyled' mb='100px'>
-              <TabList mt='38px' overflowX={'auto'}>
+            <Tabs variant="unstyled" mb="100px">
+              <TabList mt="38px" overflowX={"auto"}>
                 <Tab {...tabStyles}>
                   Useful Packages / Resource
                   <TabBadge value={UsefulPackages?.length || 0} />
                 </Tab>
 
-                <Tab mx='30px' {...tabStyles}>
+                <Tab mx="30px" {...tabStyles}>
                   How Tos and Blog Posts
                   <TabBadge value={HowTosBlogPosts?.length || 0} />
                 </Tab>
@@ -154,24 +112,24 @@ const Resources = () => {
                 </Tab>
               </TabList>
 
-              <TabPanels mt='44px'>
+              <TabPanels mt="44px">
                 <TabPanel px={0}>
                   <ResourceDataSection
                     data={UsefulPackages || []}
-                    type='package'
+                    type="package"
                   />
                 </TabPanel>
 
                 <TabPanel px={0}>
                   <ResourceDataSection
                     data={HowTosBlogPosts || []}
-                    type='howTo_or_blog_post'
+                    type="howTo_or_blog_post"
                   />
                 </TabPanel>
                 <TabPanel px={0}>
                   <ResourceDataSection
                     data={RecommendedCourses || []}
-                    type='course'
+                    type="course"
                   />
                 </TabPanel>
               </TabPanels>
