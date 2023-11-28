@@ -17,12 +17,13 @@ import { trpc } from "../../utils/trpc";
 
 const Resources = () => {
   const tabStyles = {
-    _selected: { color: "white", bg: "black.100" },
-    bg: "backgrounds.300",
-    borderRadius: "4px",
-    h: "40px",
-    px: "10px",
-    fontWeight: "700",
+    _selected: { color: "white", bg: "black.100", fontWeight: "bold" },
+    borderWidth: "1px",
+    borderColor: "gray.300",
+    borderRadius: "10px",
+    py: "10px",
+    px: "16px",
+    fontWeight: "semibold",
     minW: { base: "260px", md: "fit-content" },
     sx: {
       div: {

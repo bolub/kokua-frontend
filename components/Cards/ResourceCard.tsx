@@ -60,13 +60,13 @@ const ResourceCard: FC<Data> = ({
   return (
     <LinkBox as="article" pos="relative">
       <Flex
-        borderRadius={"6px"}
-        borderColor={"border.100"}
+        borderRadius={"2xl"}
+        borderColor={"gray.300"}
         borderWidth={"1px"}
         boxShadow="0px 3px 1px rgba(0, 0, 0, 0.03);"
         bg={"shadow.100"}
-        py="32px"
-        px="28px"
+        py="40px"
+        px="32px"
         flexDir="column"
         _hover={{
           borderColor: "brand.500",
@@ -111,7 +111,7 @@ const ResourceCard: FC<Data> = ({
             h="300px"
             objectFit="cover"
             alt={title}
-            rounded="sm"
+            rounded="xl"
             my="20px"
             onError={(e) => {
               e.currentTarget.src = "/Placeholder.png";
