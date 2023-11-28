@@ -1,8 +1,5 @@
-import React from "react";
-import { Box, Flex, chakra, Container, HStack } from "@chakra-ui/react";
+import { Box, Flex, chakra, Container } from "@chakra-ui/react";
 import Link from "next/link";
-import NavLink from "./NavLink";
-// import NavLink from './NavLink';
 
 const Navbar = () => {
   return (
