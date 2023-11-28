@@ -17,22 +17,23 @@ const Header = () => {
             </Text>
 
             <Button
+              mt="40px"
               as="a"
-              cursor="pointer"
               href="#main"
-              mt="31px"
-              fontSize="16px"
-              borderColor={"brand.500"}
-              borderRadius="0px"
-              borderWidth={"2px"}
-              color={"brand.500"}
+              bgColor="gray.900"
+              color="white"
+              size={"lg"}
+              borderRadius="lg"
               fontWeight={"700"}
+              fontSize={"16px"}
+              px="32px"
+              py="28px"
               rightIcon={<HiArrowDown />}
-              py="10px"
-              px="18px"
-              bgColor="white"
+              _hover={{
+                backgroundColor: "gray.700",
+              }}
             >
-              Start Exploring
+              Start exploring
             </Button>
           </Box>
 
