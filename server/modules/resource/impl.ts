@@ -2,7 +2,11 @@ import prisma from "../../../utils/db";
 import { ResourceServiceType } from "./interface";
 
 const all: ResourceServiceType["all"] = async () => {
-  return await prisma.resource.findMany();
+  return await prisma.resource.findMany({
+    include: {
+      tags: true,
+    },
+  });
 };
 
 const findByTag: ResourceServiceType["findByTag"] = async ({ name }) => {

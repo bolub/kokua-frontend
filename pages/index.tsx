@@ -1,20 +1,21 @@
-import { Box, chakra } from "@chakra-ui/react";
-import type { InferGetStaticPropsType } from "next";
-import DataSection from "../components/landing/DataSection";
-import Header from "../components/landing/Header";
-import SearchSection from "../components/landing/SearchSection";
-import { trpc } from "../utils/trpc";
+import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { FrameworkService } from "../server/modules/framework/impl";
 import { LanguageService } from "../server/modules/language/impl";
+import { HomePage } from "../components/containers/homepage/HomePage";
+import { ResourceService } from "../server/modules/resource/impl";
 
-export const getStaticProps = async () => {
+export const getStaticProps = async (context: GetStaticPropsContext) => {
   const frameworks = await FrameworkService.all();
   const languages = await LanguageService.all();
+  const allResources = await ResourceService.all();
+
+  console.log(context);
 
   return {
     props: {
       frameworks,
       languages,
+      allResources,
     },
     revalidate: 1,
   };
@@ -23,47 +24,13 @@ export const getStaticProps = async () => {
 const Home = ({
   frameworks,
   languages,
+  allResources,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const specialResources = [
-    {
-      id: "1",
-      name: "Special",
-      logo_url:
-        "https://emojipedia-us.s3.amazonaws.com/source/microsoft-teams/337/grinning-face_1f600.png",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-  ];
-
-  const { data: tagsData } = trpc.tags.all.useQuery();
-
   return (
     <>
-      <Box>
-        <Header />
+      {/* <OldHomePage languages={languages} frameworks={frameworks} /> */}
 
-        <chakra.main id="main" py={"60px"}>
-          <SearchSection data={tagsData} />
-
-          <DataSection
-            title=" Programming Languages"
-            data={languages}
-            type="language"
-          />
-
-          <DataSection
-            title="Frameworks and Libraries"
-            data={frameworks}
-            type="framework"
-          />
-
-          <DataSection
-            title="Special Resources"
-            data={specialResources}
-            type="framework"
-          />
-        </chakra.main>
-      </Box>
+      <HomePage resources={allResources} />
     </>
   );
 };

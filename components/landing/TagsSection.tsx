@@ -17,12 +17,11 @@ const TagsSection: FC<{
                 py={"1"}
                 px={"14px"}
                 borderRadius={"200px"}
+                bgColor={"gray.100"}
                 color={"text.100"}
-                borderColor={"border.200"}
-                borderWidth={"1px"}
                 fontWeight={"600"}
                 textTransform={"capitalize"}
-                fontSize={"sm"}
+                fontSize={"xs"}
                 bg="white"
                 _hover={{
                   bg: "black",

@@ -27,11 +27,7 @@ const ContentTypeDisplay = ({
 }: {
   contentType?: ContentType | null;
 }) => {
-  return (
-    <Box pos="absolute" top="5" right="5">
-      {useContentIcon(contentType)}
-    </Box>
-  );
+  return <Box>{useContentIcon(contentType)}</Box>;
 };
 
 const ResourceCard: FC<Data> = ({
@@ -63,30 +59,29 @@ const ResourceCard: FC<Data> = ({
         borderRadius={"2xl"}
         borderColor={"gray.300"}
         borderWidth={"1px"}
-        boxShadow="0px 3px 1px rgba(0, 0, 0, 0.03);"
-        bg={"shadow.100"}
-        py="40px"
-        px="32px"
+        pt="30px"
+        pb="20px"
         flexDir="column"
         _hover={{
           borderColor: "brand.500",
-          borderWidth: "2px",
         }}
         transition="all .3s"
         h="full"
       >
-        <Tooltip label={contentType}>
-          <ContentTypeDisplay contentType={contentType} />
-        </Tooltip>
+        <Box px="24px" mb="20px">
+          <Tooltip label={contentType}>
+            <ContentTypeDisplay contentType={contentType} />
+          </Tooltip>
+        </Box>
 
-        <LinkOverlay href={url} isExternal>
+        <LinkOverlay px="24px" href={url} isExternal>
           <Skeleton
             height={Boolean(title) ? "" : "20px"}
             isLoaded={Boolean(title)}
           >
             <Heading
               as="h2"
-              fontSize={"24px"}
+              fontSize={"20px"}
               fontWeight={"700"}
               noOfLines={2}
               lineHeight="28px"
@@ -100,15 +95,18 @@ const ResourceCard: FC<Data> = ({
           height={Boolean(description) ? "" : "10px"}
           mt="14px"
           isLoaded={Boolean(description)}
+          px="24px"
         >
-          <Text fontWeight={"500"} noOfLines={2}>
+          <Text fontSize="sm" fontWeight={"500"} noOfLines={2}>
             {description}
           </Text>
+        </Skeleton>
 
+        <Box mt="auto" px="14px">
           <ChakraImage
-            src={previewImage}
+            src={previewImage || "/Placeholder.png"}
             w="full"
-            h="300px"
+            h="200px"
             objectFit="cover"
             alt={title}
             rounded="xl"
@@ -117,9 +115,9 @@ const ResourceCard: FC<Data> = ({
               e.currentTarget.src = "/Placeholder.png";
             }}
           />
-        </Skeleton>
+        </Box>
 
-        <Box mt="auto">
+        <Box px="24px">
           <TagsSection data={tags} />
         </Box>
       </Flex>
