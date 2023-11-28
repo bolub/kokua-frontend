@@ -32,7 +32,9 @@ const find: ResourceServiceType["find"] = async ({ name }) => {
     where: {
       OR: [
         {
-          name,
+          name: {
+            contains: name,
+          },
         },
         {
           tags: {
