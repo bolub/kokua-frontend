@@ -38,11 +38,7 @@ const Resources = () => {
     type: "tag" | "search";
   };
 
-  const {
-    data: dataByTag,
-    error: dataByTagError,
-    isLoading: dataByTagLoading,
-  } = trpc.resources.findByTagName.useQuery(
+  const { data: dataByTag } = trpc.resources.findByTagName.useQuery(
     {
       name: slug,
     },
@@ -51,11 +47,7 @@ const Resources = () => {
     }
   );
 
-  const {
-    data: dataBySearch,
-    error: dataBySearchError,
-    isLoading: dataBySearchLoading,
-  } = trpc.resources.find.useQuery(
+  const { data: dataBySearch } = trpc.resources.find.useQuery(
     {
       name: slug,
     },
