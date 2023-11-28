@@ -1,35 +1,36 @@
 import { Box, chakra } from "@chakra-ui/react";
-import type { GetStaticProps, NextPage } from "next";
+import type {
+  GetStaticPathsContext,
+  GetStaticProps,
+  InferGetStaticPropsType,
+  NextPage,
+} from "next";
 import DataSection from "../components/landing/DataSection";
 import Header from "../components/landing/Header";
 import SearchSection from "../components/landing/SearchSection";
 import { trpc } from "../utils/trpc";
-import superjson from "superjson";
-import { createServerSideHelpers } from "@trpc/react-query/server";
-import { appRouter } from "../server/_app";
+import { FrameworkService } from "../server/modules/framework/impl";
+import { LanguageService } from "../server/modules/language/impl";
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const helpers = createServerSideHelpers({
-    router: appRouter,
-    ctx: {},
-    transformer: superjson, // optional - adds superjson serialization
-  });
-
-  helpers.languages.all.prefetch();
-  helpers.frameworks.all.prefetch();
+export const getStaticProps: GetStaticProps = async (
+  context: GetStaticPathsContext
+) => {
+  const frameworks = await FrameworkService.all();
+  const languages = await LanguageService.all();
 
   return {
     props: {
-      trpcState: helpers.dehydrate(),
+      frameworks,
+      languages,
     },
     revalidate: 1,
   };
 };
 
-const Home: NextPage = () => {
-  const { data: languagesData } = trpc.languages.all.useQuery();
-  const { data: frameworksData } = trpc.frameworks.all.useQuery();
-
+const Home: NextPage = ({
+  frameworks,
+  languages,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const specialResources = [
     {
       id: "1",
@@ -53,13 +54,13 @@ const Home: NextPage = () => {
 
           <DataSection
             title=" Programming Languages"
-            data={languagesData}
+            data={languages}
             type="language"
           />
 
           <DataSection
             title="Frameworks and Libraries"
-            data={frameworksData}
+            data={frameworks}
             type="framework"
           />
 
