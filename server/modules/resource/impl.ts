@@ -1,18 +1,18 @@
-import prisma from '../../../utils/db';
-import { ResourceServiceType } from './interface';
+import prisma from "../../../utils/db";
+import { ResourceServiceType } from "./interface";
 
-const all: ResourceServiceType['all'] = async () => {
+const all: ResourceServiceType["all"] = async () => {
   return await prisma.resource.findMany();
 };
 
-const findByTag: ResourceServiceType['findByTag'] = async ({ name }) => {
+const findByTag: ResourceServiceType["findByTag"] = async ({ name }) => {
   try {
     return await prisma.resource.findMany({
       where: {
         tags: {
           some: {
             name: {
-              contains: name.toLowerCase(),
+              contains: name,
             },
           },
         },
@@ -27,7 +27,7 @@ const findByTag: ResourceServiceType['findByTag'] = async ({ name }) => {
   }
 };
 
-const find: ResourceServiceType['find'] = async ({ name }) => {
+const find: ResourceServiceType["find"] = async ({ name }) => {
   const data = await prisma.resource.findMany({
     where: {
       OR: [
