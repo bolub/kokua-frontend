@@ -8,7 +8,7 @@ const Navbar = () => {
   return (
     <chakra.nav>
       <Container size="md">
-        <Flex w="full" pt={"2rem"} alignItems="center">
+        <Flex w="full" py={"2rem"} alignItems="center">
           <Box as="span">
             <Link href="/">
               <svg
