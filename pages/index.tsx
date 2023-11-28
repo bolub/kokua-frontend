@@ -1,10 +1,5 @@
 import { Box, chakra } from "@chakra-ui/react";
-import type {
-  GetStaticPathsContext,
-  GetStaticProps,
-  InferGetStaticPropsType,
-  NextPage,
-} from "next";
+import type { InferGetStaticPropsType } from "next";
 import DataSection from "../components/landing/DataSection";
 import Header from "../components/landing/Header";
 import SearchSection from "../components/landing/SearchSection";
@@ -12,9 +7,7 @@ import { trpc } from "../utils/trpc";
 import { FrameworkService } from "../server/modules/framework/impl";
 import { LanguageService } from "../server/modules/language/impl";
 
-export const getStaticProps: GetStaticProps = async (
-  context: GetStaticPathsContext
-) => {
+export const getStaticProps = async () => {
   const frameworks = await FrameworkService.all();
   const languages = await LanguageService.all();
 
@@ -27,7 +20,7 @@ export const getStaticProps: GetStaticProps = async (
   };
 };
 
-const Home: NextPage = ({
+const Home = ({
   frameworks,
   languages,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
