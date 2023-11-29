@@ -1,7 +1,11 @@
-import { Resource } from '@prisma/client';
+import { Resource, Tag } from "@prisma/client";
+
+export type ResourceWithTags = Resource & {
+  tags?: Tag[];
+};
 
 export interface ResourceServiceType {
-  all: () => Promise<Resource[]>;
-  findByTag: (args: { name: string }) => Promise<Resource[]>;
-  find: (args: { name: string }) => Promise<Resource[]>;
+  all: (args: { name?: string; tag?: string }) => Promise<ResourceWithTags[]>;
+  findByTag: (args: { name: string }) => Promise<ResourceWithTags[]>;
+  find: (args: { name: string }) => Promise<ResourceWithTags[]>;
 }
