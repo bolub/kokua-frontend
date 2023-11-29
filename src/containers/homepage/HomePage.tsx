@@ -1,5 +1,5 @@
 import { Box, Container, Flex } from "@chakra-ui/react";
-import { Sidebar } from "./components/Sidebar";
+import { Sidebar } from "./components/Sidebar/Sidebar";
 import { SearchInput } from "@/components/SearchInput/SearchInput";
 import ResourceDataSection from "./components/ResourceDataSection";
 import { SearchParams } from "@/app/page";
@@ -19,7 +19,7 @@ export const HomePage = async ({ params }: { params: SearchParams }) => {
         py="24px"
         display={{ base: "none", md: "block" }}
       >
-        <Sidebar />
+        <Sidebar params={params} />
       </Box>
 
       <Box overflowY="auto" w="100%" pt="24px" pb="64px">
