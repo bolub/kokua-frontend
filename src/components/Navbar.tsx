@@ -2,11 +2,19 @@
 
 import { Box, Flex, chakra } from "@chakra-ui/react";
 import Link from "next/link";
+import { ReactNode } from "react";
 
-const Navbar = () => {
+const Navbar = ({ children }: { children?: ReactNode }) => {
   return (
     <chakra.nav borderBottomWidth="1px" borderColor="gray.300">
-      <Flex px="32px" w="full" height="6vh" alignItems="center">
+      <Flex
+        px={{ base: "24px", lg: "32px" }}
+        w="full"
+        height="6vh"
+        alignItems="center"
+      >
+        {children}
+
         <Box as="span">
           <Link href="/">
             <svg

@@ -23,8 +23,9 @@ export const NavItemCollapse = ({
 
   const { tag } = useQueryParams();
 
-  const isChildActive =
-    options.some((option) => option.href.includes(tag)) || isOpen;
+  const isChildActive = options.some((option) => {
+    return option.href === `?tag=${tag}` || isOpen;
+  });
 
   return (
     <>
@@ -49,7 +50,7 @@ export const NavItemCollapse = ({
       <Collapse in={isOpen} animateOpacity>
         <VStack px="10px" pb="10px" align="start" spacing="10px">
           {options.map((option, index) => {
-            const isActive = option.href.includes(tag);
+            const isActive = option.href === `?tag=${tag}`;
 
             return (
               <Text
