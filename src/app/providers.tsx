@@ -4,6 +4,7 @@ import { theme } from "@/theme/theme";
 import { CacheProvider } from "@chakra-ui/next-js";
 import { ChakraProvider } from "@chakra-ui/react";
 import { DM_Sans } from "next/font/google";
+import PlausibleProvider from "next-plausible";
 
 const dm_sans = DM_Sans({ subsets: ["latin"] });
 
@@ -19,7 +20,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
       </style>
 
       <CacheProvider>
-        <ChakraProvider theme={theme}>{children}</ChakraProvider>
+        <PlausibleProvider domain="kokua.wiki">
+          <ChakraProvider theme={theme}>{children}</ChakraProvider>
+        </PlausibleProvider>
       </CacheProvider>
     </>
   );
