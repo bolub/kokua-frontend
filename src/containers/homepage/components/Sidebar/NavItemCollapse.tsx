@@ -37,6 +37,7 @@ export const NavItemCollapse = ({
         display="flex"
         gap="6px"
         alignItems={"center"}
+        justifyContent={"space-between"}
       >
         {label}
 
