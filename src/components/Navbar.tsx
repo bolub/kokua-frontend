@@ -10,7 +10,7 @@ const Navbar = ({ children }: { children?: ReactNode }) => {
       <Flex
         px={{ base: "24px", lg: "32px" }}
         w="full"
-        height="6vh"
+        height="8vh"
         alignItems="center"
       >
         {children}

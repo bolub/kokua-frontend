@@ -22,7 +22,7 @@ const ResourceDataSection: FC<{
         length={resources?.length}
       />
 
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing="24px">
+      <SimpleGrid columns={{ base: 1, md: 2, xl: 3 }} spacing="24px">
         {resources?.map((resource) => {
           return <ResourceCard key={resource.id} {...resource} />;
         })}

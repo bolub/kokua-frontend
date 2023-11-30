@@ -12,7 +12,7 @@ export const HomePage = async ({ params }: { params: SearchParams }) => {
     <Flex
       w="100%"
       h={{ base: "auto", md: "100vh" }}
-      flexDir={{ base: "column", md: "row" }}
+      flexDir={{ base: "column", lg: "row" }}
     >
       <Box
         w="100%"

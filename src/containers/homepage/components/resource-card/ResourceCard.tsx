@@ -60,7 +60,7 @@ const ResourceCard = ({
             <Heading
               as="h2"
               fontSize={"18px"}
-              fontWeight={"semibold"}
+              fontWeight={"bold"}
               noOfLines={2}
               lineHeight="28px"
             >

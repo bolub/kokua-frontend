@@ -31,6 +31,8 @@ export const SidebarMobileContainer = ({
           aria-label="Menu"
           onClick={onOpen}
           ref={btnRef}
+          bgColor="brand.500"
+          color="white"
         />
       </Navbar>
 
