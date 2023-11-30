@@ -103,22 +103,9 @@ export const Sidebar = async ({ params }: { params: SearchParams }) => {
           fontWeight={"medium"}
         >
           <NavItemCollapse
-            label="Programming language"
-            options={mappedLanguages}
-          />
-
-          <NavItemCollapse
             label="Frameworks/Libraries"
             options={mappedFrameworks}
           />
-
-          <Text
-            as={Link}
-            href="/?tag=course"
-            fontWeight={!isCourseActive ? "medium" : "bold"}
-          >
-            Courses
-          </Text>
 
           <NavItemCollapse
             label="Specialty"
@@ -140,6 +127,18 @@ export const Sidebar = async ({ params }: { params: SearchParams }) => {
               },
             ]}
           />
+          <NavItemCollapse
+            label="Programming language"
+            options={mappedLanguages}
+          />
+
+          <Text
+            as={Link}
+            href="/?tag=course"
+            fontWeight={!isCourseActive ? "medium" : "bold"}
+          >
+            Courses
+          </Text>
 
           {/* <Text as={Link} href="/">
             Field
