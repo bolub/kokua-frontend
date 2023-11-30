@@ -5,6 +5,7 @@ import { CacheProvider } from "@chakra-ui/next-js";
 import { ChakraProvider } from "@chakra-ui/react";
 import { DM_Sans } from "next/font/google";
 import PlausibleProvider from "next-plausible";
+import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 
 const dm_sans = DM_Sans({ subsets: ["latin"] });
 
@@ -21,7 +22,16 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
       <CacheProvider>
         <PlausibleProvider domain="kokua.wiki">
-          <ChakraProvider theme={theme}>{children}</ChakraProvider>
+          <ChakraProvider theme={theme}>
+            {children}
+
+            <ProgressBar
+              height="4px"
+              color="#0018E7"
+              options={{ showSpinner: false }}
+              shallowRouting
+            />
+          </ChakraProvider>
         </PlausibleProvider>
       </CacheProvider>
     </>
