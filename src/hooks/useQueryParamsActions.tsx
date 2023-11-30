@@ -5,7 +5,7 @@ export const useQueryParamsActions = () => {
   const router = useRouter();
 
   const setQueryParam = ({ name, value }: { name: string; value: string }) => {
-    const search = new URLSearchParams();
+    const search = new URLSearchParams(window.location.search);
 
     if (!value) {
       search.delete(name);
