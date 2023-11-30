@@ -15,7 +15,7 @@ import { ChangeEvent } from "react";
 
 export const SearchInput = () => {
   const { query } = useQueryParams();
-  const { setQueryParam } = useQueryParamsActions();
+  const { setQueryParam, clearQueryParams } = useQueryParamsActions();
 
   return (
     <chakra.section>

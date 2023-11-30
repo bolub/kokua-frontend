@@ -1,10 +1,11 @@
+import { queryIds } from "@/components/SearchInput/useQueryParams";
 import { useRouter } from "next/navigation";
 
 export const useQueryParamsActions = () => {
   const router = useRouter();
 
   const setQueryParam = ({ name, value }: { name: string; value: string }) => {
-    const search = new URLSearchParams(window.location.search);
+    const search = new URLSearchParams();
 
     if (!value) {
       search.delete(name);
@@ -23,8 +24,18 @@ export const useQueryParamsActions = () => {
     router.replace(`/?${search.toString()}`);
   };
 
+  const clearQueryParams = () => {
+    const search = new URLSearchParams(window.location.search);
+
+    search.delete(queryIds.query);
+    search.delete(queryIds.tag);
+
+    router.replace(`/?${search.toString()}`);
+  };
+
   return {
     setQueryParam,
     removeQueryParam,
+    clearQueryParams,
   };
 };
