@@ -7,7 +7,7 @@ import { ResourcesLoading } from "./components/LoadingSkeleton";
 export const HomePage = ({ params }: { params: SearchParams }) => {
   return (
     <>
-      <Suspense fallback={<>search...</>}>
+      <Suspense>
         <SearchInput />
       </Suspense>
 
