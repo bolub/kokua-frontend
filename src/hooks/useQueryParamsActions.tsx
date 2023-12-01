@@ -3,14 +3,6 @@ import { useRouter } from "next/navigation";
 
 type Params = { name: string; value: string };
 
-export const addQueryParam = ({ name, value }: Params) => {
-  const search = new URLSearchParams(window.location.search);
-
-  search.set(name, encodeURIComponent(value));
-
-  return search.toString();
-};
-
 export const useQueryParamsActions = () => {
   const router = useRouter();
 

@@ -14,8 +14,11 @@ export const useQueryParams = () => {
     return decodeURIComponent(rawParamValue);
   };
 
+  const rawSearchQuery = getValue(queryIds.query) || null;
+
   return {
     query: getValue(queryIds.query),
     tag: getValue(queryIds.tag),
+    searchQuery: rawSearchQuery ? rawSearchQuery.split("&") : [],
   };
 };

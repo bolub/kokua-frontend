@@ -2,34 +2,81 @@ import prisma from "@/utils/db";
 
 import { ResourceServiceType } from "./interface";
 
-const all: ResourceServiceType["all"] = async ({ name, tag }) => {
-  const tagFilter = tag || name;
+//   const tagFilter = tag || name;
 
-  return await prisma.resource.findMany({
-    where: {
-      OR: [
-        {
-          name: {
-            contains: name,
-            mode: "insensitive",
-          },
-        },
-        {
-          tags: {
-            some: {
-              name: {
-                contains: tagFilter,
-                mode: "insensitive",
-              },
-            },
-          },
-        },
-      ],
-    },
+//   return await prisma.resource.findMany({
+//     where: {
+//       OR: [
+//         {
+//           name: {
+//             contains: name,
+//             mode: "insensitive",
+//           },
+//         },
+//         {
+//           tags: {
+//             some: {
+//               name: {
+//                 contains: tagFilter,
+//                 mode: "insensitive",
+//               },
+//             },
+//           },
+//         },
+//       ],
+//     },
+//     include: {
+//       tags: true,
+//     },
+//   });
+// };
+
+const all: ResourceServiceType["all"] = async ({ name, tag }) => {
+  const allResources = await prisma.resource.findMany({
     include: {
       tags: true,
     },
   });
+
+  if (tag && !name) {
+    return findByTag({ name: tag });
+  }
+
+  if (name && !tag) {
+    return find({ name });
+  }
+
+  if (name && tag) {
+    const test = await prisma.resource.findMany({
+      where: {
+        AND: [
+          ...name.map((term) => ({
+            name: {
+              contains: term,
+              mode: "insensitive" as const,
+            },
+          })),
+          {
+            tags: {
+              some: {
+                name: {
+                  contains: tag,
+                  mode: "insensitive" as const,
+                },
+              },
+            },
+          },
+        ],
+      },
+      include: {
+        tags: true,
+      },
+    });
+
+    return test;
+  }
+
+  return allResources;
 };
 
 const findByTag: ResourceServiceType["findByTag"] = async ({ name }) => {
@@ -54,33 +101,31 @@ const findByTag: ResourceServiceType["findByTag"] = async ({ name }) => {
 };
 
 const find: ResourceServiceType["find"] = async ({ name }) => {
-  const data = await prisma.resource.findMany({
+  return await prisma.resource.findMany({
     where: {
       OR: [
-        {
+        ...name.map((term) => ({
           name: {
-            contains: name,
+            contains: term,
+            mode: "insensitive" as const,
           },
-        },
-        {
+        })),
+        ...name.map((term) => ({
           tags: {
             some: {
-              name,
+              name: {
+                contains: term,
+                mode: "insensitive" as const,
+              },
             },
           },
-        },
+        })),
       ],
     },
     include: {
       tags: true,
     },
   });
-
-  try {
-    return data;
-  } catch (error) {
-    throw error;
-  }
 };
 
 export const ResourceService: ResourceServiceType = {

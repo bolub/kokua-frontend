@@ -7,7 +7,7 @@ import { Suspense } from "react";
 import { ResourcesLoading } from "./components/LoadingSkeleton";
 import { SidebarMobileContainer } from "./components/Sidebar/SidebarMobileContainer";
 
-export const HomePage = async ({ params }: { params: SearchParams }) => {
+export const HomePage = ({ params }: { params: SearchParams }) => {
   return (
     <Flex
       w="100%"
@@ -36,7 +36,7 @@ export const HomePage = async ({ params }: { params: SearchParams }) => {
 
       <Box overflowY="auto" w="100%" pt="24px" pb="64px">
         <Container maxW="1150px">
-          <Suspense fallback={<>search</>}>
+          <Suspense fallback={<>search...</>}>
             <SearchInput />
           </Suspense>
 

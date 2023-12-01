@@ -10,7 +10,7 @@ const ResourceDataSection: FC<{
   params: SearchParams;
 }> = async ({ params }) => {
   const resources = await ResourceService.all({
-    name: params.query,
+    name: decodeURIComponent(params.query || "").split("&"),
     tag: params.tag,
   });
 
