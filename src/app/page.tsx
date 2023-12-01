@@ -10,5 +10,9 @@ type HomePageProps = {
 };
 
 export default async function Home(props: HomePageProps) {
-  return <HomePage params={props.searchParams} />;
+  return (
+    <>
+      <HomePage params={props.searchParams} />
+    </>
+  );
 }
