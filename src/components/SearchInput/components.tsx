@@ -1,6 +1,7 @@
-import { Icon, chakra } from "@chakra-ui/react";
+import { Box, Flex, Icon, chakra } from "@chakra-ui/react";
 import {
   ChakraStylesConfig,
+  GroupProps,
   OptionProps,
   components,
 } from "chakra-react-select";
@@ -39,12 +40,20 @@ export const chakraStyles: ChakraStylesConfig<SelectOption, true> = {
       gap: "8px !important",
       flexDir: "row",
       px: "20px",
-      pt: "24px",
-      pb: "32px",
+      pt: "16px",
+      pb: "28px",
       rounded: "xl",
       boxShadow: "lg",
     };
   },
+  groupHeading: (provided) => ({
+    ...provided,
+    display: "flex",
+    fontSize: "sm",
+    width: "100%",
+    p: "0px",
+    mb: "12px !important",
+  }),
 };
 
 export const Option = (props: OptionProps<SelectOption, true>) => {
@@ -86,7 +95,28 @@ export const Option = (props: OptionProps<SelectOption, true>) => {
   );
 };
 
+export const Group = (props: GroupProps<SelectOption, true>) => {
+  return (
+    <components.Group {...props}>
+      <Box display={"flex"} gap="8px" flexWrap={"wrap"}>
+        {props.children}
+      </Box>
+    </components.Group>
+  );
+};
+
+const LoadingMessage = (props: any) => {
+  return (
+    <Flex w="full" textAlign="center" justifyContent="center">
+      <components.LoadingMessage {...props}>
+        {props.children}
+      </components.LoadingMessage>
+    </Flex>
+  );
+};
+
 export const componentsDesktop = {
-  //   MenuList,
   Option,
+  Group,
+  LoadingMessage,
 };
