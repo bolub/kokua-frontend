@@ -1,16 +1,9 @@
 import { Box, Container, Flex } from "@chakra-ui/react";
-import { SearchParams } from "@/app/page";
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import { Sidebar } from "@/containers/homepage/components/Sidebar/Sidebar";
 import { SidebarMobileContainer } from "@/containers/homepage/components/Sidebar/SidebarMobileContainer";
 
-export const LayoutContainer = ({
-  params,
-  children,
-}: {
-  params?: SearchParams;
-  children: ReactNode;
-}) => {
+export const LayoutContainer = ({ children }: { children: ReactNode }) => {
   return (
     <Flex
       w="100%"
@@ -27,12 +20,12 @@ export const LayoutContainer = ({
         py={{ lg: "24px" }}
       >
         <Box display={{ base: "none", lg: "block" }}>
-          <Sidebar params={params} />
+          <Sidebar />
         </Box>
 
         <Box display={{ lg: "none" }}>
           <SidebarMobileContainer>
-            <Sidebar params={params} />
+            <Sidebar />
           </SidebarMobileContainer>
         </Box>
       </Box>
