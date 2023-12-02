@@ -2,7 +2,6 @@
 
 import { Navbar } from "@/components/Navbar";
 import {
-  Box,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
