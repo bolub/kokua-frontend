@@ -9,7 +9,7 @@ async function getData({
   const res = await fetch(
     `${
       process.env.NEXT_PUBLIC_API_URL || process.env.VERCEL_URL
-    }/tags?name=${name}`
+    }/api/tags?name=${name}`
   );
   if (!res.ok) {
     throw new Error("Failed to fetch data");
