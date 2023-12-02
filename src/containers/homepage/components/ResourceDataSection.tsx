@@ -39,15 +39,43 @@ const getData = ({
 }): Promise<Resource[]> => {
   const searchFilter = search?.length > 0 && search[0] !== "" ? search : null;
 
-  const tagFilterAction = tag ? `&& tags[]-> name match "${tag}*"` : "";
+  const tagTest = (textMatch?: string) => {
+    return textMatch ? `tags[]-> name match "${textMatch}*"` : "";
+  };
+
+  const tagFilterAction = `&& ${tagTest(tag)}`;
+
+  const searchAction = searchFilter
+    ? "&& (" +
+      searchFilter
+        ?.map((s) => `name match "${s}*" && ${tagTest(s)}`)
+        .join(" || ") +
+      ")"
+    : "";
   const searchFilterAction = searchFilter
-    ? searchFilter
-        ?.map((s) => `&& name match "${s}*" && tags[]-> name match "${s}*"`)
-        .join(" || ")
+    ? "&& (" +
+      searchFilter
+        ?.map((s) => `name match "${s}*" ${tagFilterAction}"`)
+        .join(" || ") +
+      ")"
     : "";
 
+  const filterAction = () => {
+    if (tag) {
+      return tagFilterAction;
+    }
+
+    if (search) {
+      return searchAction;
+    }
+
+    if (tag && search) {
+      return searchFilterAction;
+    }
+  };
+
   const query = `
-    *[_type == "resource" ${tagFilterAction} ${searchFilterAction}]{
+    *[_type == "resource" ${filterAction()}]{
       _id,
       'slug': slug.current,
       name,

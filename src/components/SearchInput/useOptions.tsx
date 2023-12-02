@@ -22,7 +22,7 @@ async function getData({
 }
 
 export const useOptions = () => {
-  const { searchQuery } = useQueryParams();
+  const { searchQuery, tagQuery } = useQueryParams();
 
   const defaultOptions = [
     {
@@ -60,12 +60,22 @@ export const useOptions = () => {
     },
   ];
 
-  const queryOptions = searchQuery?.map((option) => {
+  const searchOptions = searchQuery?.map((option) => {
+    return {
+      label: option,
+      value: option,
+      __isNew__: true,
+    };
+  });
+
+  const tagOptions = tagQuery?.map((option) => {
     return {
       label: option,
       value: option,
     };
   });
+
+  const queryOptions = [...searchOptions, ...tagOptions];
 
   const promiseOptions = async (searchQuery: string) => {
     const allTags = await getData({ searchQuery });
