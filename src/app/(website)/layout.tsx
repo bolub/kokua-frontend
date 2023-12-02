@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Providers } from "./providers";
+import { Providers } from "../(website)/providers";
 import { LayoutContainer } from "@/components/LayoutContainer";
 
 export const metadata: Metadata = {

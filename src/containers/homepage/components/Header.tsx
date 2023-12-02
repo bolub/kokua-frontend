@@ -1,6 +1,6 @@
 "use client";
 
-import { SearchParams } from "@/app/page";
+import { SearchParams } from "@/app/(website)/page";
 import { useQueryParamsActions } from "@/hooks/useQueryParamsActions";
 import { HStack, Tag, TagCloseButton, TagLabel, Text } from "@chakra-ui/react";
 import React from "react";

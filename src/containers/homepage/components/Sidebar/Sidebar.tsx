@@ -1,28 +1,25 @@
 import { Box, Text, VStack } from "@chakra-ui/react";
 import Link from "next/link";
 import { NavItemCollapse } from "./NavItemCollapse";
-import { FrameworkService } from "../../../../../server/modules/framework/impl";
-import { LanguageService } from "../../../../../server/modules/language/impl";
-
 export const Sidebar = async () => {
-  const frameworks = await FrameworkService.all();
-  const languages = await LanguageService.all();
+  // const frameworks = await FrameworkService.all();
+  // const languages = await LanguageService.all();
 
-  const mappedLanguages = languages.map((language) => {
-    return {
-      id: language.id,
-      label: language.name,
-      href: `?tag=${language.name}`,
-    };
-  });
+  // const mappedLanguages = languages.map((language) => {
+  //   return {
+  //     id: language.id,
+  //     label: language.name,
+  //     href: `?tag=${language.name}`,
+  //   };
+  // });
 
-  const mappedFrameworks = frameworks.map((framework) => {
-    return {
-      id: framework.id,
-      label: framework.name,
-      href: `?tag=${framework.name}`,
-    };
-  });
+  // const mappedFrameworks = frameworks.map((framework) => {
+  //   return {
+  //     id: framework.id,
+  //     label: framework.name,
+  //     href: `?tag=${framework.name}`,
+  //   };
+  // });
 
   const isCourseActive = false;
 
@@ -103,7 +100,8 @@ export const Sidebar = async () => {
         >
           <NavItemCollapse
             label="Frameworks/Libraries"
-            options={mappedFrameworks}
+            // options={mappedFrameworks}
+            options={[]}
           />
 
           <NavItemCollapse
@@ -128,7 +126,8 @@ export const Sidebar = async () => {
           />
           <NavItemCollapse
             label="Programming language"
-            options={mappedLanguages}
+            // options={mappedLanguages}
+            options={[]}
           />
 
           <Text

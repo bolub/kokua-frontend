@@ -11,10 +11,10 @@ import {
   BoxProps,
 } from "@chakra-ui/react";
 import TagsSection from "../TagsSection";
-import { ResourceWithTags } from "../../../../../server/modules/resource/interface";
 import { ContentTypeDisplay } from "./ContentTypeDisplay";
 import { ReactNode } from "react";
 import { ImageDisplay } from "./ImageDisplay";
+import { Resource } from "../ResourceDataSection";
 
 export const ContentContainer = ({
   children,
@@ -27,13 +27,9 @@ export const ContentContainer = ({
   );
 };
 
-const ResourceCard = ({
-  name,
-  subtitle,
-  tags,
-  contentType,
-  external_url,
-}: ResourceWithTags) => {
+const ResourceCard = (props: Resource) => {
+  const { name, subtitle, tags, content_type, external_url } = props;
+
   return (
     <LinkBox as="article" pos="relative">
       <Flex
@@ -50,8 +46,8 @@ const ResourceCard = ({
         h="full"
       >
         <ContentContainer px="24px" mb="20px">
-          <Tooltip label={contentType}>
-            <ContentTypeDisplay contentType={contentType} />
+          <Tooltip label={content_type}>
+            <ContentTypeDisplay contentType={content_type} />
           </Tooltip>
         </ContentContainer>
 
