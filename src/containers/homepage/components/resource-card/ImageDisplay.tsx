@@ -51,9 +51,7 @@ export const ImageDisplay = ({ url, alt }: { url: string; alt: string }) => {
           bgColor={background}
           color={text}
         >
-          <Text fontSize="sm" fontWeight="bold">
-            {alt}
-          </Text>
+          <Text fontWeight="bold">{alt}</Text>
         </Center>
       )}
     </>
