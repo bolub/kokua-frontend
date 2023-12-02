@@ -1,10 +1,12 @@
 import { queryIds } from "@/components/SearchInput/useQueryParams";
 import { useRouter } from "next/navigation";
 
+type Params = { name: string; value: string };
+
 export const useQueryParamsActions = () => {
   const router = useRouter();
 
-  const setQueryParam = ({ name, value }: { name: string; value: string }) => {
+  const setQueryParam = ({ name, value }: Params) => {
     const search = new URLSearchParams(window.location.search);
 
     if (!value) {

@@ -3,9 +3,8 @@ import Link from "next/link";
 import { NavItemCollapse } from "./NavItemCollapse";
 import { FrameworkService } from "../../../../../server/modules/framework/impl";
 import { LanguageService } from "../../../../../server/modules/language/impl";
-import { SearchParams } from "@/app/page";
 
-export const Sidebar = async ({ params }: { params: SearchParams }) => {
+export const Sidebar = async () => {
   const frameworks = await FrameworkService.all();
   const languages = await LanguageService.all();
 
@@ -25,7 +24,7 @@ export const Sidebar = async ({ params }: { params: SearchParams }) => {
     };
   });
 
-  const isCourseActive = params.tag?.includes("course");
+  const isCourseActive = false;
 
   return (
     <>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Providers } from "./providers";
+import { LayoutContainer } from "@/components/LayoutContainer";
 
 export const metadata: Metadata = {
   title: "Kokua",
@@ -16,7 +17,9 @@ export default function RootLayout({
     <>
       <html lang="en">
         <body>
-          <Providers>{children}</Providers>
+          <Providers>
+            <LayoutContainer>{children}</LayoutContainer>
+          </Providers>
         </body>
       </html>
     </>
