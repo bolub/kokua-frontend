@@ -32,50 +32,56 @@ export type Resource = {
 
 const getData = ({
   search = [],
-  tag,
+  tag = [],
 }: {
   search?: string[];
-  tag?: string;
+  tag?: string[];
 }): Promise<Resource[]> => {
   const searchFilter = search?.length > 0 && search[0] !== "" ? search : null;
+  const tagFilter = tag?.length > 0 && tag[0] !== "" ? tag : null;
 
-  const tagTest = (textMatch?: string) => {
-    return textMatch ? `tags[]-> name match "${textMatch}*"` : "";
+  const searchMap = (conditional: (s: string) => string) => {
+    return searchFilter?.map((s) => conditional(s)).join(" || ");
   };
 
-  const tagFilterAction = `&& ${tagTest(tag)}`;
+  const searchFilterConditional = (s: string) => {
+    return `name match "*${s}*"`;
+  };
 
-  const searchAction = searchFilter
-    ? "&& (" +
-      searchFilter
-        ?.map((s) => `name match "${s}*" && ${tagTest(s)}`)
-        .join(" || ") +
-      ")"
+  const tagFilterConditional = (s: string) => {
+    return `tags[]-> name match "*${s}*"`;
+  };
+
+  const tagMap = (conditional: (s: string) => string) => {
+    return tagFilter?.map((s) => conditional(s)).join(" || ");
+  };
+
+  const tagFilterAction = tagFilter
+    ? "&& (" + tagMap(tagFilterConditional) + ")"
     : "";
+
   const searchFilterAction = searchFilter
-    ? "&& (" +
-      searchFilter
-        ?.map((s) => `name match "${s}*" ${tagFilterAction}"`)
-        .join(" || ") +
-      ")"
+    ? "&& (" + searchMap(searchFilterConditional) + ")"
     : "";
+
+  const searchTagFilterAction = `${searchFilterAction} ${tagFilterAction}`;
 
   const filterAction = () => {
-    if (tag) {
+    if (tagFilter && !searchFilter) {
       return tagFilterAction;
     }
 
-    if (search) {
-      return searchAction;
+    if (searchFilter && !tagFilter) {
+      return searchFilterAction;
     }
 
-    if (tag && search) {
-      return searchFilterAction;
+    if (tagFilter && searchFilter) {
+      return searchTagFilterAction;
     }
   };
 
   const query = `
-    *[_type == "resource" ${filterAction()}]{
+    *[_type == "resource" ${filterAction() || ""}]{
       _id,
       'slug': slug.current,
       name,
@@ -98,7 +104,7 @@ const ResourceDataSection: FC<{
 }> = async ({ params }) => {
   const resources = await getData({
     search: decodeURIComponent(params.query || "").split("&"),
-    tag: params.tag,
+    tag: decodeURIComponent(params.tag || "").split("&"),
   });
 
   return (
