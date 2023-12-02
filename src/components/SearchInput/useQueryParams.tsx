@@ -15,10 +15,12 @@ export const useQueryParams = () => {
   };
 
   const rawSearchQuery = getValue(queryIds.query) || null;
+  const rawTagQuery = getValue(queryIds.tag) || null;
 
   return {
     query: getValue(queryIds.query),
     tag: getValue(queryIds.tag),
     searchQuery: rawSearchQuery ? rawSearchQuery.split("&") : [],
+    tagQuery: rawTagQuery ? rawTagQuery.split("&") : [],
   };
 };

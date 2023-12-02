@@ -18,6 +18,22 @@ export const useQueryParamsActions = () => {
     router.replace(`/?${search.toString()}`);
   };
 
+  const setMultipleQueryParams = (searchParams: Params[]) => {
+    const search = new URLSearchParams(window.location.search);
+
+    searchParams?.forEach((param) => {
+      const { name, value } = param;
+
+      if (!value) {
+        search.delete(name);
+      } else {
+        search.set(name, encodeURIComponent(value));
+      }
+    });
+
+    router.replace(`/?${search.toString()}`);
+  };
+
   const removeQueryParam = (name: string) => {
     const search = new URLSearchParams(window.location.search);
 
@@ -39,5 +55,6 @@ export const useQueryParamsActions = () => {
     setQueryParam,
     removeQueryParam,
     clearQueryParams,
+    setMultipleQueryParams,
   };
 };

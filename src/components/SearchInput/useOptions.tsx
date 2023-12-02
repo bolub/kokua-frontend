@@ -1,21 +1,28 @@
+import { Tag } from "@/containers/homepage/components/ResourceDataSection";
 import { useQueryParams } from "./useQueryParams";
-import { Tag } from "@prisma/client";
+import { client } from "../../../sanity/lib/client";
 
 async function getData({
-  name,
+  searchQuery,
 }: {
-  name: string;
-}): Promise<{ allTags: Tag[] }> {
-  const res = await fetch(`/api/tags?name=${name}`);
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
+  searchQuery: string;
+}): Promise<Tag[]> {
+  const searchFilterAction = searchQuery
+    ? `&& name match "${searchQuery}*"`
+    : "";
 
-  return res.json();
+  const query = `
+  *[_type == "tag" ${searchFilterAction}]{
+      _id,
+      name
+  }
+`;
+
+  return client.fetch(query);
 }
 
 export const useOptions = () => {
-  const { searchQuery } = useQueryParams();
+  const { searchQuery, tagQuery } = useQueryParams();
 
   const defaultOptions = [
     {
@@ -53,15 +60,25 @@ export const useOptions = () => {
     },
   ];
 
-  const queryOptions = searchQuery?.map((option) => {
+  const searchOptions = searchQuery?.map((option) => {
+    return {
+      label: option,
+      value: option,
+      __isNew__: true,
+    };
+  });
+
+  const tagOptions = tagQuery?.map((option) => {
     return {
       label: option,
       value: option,
     };
   });
 
+  const queryOptions = [...searchOptions, ...tagOptions];
+
   const promiseOptions = async (searchQuery: string) => {
-    const { allTags } = await getData({ name: searchQuery });
+    const allTags = await getData({ searchQuery });
 
     return allTags?.map((tag: any) => {
       return {

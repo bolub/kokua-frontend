@@ -17,18 +17,30 @@ import { chakraStyles, componentsDesktop, SelectOption } from "./components";
 import { useOptions } from "./useOptions";
 
 export const SearchInput = () => {
-  const { setQueryParam } = useQueryParamsActions();
+  const { setMultipleQueryParams } = useQueryParamsActions();
   const { defaultOptions, queryOptions, promiseOptions } = useOptions();
 
   const onChange = (optionValues: OnChangeValue<SelectOption, true>) => {
-    const valuesToArrayOfStrings = optionValues
+    const searchValuesToArrayOfStrings = optionValues
+      .filter((option) => option?.__isNew__ === true)
       .map((option) => option.label)
       .join("&");
 
-    setQueryParam({
-      name: queryIds.query,
-      value: valuesToArrayOfStrings,
-    });
+    const tagValuesToArrayOfStrings = optionValues
+      .filter((option) => !option?.__isNew__)
+      .map((option) => option.label)
+      .join("&");
+
+    setMultipleQueryParams([
+      {
+        name: queryIds.query,
+        value: searchValuesToArrayOfStrings,
+      },
+      {
+        name: queryIds.tag,
+        value: tagValuesToArrayOfStrings,
+      },
+    ]);
   };
 
   return (
