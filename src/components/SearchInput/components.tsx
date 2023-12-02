@@ -39,7 +39,7 @@ export const chakraStyles: ChakraStylesConfig<SelectOption, true> = {
       flexWrap: "wrap",
       gap: "8px !important",
       flexDir: "row",
-      px: "20px",
+      px: "32px",
       pt: "16px",
       pb: "28px",
       rounded: "xl",
