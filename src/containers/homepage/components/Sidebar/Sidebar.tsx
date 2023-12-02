@@ -1,25 +1,59 @@
 import { Box, Text, VStack } from "@chakra-ui/react";
 import Link from "next/link";
 import { NavItemCollapse } from "./NavItemCollapse";
+import { client } from "../../../../../sanity/lib/client";
+
+export type Framework = {
+  _id: string;
+  name: string;
+};
+
+export type Language = {
+  _id: string;
+  name: string;
+};
+
+const getFramework = async (): Promise<Framework[]> => {
+  const query = `
+    *[_type == "framework"]{
+      _id,
+      'name': name -> name,
+    }
+  `;
+
+  return client.fetch(query);
+};
+
+const getLanguages = async (): Promise<Language[]> => {
+  const query = `
+    *[_type == "language"]{
+      _id,
+      'name': name -> name,
+    }
+  `;
+
+  return client.fetch(query);
+};
+
 export const Sidebar = async () => {
-  // const frameworks = await FrameworkService.all();
-  // const languages = await LanguageService.all();
+  const frameworks = await getFramework();
+  const languages = await getLanguages();
 
-  // const mappedLanguages = languages.map((language) => {
-  //   return {
-  //     id: language.id,
-  //     label: language.name,
-  //     href: `?tag=${language.name}`,
-  //   };
-  // });
+  const mappedLanguages = languages.map((language) => {
+    return {
+      id: language._id,
+      label: language.name,
+      href: `?tag=${language.name}`,
+    };
+  });
 
-  // const mappedFrameworks = frameworks.map((framework) => {
-  //   return {
-  //     id: framework.id,
-  //     label: framework.name,
-  //     href: `?tag=${framework.name}`,
-  //   };
-  // });
+  const mappedFrameworks = frameworks.map((framework) => {
+    return {
+      id: framework._id,
+      label: framework.name,
+      href: `?tag=${framework.name}`,
+    };
+  });
 
   const isCourseActive = false;
 
@@ -100,8 +134,7 @@ export const Sidebar = async () => {
         >
           <NavItemCollapse
             label="Frameworks/Libraries"
-            // options={mappedFrameworks}
-            options={[]}
+            options={mappedFrameworks}
           />
 
           <NavItemCollapse
@@ -126,8 +159,7 @@ export const Sidebar = async () => {
           />
           <NavItemCollapse
             label="Programming language"
-            // options={mappedLanguages}
-            options={[]}
+            options={mappedLanguages}
           />
 
           <Text
