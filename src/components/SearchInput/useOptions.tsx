@@ -6,11 +6,7 @@ async function getData({
 }: {
   name: string;
 }): Promise<{ allTags: Tag[] }> {
-  const res = await fetch(
-    `${
-      process.env.NEXT_PUBLIC_API_URL || process.env.VERCEL_URL
-    }/api/tags?name=${name}`
-  );
+  const res = await fetch(`/api/tags?name=${name}`);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
