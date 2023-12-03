@@ -58,12 +58,8 @@ export const SearchInput = () => {
             chakraStyles={chakraStyles}
             placeholder="Search..."
             formatCreateLabel={(userInput) => `Search for "${userInput}"`}
-            loadingMessage={(props) => {
-              return "🔎 Give it a sec...";
-            }}
-            noOptionsMessage={(props) => {
-              return "😥 Looks like this is out of our hands";
-            }}
+            loadingMessage={() => "🔎 Give it a sec..."}
+            noOptionsMessage={() => "😥 Looks like this is out of our hands"}
             components={componentsDesktop}
             isMulti
             isSearchable
