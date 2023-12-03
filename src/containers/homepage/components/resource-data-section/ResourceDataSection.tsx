@@ -31,7 +31,7 @@ const ResourceDataSection: FC<{
       {resources?.length === 0 && (
         <Center h="60vh" maxW="500px" mx="auto" textAlign="center">
           <Text>
-            Sorry, we don&apos; the resource you&apos;re looking for. But
+            Sorry, we don&apos;t have the resource you&apos;re looking for. But
             we&apos;re always adding new stuff so check back later
           </Text>
         </Center>
