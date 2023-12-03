@@ -14,7 +14,7 @@ import TagsSection from "../TagsSection";
 import { ContentTypeDisplay } from "./ContentTypeDisplay";
 import { ReactNode } from "react";
 import { ImageDisplay } from "./ImageDisplay";
-import { Resource } from "../ResourceDataSection";
+import { Resource } from "../resource-data-section/types";
 
 export const ContentContainer = ({
   children,

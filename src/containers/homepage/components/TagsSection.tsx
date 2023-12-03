@@ -5,7 +5,7 @@ import Link from "next/link";
 import { FC } from "react";
 import { useSearchParams } from "next/navigation";
 import { queryIds } from "@/components/SearchInput/useQueryParams";
-import { Tag } from "./ResourceDataSection";
+import { Tag } from "./resource-data-section/types";
 
 const TagsSection: FC<{
   data?: Tag[];

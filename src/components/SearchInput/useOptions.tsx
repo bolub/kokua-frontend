@@ -1,6 +1,6 @@
-import { Tag } from "@/containers/homepage/components/ResourceDataSection";
 import { useQueryParams } from "./useQueryParams";
 import { client } from "../../../sanity/lib/client";
+import { Tag } from "@/containers/homepage/components/resource-data-section/types";
 
 async function getData({
   searchQuery,

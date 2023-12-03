@@ -1,5 +1,5 @@
 import { SearchInput } from "@/components/SearchInput/SearchInput";
-import ResourceDataSection from "./components/ResourceDataSection";
+import ResourceDataSection from "./components/resource-data-section/ResourceDataSection";
 import { SearchParams } from "@/app/(website)/page";
 import { Suspense } from "react";
 import { ResourcesLoading } from "./components/LoadingSkeleton";
