@@ -57,6 +57,13 @@ export const SearchInput = () => {
             menuPortalTarget={document.body}
             chakraStyles={chakraStyles}
             placeholder="Search..."
+            formatCreateLabel={(userInput) => `Search for "${userInput}"`}
+            loadingMessage={(props) => {
+              return "🔎 Give it a sec...";
+            }}
+            noOptionsMessage={(props) => {
+              return "😥 Looks like this is out of our hands";
+            }}
             components={componentsDesktop}
             isMulti
             isSearchable
@@ -65,6 +72,7 @@ export const SearchInput = () => {
             options={defaultOptions}
             loadOptions={promiseOptions}
             defaultOptions={defaultOptions}
+            cacheOptions
             value={queryOptions}
             onChange={onChange}
           />
