@@ -52,7 +52,7 @@ export const getData = ({
   };
 
   const query = `
-      *[_type == "resource" ${filterAction() || ""}]{
+    *[_type == "resource" ${filterAction() || ""}] | order(_createdAt desc) {
         _id,
         'slug': slug.current,
         name,
