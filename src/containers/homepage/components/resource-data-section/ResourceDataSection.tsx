@@ -1,4 +1,4 @@
-import { Box, SimpleGrid } from "@chakra-ui/react";
+import { Box, Center, SimpleGrid, Text } from "@chakra-ui/react";
 import React, { FC } from "react";
 import ResourceCard from "../resource-card/ResourceCard";
 
@@ -27,6 +27,15 @@ const ResourceDataSection: FC<{
           return <ResourceCard key={resource._id} {...resource} />;
         })}
       </SimpleGrid>
+
+      {resources?.length === 0 && (
+        <Center h="60vh" maxW="500px" mx="auto" textAlign="center">
+          <Text>
+            Sorry, we don&apos; the resource you&apos;re looking for. But
+            we&apos;re always adding new stuff so check back later
+          </Text>
+        </Center>
+      )}
     </Box>
   );
 };
