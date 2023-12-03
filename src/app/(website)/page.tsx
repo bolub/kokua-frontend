@@ -9,6 +9,8 @@ type HomePageProps = {
   searchParams: SearchParams;
 };
 
+export const revalidate = 1;
+
 export default async function Home(props: HomePageProps) {
   return (
     <>
