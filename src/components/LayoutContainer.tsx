@@ -7,7 +7,7 @@ export const LayoutContainer = ({ children }: { children: ReactNode }) => {
   return (
     <Flex
       w="100%"
-      h={{ base: "auto", md: "100vh" }}
+      h={{ base: "auto", md: "100dvh" }}
       flexDir={{ base: "column", lg: "row" }}
     >
       <Box
@@ -19,11 +19,11 @@ export const LayoutContainer = ({ children }: { children: ReactNode }) => {
         px={{ lg: "32px" }}
         py={{ lg: "24px" }}
       >
-        <Box display={{ base: "none", lg: "block" }}>
+        <Box display={{ base: "none", lg: "block" }} h="100%">
           <Sidebar />
         </Box>
 
-        <Box display={{ lg: "none" }}>
+        <Box display={{ lg: "none" }} h="100%">
           <SidebarMobileContainer>
             <Sidebar />
           </SidebarMobileContainer>
