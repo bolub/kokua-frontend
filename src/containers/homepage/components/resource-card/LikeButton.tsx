@@ -23,7 +23,9 @@ export const LikeButton = ({
         bgColor={hasLiked ? "rgba(0, 24, 231, 0.1)" : ""}
         color={hasLiked ? "rgb(0, 24, 231)" : ""}
         onClick={() => {
-          increaseResourceCount();
+          if (!hasLiked) {
+            increaseResourceCount();
+          }
         }}
         leftIcon={hasLiked ? <HiThumbUp /> : <HiOutlineThumbUp />}
         fontSize="sm"
