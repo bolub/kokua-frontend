@@ -63,7 +63,8 @@ export const getData = ({
         tags[]->{
           _id,
           name
-        }
+        },
+        upvotes
       }
     `;
 

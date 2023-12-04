@@ -93,11 +93,18 @@ export default defineType({
       type: "url",
       validation: (Rule) => Rule.required(),
     }),
+
     defineField({
       name: "tags",
       title: "Tags",
       type: "array",
       of: [{ type: "reference", to: { type: "tag" } }],
+    }),
+    defineField({
+      name: "upvotes",
+      title: "Upvotes",
+      type: "number",
+      initialValue: 0,
     }),
   ],
 });
