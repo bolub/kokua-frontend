@@ -28,8 +28,8 @@ export const LikeButton = ({
           }
         }}
         leftIcon={hasLiked ? <HiThumbUp /> : <HiOutlineThumbUp />}
-        fontSize="sm"
-        rounded="xl"
+        rounded="lg"
+        size="sm"
       >
         {upV || 0}
       </Button>
