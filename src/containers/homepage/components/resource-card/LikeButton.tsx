@@ -34,13 +34,17 @@ export const LikeButton = ({
       .patch(resourceId)
       .setIfMissing({ upvotes: 0 })
       .inc({ upvotes: 1 })
-      .commit();
+      .commit()
+      .catch(() => {
+        setUpV((prev) => prev - 1);
+      });
   };
 
   return (
     <>
       <Button
-        colorScheme={hasLiked ? "brand" : "gray"}
+        bgColor={hasLiked ? "rgba(0, 24, 231, 0.1)" : ""}
+        color={hasLiked ? "rgb(0, 24, 231)" : ""}
         onClick={() => {
           increaseResourceCount();
         }}

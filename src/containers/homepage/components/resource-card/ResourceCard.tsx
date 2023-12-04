@@ -86,7 +86,7 @@ const ResourceCard = (props: Resource) => {
         <ContentContainer mt="32px">
           <HStack>
             <LikeButton resourceId={_id} upvotes={upvotes} />
-            <ShareButton />
+            {/* <ShareButton /> */}
           </HStack>
         </ContentContainer>
       </Flex>
