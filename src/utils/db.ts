@@ -3,16 +3,17 @@ import Dexie, { Table } from "dexie";
 const dbName = "kokua";
 
 interface MyObject {
-  id: string | number;
+  userId: string | number;
   resourceId: string;
+  count?: number;
 }
 
 interface MyDatabase extends Dexie {
-  users: Table<MyObject, number>;
+  products: Table<MyObject, number>;
 }
 
 export const db = new Dexie(dbName) as MyDatabase;
 
-db.version(1).stores({
-  users: "++id, resourceId",
+db.version(3).stores({
+  products: "userId, resourceId, count",
 });

@@ -1,11 +1,8 @@
 "use client";
 
-import { useNewId, useUser } from "@/hooks/useUserId";
 import { Button } from "@chakra-ui/react";
 import { HiOutlineThumbUp, HiThumbUp } from "react-icons/hi";
-import { client } from "../../../../../sanity/lib/client";
-import { db } from "@/utils/db";
-import { useState } from "react";
+import { useResourceDetails } from "./useResourceDetails";
 
 export const LikeButton = ({
   resourceId,
@@ -14,31 +11,11 @@ export const LikeButton = ({
   resourceId: string;
   upvotes: number;
 }) => {
-  const { newId } = useNewId();
-  const { userId } = useUser({ resourceId });
-  const hasLiked = Boolean(userId);
-
-  const [upV, setUpV] = useState(upvotes);
-
-  const increaseResourceCount = () => {
-    if (!userId) {
-      db.users.add({
-        id: newId,
-        resourceId,
-      });
-    }
-
-    setUpV((prev) => prev + 1);
-
-    client
-      .patch(resourceId)
-      .setIfMissing({ upvotes: 0 })
-      .inc({ upvotes: 1 })
-      .commit()
-      .catch(() => {
-        setUpV((prev) => prev - 1);
-      });
-  };
+  const { resourceDetails, increaseResourceCount, upV } = useResourceDetails({
+    resourceId,
+    upvotes,
+  });
+  const hasLiked = Boolean(resourceDetails);
 
   return (
     <>
