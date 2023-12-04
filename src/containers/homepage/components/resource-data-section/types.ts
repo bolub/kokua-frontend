@@ -20,4 +20,5 @@ export type Resource = {
   content_type: ContentType;
   external_url: string;
   tags?: Tag[];
+  upvotes: number;
 };

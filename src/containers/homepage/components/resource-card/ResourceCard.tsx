@@ -9,12 +9,15 @@ import {
   Text,
   Tooltip,
   BoxProps,
+  HStack,
 } from "@chakra-ui/react";
 import TagsSection from "../TagsSection";
 import { ContentTypeDisplay } from "./ContentTypeDisplay";
 import { ReactNode } from "react";
 import { ImageDisplay } from "./ImageDisplay";
 import { Resource } from "../resource-data-section/types";
+import { LikeButton } from "./LikeButton";
+import { ShareButton } from "./ShareButton";
 
 export const ContentContainer = ({
   children,
@@ -28,7 +31,8 @@ export const ContentContainer = ({
 };
 
 const ResourceCard = (props: Resource) => {
-  const { name, subtitle, tags, content_type, external_url } = props;
+  const { name, subtitle, tags, content_type, external_url, _id, upvotes } =
+    props;
 
   return (
     <LinkBox as="article" pos="relative">
@@ -77,6 +81,13 @@ const ResourceCard = (props: Resource) => {
 
         <ContentContainer mt="20px">
           <TagsSection data={tags} />
+        </ContentContainer>
+
+        <ContentContainer mt="32px">
+          <HStack>
+            <LikeButton resourceId={_id} upvotes={upvotes} />
+            <ShareButton />
+          </HStack>
         </ContentContainer>
       </Flex>
     </LinkBox>
