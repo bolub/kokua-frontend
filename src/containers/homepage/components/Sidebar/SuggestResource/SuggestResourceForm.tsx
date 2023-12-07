@@ -7,6 +7,7 @@ import { SuggestResourceAction } from "./suggestResourceAction";
 
 const initialState = {
   message: "",
+  status: "pending",
 };
 
 export const SuggestResourceForm = ({ onFinish }: { onFinish: () => void }) => {
@@ -25,6 +26,8 @@ export const SuggestResourceForm = ({ onFinish }: { onFinish: () => void }) => {
     setStage1Visible(true);
   };
 
+  const hasError = state.status === "error";
+
   return (
     <chakra.form
       action={formAction}
@@ -33,7 +36,7 @@ export const SuggestResourceForm = ({ onFinish }: { onFinish: () => void }) => {
       position="relative"
       flexDir="column"
     >
-      {!state.message ? (
+      {state.status !== "success" && (
         <>
           <PersonalDetailsSection
             isVisible={stage1Visible}
@@ -45,7 +48,25 @@ export const SuggestResourceForm = ({ onFinish }: { onFinish: () => void }) => {
             moveToPrevStage={moveToPrevStage}
           />
         </>
-      ) : (
+      )}
+
+      {state.message && hasError && (
+        <Center
+          mt="18px"
+          textAlign="center"
+          rounded="xl"
+          py="40px"
+          px="20px"
+          bgColor="red.500"
+          flexDir="column"
+        >
+          <Text fontSize="sm" color="white" maxW="280px">
+            Something happened, please try again
+          </Text>
+        </Center>
+      )}
+
+      {state.message && !hasError && (
         <Center
           textAlign="center"
           rounded="xl"

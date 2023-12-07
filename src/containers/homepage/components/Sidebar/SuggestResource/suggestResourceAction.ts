@@ -11,6 +11,8 @@ const SuggestResourceSchema = z.object({
   resource_tags: z.array(z.string()),
 });
 
+type Status = "success" | "error" | "pending";
+
 export const SuggestResourceAction = async (
   prevState: any,
   formData: FormData
@@ -27,18 +29,18 @@ export const SuggestResourceAction = async (
   });
 
   try {
-    await fetch("http://localhost:3000/api/suggest-resource", {
+    await fetch("/api/suggest-resource", {
       method: "POST",
       body: JSON.stringify(details),
     });
 
     return {
+      status: "success" as Status,
       message: "Thanks for the suggestion 🙂, we'll get back to you soon",
     };
   } catch (error) {
-    console.log(error);
-
     return {
+      status: "error" as Status,
       message: "Something happened sorry",
     };
   }

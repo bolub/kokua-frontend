@@ -15,13 +15,11 @@ const SuggestResourceSchema = z.object({
 
 const from = "Siegfried <bolu@siegfried.dev>";
 
-export async function POST(request: Request) {
-  const res = await request.json();
-
-  const details = SuggestResourceSchema.parse(res);
-
+const createSuggestion = async (
+  details: z.infer<typeof SuggestResourceSchema>
+): Promise<{ _id: string }> => {
   try {
-    const createdSuggestion = await client.create({
+    return await client.create({
       _type: "suggestion",
       fullname: details.fullname,
       email: details.email,
@@ -34,6 +32,19 @@ export async function POST(request: Request) {
         _key: uuidv4(),
       })),
     });
+  } catch (error) {
+    // @ts-ignore
+    return error;
+  }
+};
+
+export async function POST(request: Request) {
+  const res = await request.json();
+
+  const details = SuggestResourceSchema.parse(res);
+
+  try {
+    const createdSuggestion = await createSuggestion(details);
 
     await Promise.allSettled([
       sendEmail({

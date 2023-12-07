@@ -12,6 +12,7 @@ import { feedbackAction } from "./FeedbackAction";
 
 const initialState = {
   message: "",
+  status: "pending",
 };
 
 const SubmitButton = () => {
@@ -35,6 +36,8 @@ const SubmitButton = () => {
 export const FeedbackForm = ({ onFinish }: { onFinish: () => void }) => {
   const [state, formAction] = useFormState(feedbackAction, initialState);
 
+  const hasError = state.status === "error";
+
   return (
     <chakra.form
       action={formAction}
@@ -43,7 +46,7 @@ export const FeedbackForm = ({ onFinish }: { onFinish: () => void }) => {
       position="relative"
       flexDir="column"
     >
-      {!state.message ? (
+      {state.status !== "success" && (
         <>
           <FormControl isRequired>
             <FormLabel fontSize="sm" mb="1">
@@ -61,7 +64,25 @@ export const FeedbackForm = ({ onFinish }: { onFinish: () => void }) => {
 
           <SubmitButton />
         </>
-      ) : (
+      )}
+
+      {state.message && hasError && (
+        <Center
+          mt="18px"
+          textAlign="center"
+          rounded="xl"
+          py="40px"
+          px="20px"
+          bgColor="red.500"
+          flexDir="column"
+        >
+          <Text fontSize="sm" color="white" maxW="280px">
+            Something happened, please try again
+          </Text>
+        </Center>
+      )}
+
+      {state.message && !hasError && (
         <Center
           textAlign="center"
           rounded="xl"
