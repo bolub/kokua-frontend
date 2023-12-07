@@ -14,10 +14,6 @@ export const feedbackAction = async (prevState: any, formData: FormData) => {
     message: formData.get("message"),
   });
 
-  console.log({
-    baseUrl,
-  });
-
   try {
     await fetch(`${baseUrl}/api/feedback`, {
       method: "POST",
