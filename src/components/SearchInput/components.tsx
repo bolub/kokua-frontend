@@ -63,8 +63,6 @@ export const suggestSelectChakraStyles: ChakraStylesConfig<SelectOption, true> =
       width: "100%",
     }),
     menuList: (provided, state) => {
-      // console.log(state);
-
       return {
         ...provided,
         display: "flex",
