@@ -4,7 +4,7 @@ import { createMultiStyleConfigHelpers } from "@chakra-ui/react";
 const { definePartsStyle, defineMultiStyleConfig } =
   createMultiStyleConfigHelpers(inputAnatomy.keys);
 
-const search = definePartsStyle({
+const variantSearch = definePartsStyle({
   field: {
     _focus: {
       shadow: "none",
@@ -23,11 +23,14 @@ const search = definePartsStyle({
 });
 
 const baseStyle = definePartsStyle({
-  // define the part you're going to style
-  field: {},
+  field: {
+    rounded: "xl",
+    px: "3",
+    fontSize: "sm",
+  },
 });
 
 export const inputTheme = defineMultiStyleConfig({
   baseStyle,
-  variants: { search },
+  variants: { search: variantSearch },
 });

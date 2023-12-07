@@ -1,7 +1,10 @@
-import { Box, Text, VStack } from "@chakra-ui/react";
+import { Box, Flex, HStack, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import { NavItemCollapse } from "./NavItemCollapse";
 import { client } from "../../../../../sanity/lib/client";
+import { NavItemsGroupContainer } from "./NavItemsGroupContainer";
+import { SuggestResource } from "./SuggestResource/SuggestResource";
+import { Feedback } from "./feedback/Feedback";
 
 export type Framework = {
   _id: string;
@@ -58,7 +61,7 @@ export const Sidebar = async () => {
   const isCourseActive = false;
 
   return (
-    <>
+    <Flex flexDir="column" h="100%">
       <Box as="span" display="block" mb="32px">
         <Link href="/">
           <svg
@@ -115,70 +118,51 @@ export const Sidebar = async () => {
         </Text>
       </Box>
 
-      <Box mt="54px">
+      <NavItemsGroupContainer label="Resources by">
+        <NavItemCollapse
+          label="Frameworks/Libraries"
+          options={mappedFrameworks}
+        />
+
+        <NavItemCollapse
+          label="Specialty"
+          options={[
+            {
+              id: "frontend",
+              label: "Frontend",
+              href: "?tag=frontend",
+            },
+            {
+              id: "backend",
+              label: "Backend",
+              href: "?tag=backend",
+            },
+            {
+              id: "fullstack",
+              label: "Fullstack",
+              href: "?tag=fullstack",
+            },
+          ]}
+        />
+        <NavItemCollapse
+          label="Programming language"
+          options={mappedLanguages}
+        />
+
         <Text
-          as="span"
-          fontWeight={"extrabold"}
-          fontSize={"xs"}
-          textTransform={"uppercase"}
+          as={Link}
+          href="/?tag=course"
+          fontWeight={!isCourseActive ? "medium" : "bold"}
         >
-          Resources by
+          Courses
         </Text>
+      </NavItemsGroupContainer>
 
-        <VStack
-          mt="16px"
-          align="start"
-          spacing={4}
-          fontSize={"sm"}
-          fontWeight={"medium"}
-        >
-          <NavItemCollapse
-            label="Frameworks/Libraries"
-            options={mappedFrameworks}
-          />
+      <NavItemsGroupContainer label="Miscellaneous">
+        <SuggestResource />
 
-          <NavItemCollapse
-            label="Specialty"
-            options={[
-              {
-                id: "frontend",
-                label: "Frontend",
-                href: "?tag=frontend",
-              },
-              {
-                id: "backend",
-                label: "Backend",
-                href: "?tag=backend",
-              },
-              {
-                id: "fullstack",
-                label: "Fullstack",
-                href: "?tag=fullstack",
-              },
-            ]}
-          />
-          <NavItemCollapse
-            label="Programming language"
-            options={mappedLanguages}
-          />
-
-          <Text
-            as={Link}
-            href="/?tag=course"
-            fontWeight={!isCourseActive ? "medium" : "bold"}
-          >
-            Courses
-          </Text>
-
-          {/* <Text as={Link} href="/">
-            Field
-          </Text> */}
-
-          {/* <Text as={Link} href="/">
-            UI Components
-          </Text> */}
-        </VStack>
-      </Box>
-    </>
+        <Feedback />
+      </NavItemsGroupContainer>
+    </Flex>
   );
 };

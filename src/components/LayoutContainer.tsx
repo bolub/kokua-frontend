@@ -1,5 +1,5 @@
 import { Box, Container, Flex } from "@chakra-ui/react";
-import { ReactNode, Suspense } from "react";
+import { ReactNode } from "react";
 import { Sidebar } from "@/containers/homepage/components/Sidebar/Sidebar";
 import { SidebarMobileContainer } from "@/containers/homepage/components/Sidebar/SidebarMobileContainer";
 
