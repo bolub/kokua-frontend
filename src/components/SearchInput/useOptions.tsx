@@ -2,7 +2,7 @@ import { useQueryParams } from "./useQueryParams";
 import { client } from "../../../sanity/lib/client";
 import { Tag } from "@/containers/homepage/components/resource-data-section/types";
 
-async function getData({
+async function getTags({
   searchQuery,
 }: {
   searchQuery: string;
@@ -29,32 +29,32 @@ export const useOptions = () => {
       label: "Suggested",
       options: [
         {
-          label: "React",
-          value: "React",
+          label: "ReactJS",
+          value: "1",
         },
         {
-          label: "Vue",
-          value: "Vue",
+          label: "VueJS",
+          value: "29",
         },
         {
           label: "Angular",
-          value: "Angular",
+          value: "8eb0472e-e0e1-4722-aa40-eea18496d30f",
         },
         {
           label: "Frontend",
-          value: "Frontend",
+          value: "7",
         },
         {
           label: "Backend",
-          value: "Backend",
+          value: "17",
         },
         {
           label: "User Interface (UI)",
-          value: "User Interface (UI)",
+          value: "22",
         },
         {
           label: "User Experience (UX)",
-          value: "User Experience (UX)",
+          value: "23",
         },
       ],
     },
@@ -78,12 +78,12 @@ export const useOptions = () => {
   const queryOptions = [...searchOptions, ...tagOptions];
 
   const promiseOptions = async (searchQuery: string) => {
-    const allTags = await getData({ searchQuery });
+    const allTags = await getTags({ searchQuery });
 
-    return allTags?.map((tag: any) => {
+    return allTags?.map((tag) => {
       return {
         label: tag.name,
-        value: tag.name,
+        value: tag._id,
         type: "tag",
       };
     });

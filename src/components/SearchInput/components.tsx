@@ -56,6 +56,39 @@ export const chakraStyles: ChakraStylesConfig<SelectOption, true> = {
   }),
 };
 
+export const suggestSelectChakraStyles: ChakraStylesConfig<SelectOption, true> =
+  {
+    container: (provided) => ({
+      ...provided,
+      width: "100%",
+    }),
+    menuList: (provided, state) => {
+      // console.log(state);
+
+      return {
+        ...provided,
+        display: "flex",
+        flexWrap: "wrap",
+        gap: "8px !important",
+        flexDir: "row",
+        px: "20px",
+        pt: "10px",
+        pb: "20px",
+        rounded: "xl",
+        boxShadow: "lg",
+        fontSize: "sm",
+      };
+    },
+    groupHeading: (provided) => ({
+      ...provided,
+      display: "flex",
+      fontSize: "sm",
+      width: "100%",
+      p: "0px",
+      mb: "12px !important",
+    }),
+  };
+
 export const Option = (props: OptionProps<SelectOption, true>) => {
   const isNewSearchValue = props.data?.__isNew__;
 
