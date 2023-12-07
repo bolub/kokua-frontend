@@ -3,14 +3,14 @@ import { useFormState } from "react-dom";
 import { useState } from "react";
 import { PersonalDetailsSection } from "./PersonalDetailsSection";
 import { ResourceDetailsSection } from "./ResourceDetailsSection";
-import { suggestResourceAction } from "./SuggestResourceAction";
+import { SuggestResourceAction } from "./SuggestResourceAction";
 
 const initialState = {
   message: "",
 };
 
 export const SuggestResourceForm = ({ onFinish }: { onFinish: () => void }) => {
-  const [state, formAction] = useFormState(suggestResourceAction, initialState);
+  const [state, formAction] = useFormState(SuggestResourceAction, initialState);
 
   const [stage1Visible, setStage1Visible] = useState(true);
   const [stage2Visible, setStage2Visible] = useState(false);

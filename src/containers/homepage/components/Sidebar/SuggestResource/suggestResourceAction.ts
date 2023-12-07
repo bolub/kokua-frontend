@@ -11,7 +11,7 @@ const SuggestResourceSchema = z.object({
   resource_tags: z.array(z.string()),
 });
 
-export const suggestResourceAction = async (
+export const SuggestResourceAction = async (
   prevState: any,
   formData: FormData
 ) => {
