@@ -20,7 +20,7 @@ export const Feedback = () => {
         <>
           <Text fontSize="sm">
             See something that needs improvement, or just general feedback? Just
-            holla
+            holla.
           </Text>
 
           <FeedbackForm onFinish={disclosure.onClose} />
