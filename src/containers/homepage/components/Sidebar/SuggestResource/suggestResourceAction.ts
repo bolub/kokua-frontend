@@ -1,5 +1,6 @@
 "use server";
 
+import { baseUrl } from "@/utils/api";
 import { z } from "zod";
 
 const SuggestResourceSchema = z.object({
@@ -11,7 +12,7 @@ const SuggestResourceSchema = z.object({
   resource_tags: z.array(z.string()),
 });
 
-type Status = "success" | "error" | "pending";
+type Status = "success" | "error";
 
 export const SuggestResourceAction = async (
   prevState: any,
@@ -29,7 +30,7 @@ export const SuggestResourceAction = async (
   });
 
   try {
-    await fetch("/api/suggest-resource", {
+    await fetch(`${baseUrl}/api/suggest-resource`, {
       method: "POST",
       body: JSON.stringify(details),
     });

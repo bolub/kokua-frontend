@@ -36,7 +36,7 @@ export const SuggestResourceForm = ({ onFinish }: { onFinish: () => void }) => {
       position="relative"
       flexDir="column"
     >
-      {state.status !== "success" && (
+      {!state.message.includes("Thanks") && (
         <>
           <PersonalDetailsSection
             isVisible={stage1Visible}

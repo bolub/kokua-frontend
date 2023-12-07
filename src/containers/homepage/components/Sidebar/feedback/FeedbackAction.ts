@@ -1,5 +1,6 @@
 "use server";
 
+import { baseUrl } from "@/utils/api";
 import { z } from "zod";
 
 const feedbackSchema = z.object({
@@ -14,7 +15,7 @@ export const feedbackAction = async (prevState: any, formData: FormData) => {
   });
 
   try {
-    await fetch("/api/feedback", {
+    await fetch(`${baseUrl}/api/feedback`, {
       method: "POST",
       body: JSON.stringify(details),
     });
