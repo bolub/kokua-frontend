@@ -16,7 +16,7 @@ export const ReceiveFeedback: React.FC<Readonly<ReceiveFeedbackProps>> = ({
         marginBottom: "10px",
       }}
     >
-      Someone sent you ReceiveFeedback
+      Someone sent you feedback
     </p>
 
     <div>
