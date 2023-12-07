@@ -7,7 +7,7 @@ const SuggestResourceSchema = z.object({
   message: z.string(),
 });
 
-const from = "Siegfried <bolu@siegfried.dev>";
+const from = "Kokua <bolu@kokua.wiki>";
 
 export async function POST(request: Request) {
   const res = await request.json();

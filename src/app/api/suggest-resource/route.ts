@@ -13,7 +13,7 @@ const SuggestResourceSchema = z.object({
   resource_tags: z.array(z.string()),
 });
 
-const from = "Siegfried <bolu@siegfried.dev>";
+const from = "Kokua <bolu@kokua.wiki>";
 
 const createSuggestion = async (
   details: z.infer<typeof SuggestResourceSchema>
