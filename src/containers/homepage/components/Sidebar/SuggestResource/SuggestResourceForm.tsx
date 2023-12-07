@@ -1,9 +1,9 @@
 import { Button, Center, Text, chakra } from "@chakra-ui/react";
 import { useFormState } from "react-dom";
-import { suggestResourceAction } from "./SuggestResourceAction";
 import { useState } from "react";
 import { PersonalDetailsSection } from "./PersonalDetailsSection";
 import { ResourceDetailsSection } from "./ResourceDetailsSection";
+import { suggestResourceAction } from "./SuggestResourceAction";
 
 const initialState = {
   message: "",
