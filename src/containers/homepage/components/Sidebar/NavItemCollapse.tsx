@@ -31,7 +31,7 @@ export const NavItemCollapse = ({
     <>
       <chakra.button
         onClick={onToggle}
-        fontWeight={!isChildActive ? "medium" : "bold"}
+        fontWeight={!isChildActive ? "" : "bold"}
         w="100%"
         textAlign="left"
         display="flex"
