@@ -13,8 +13,6 @@ const SuggestResourceSchema = z.object({
   resource_tags: z.array(z.string()),
 });
 
-const from = "Kokua <bolu@kokua.wiki>";
-
 const createSuggestion = async (
   details: z.infer<typeof SuggestResourceSchema>
 ): Promise<{ _id: string }> => {
@@ -48,7 +46,6 @@ export async function POST(request: Request) {
 
     await Promise.allSettled([
       sendEmail({
-        from,
         to: [details.email],
         subject: "Thanks for the suggestion 🙂",
         react: SuggestionNotification({
@@ -59,10 +56,8 @@ export async function POST(request: Request) {
             url: details.resource_url,
           },
         }),
-        text: "",
       }),
       sendEmail({
-        from,
         to: ["abiol5202@gmail.com"],
         subject: `Resource suggestion from ${details.fullname}`,
         react: SuggestionNotification({
@@ -75,7 +70,6 @@ export async function POST(request: Request) {
           isAdmin: true,
           resourceId: createdSuggestion._id,
         }),
-        text: "",
       }),
     ]);
 

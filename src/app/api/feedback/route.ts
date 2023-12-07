@@ -7,8 +7,6 @@ const SuggestResourceSchema = z.object({
   message: z.string(),
 });
 
-const from = "Kokua <bolu@kokua.wiki>";
-
 export async function POST(request: Request) {
   const res = await request.json();
 
@@ -21,13 +19,11 @@ export async function POST(request: Request) {
     });
 
     await sendEmail({
-      from,
       to: ["abiol5202@gmail.com"],
       subject: `Feedback for Kokua`,
       react: ReceiveFeedback({
         message: details.message,
       }),
-      text: "",
     });
 
     return Response.json({
