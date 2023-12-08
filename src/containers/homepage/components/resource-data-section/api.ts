@@ -64,7 +64,10 @@ export const getData = ({
           _id,
           name
         },
-        upvotes
+        upvotes,
+        suggestedBy -> {
+          fullname
+        }
       }
     `;
 
