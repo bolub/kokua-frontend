@@ -1,8 +1,9 @@
 "use client";
 
 import { CustomModal } from "../../../../../components/CustomModal";
-import { HStack, Text, useDisclosure, chakra } from "@chakra-ui/react";
+import { HStack, Text, useDisclosure, chakra, Icon } from "@chakra-ui/react";
 import { SuggestResourceForm } from "./SuggestResourceForm";
+import { BulbIcon } from "../../resource-card/SuggestedIndicator";
 
 export const SuggestResource = () => {
   const disclosure = useDisclosure();
@@ -11,7 +12,13 @@ export const SuggestResource = () => {
     <>
       <chakra.button w="full" onClick={disclosure.onOpen}>
         <HStack gap="12px">
-          <Text>🪵</Text>
+          <Icon
+            fontSize="16px"
+            color="yellow.500"
+            strokeWidth="2px"
+            as={BulbIcon}
+          />
+
           <Text>Suggest resource</Text>
         </HStack>
       </chakra.button>
