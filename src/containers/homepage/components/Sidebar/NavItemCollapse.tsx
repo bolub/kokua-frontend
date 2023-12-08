@@ -15,9 +15,11 @@ import { HiOutlineChevronDown, HiOutlineChevronUp } from "react-icons/hi";
 export const NavItemCollapse = ({
   label,
   options,
+  onClickItem,
 }: {
   label: string;
   options: { id: string; label: string; href: string }[];
+  onClickItem: () => void;
 }) => {
   const { isOpen, onToggle } = useDisclosure();
 
@@ -59,6 +61,7 @@ export const NavItemCollapse = ({
                 as={Link}
                 href={option.href}
                 fontWeight={!isActive ? "" : "bold"}
+                onClick={onClickItem}
               >
                 {option.label}
               </Text>

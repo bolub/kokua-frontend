@@ -8,17 +8,19 @@ import {
   DrawerContent,
   DrawerOverlay,
   IconButton,
-  useDisclosure,
+  UseDisclosureReturn,
 } from "@chakra-ui/react";
 import React, { ReactNode, useRef } from "react";
 import { HiOutlineMenu } from "react-icons/hi";
 
 export const SidebarMobileContainer = ({
   children,
+  disclosure,
 }: {
   children: ReactNode;
+  disclosure: UseDisclosureReturn;
 }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose } = disclosure;
   const btnRef = useRef(null);
 
   return (

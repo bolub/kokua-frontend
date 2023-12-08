@@ -1,9 +1,22 @@
-import { Box, Container, Flex } from "@chakra-ui/react";
+"use client";
+
+import { Box, Container, Flex, useDisclosure } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import { Sidebar } from "@/containers/homepage/components/Sidebar/Sidebar";
 import { SidebarMobileContainer } from "@/containers/homepage/components/Sidebar/SidebarMobileContainer";
+import { Framework, Language } from "@/utils/api";
 
-export const LayoutContainer = ({ children }: { children: ReactNode }) => {
+export const LayoutContainer = ({
+  children,
+  frameworks,
+  languages,
+}: {
+  children: ReactNode;
+  frameworks: Framework[];
+  languages: Language[];
+}) => {
+  const mobileDisclosure = useDisclosure();
+
   return (
     <Flex
       w="100%"
@@ -20,12 +33,20 @@ export const LayoutContainer = ({ children }: { children: ReactNode }) => {
         py={{ lg: "24px" }}
       >
         <Box display={{ base: "none", lg: "block" }} h="100%">
-          <Sidebar />
+          <Sidebar
+            frameworks={frameworks}
+            languages={languages}
+            onClickItem={mobileDisclosure.onClose}
+          />
         </Box>
 
         <Box display={{ lg: "none" }} h="100%">
-          <SidebarMobileContainer>
-            <Sidebar />
+          <SidebarMobileContainer disclosure={mobileDisclosure}>
+            <Sidebar
+              frameworks={frameworks}
+              languages={languages}
+              onClickItem={mobileDisclosure.onClose}
+            />
           </SidebarMobileContainer>
         </Box>
       </Box>
