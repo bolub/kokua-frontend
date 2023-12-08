@@ -11,6 +11,17 @@ export type Tag = {
   name: string;
 };
 
+export type Suggestion = {
+  fullname: string;
+  email: string;
+  resource_title: string;
+  resource_subtitle: string;
+  resource_url: string;
+  resource_tags?: Tag[];
+};
+
+export type ResourceSuggestion = Pick<Suggestion, "fullname">;
+
 export type Resource = {
   _id: string;
   name: string;
@@ -21,4 +32,5 @@ export type Resource = {
   external_url: string;
   tags?: Tag[];
   upvotes: number;
+  suggestedBy: ResourceSuggestion;
 };
