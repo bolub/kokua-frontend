@@ -106,5 +106,11 @@ export default defineType({
       type: "number",
       initialValue: 0,
     }),
+    defineField({
+      name: "suggestedBy",
+      title: "Suggested by",
+      type: "reference",
+      to: [{ type: "suggestion" }],
+    }),
   ],
 });
