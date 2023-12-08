@@ -24,7 +24,7 @@
     "next": "14.0.3",
     "next-nprogress-bar": "^2.1.2",
     "next-plausible": "^3.12.0",
-    "next-sanity": "5",
+    "next-sanity": "^5.5.11",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^4.12.0",
