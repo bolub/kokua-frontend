@@ -1,47 +1,20 @@
-import { Box, Flex, HStack, Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import { NavItemCollapse } from "./NavItemCollapse";
-import { client } from "../../../../../sanity/lib/client";
 import { NavItemsGroupContainer } from "./NavItemsGroupContainer";
 import { SuggestResource } from "./SuggestResource/SuggestResource";
 import { Feedback } from "./feedback/Feedback";
+import { Framework, Language } from "@/components/DataLayer";
 
-export type Framework = {
-  _id: string;
-  name: string;
-};
-
-export type Language = {
-  _id: string;
-  name: string;
-};
-
-const getFramework = async (): Promise<Framework[]> => {
-  const query = `
-    *[_type == "framework"]{
-      _id,
-      'name': name -> name,
-    }
-  `;
-
-  return client.fetch(query);
-};
-
-const getLanguages = async (): Promise<Language[]> => {
-  const query = `
-    *[_type == "language"]{
-      _id,
-      'name': name -> name,
-    }
-  `;
-
-  return client.fetch(query);
-};
-
-export const Sidebar = async () => {
-  const frameworks = await getFramework();
-  const languages = await getLanguages();
-
+export const Sidebar = ({
+  frameworks,
+  languages,
+  onClickItem,
+}: {
+  frameworks: Framework[];
+  languages: Language[];
+  onClickItem: () => void;
+}) => {
   const mappedLanguages = languages.map((language) => {
     return {
       id: language._id,
@@ -63,7 +36,7 @@ export const Sidebar = async () => {
   return (
     <Flex flexDir="column" h="100%">
       <Box as="span" display="block" mb="32px">
-        <Link href="/">
+        <Link href="/" onClick={onClickItem}>
           <svg
             cursor="pointer"
             width="74"
@@ -122,6 +95,7 @@ export const Sidebar = async () => {
         <NavItemCollapse
           label="Frameworks/Libraries"
           options={mappedFrameworks}
+          onClickItem={onClickItem}
         />
 
         <NavItemCollapse
@@ -143,16 +117,19 @@ export const Sidebar = async () => {
               href: "?tag=fullstack",
             },
           ]}
+          onClickItem={onClickItem}
         />
         <NavItemCollapse
           label="Programming language"
           options={mappedLanguages}
+          onClickItem={onClickItem}
         />
 
         <Text
           as={Link}
           href="/?tag=course"
           fontWeight={!isCourseActive ? "medium" : "bold"}
+          onClick={onClickItem}
         >
           Courses
         </Text>
