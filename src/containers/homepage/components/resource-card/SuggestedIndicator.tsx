@@ -33,7 +33,7 @@ export const SuggestedIndicator = ({ data }: { data: ResourceSuggestion }) => {
     <Popover trigger="hover">
       <PopoverTrigger>
         <Button rounded="lg" size="sm" w="32px" h="32px" colorScheme="yellow">
-          <Icon fontSize="18px" as={BulbIcon} />
+          <Icon fontSize="16px" as={BulbIcon} />
         </Button>
       </PopoverTrigger>
       <PopoverContent maxW="fit-content" bgColor="gray.900" color="white">
