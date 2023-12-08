@@ -63,10 +63,15 @@ export const PersonalDetailsSection = ({
               variant="filled"
               placeholder="Chandler bing"
             />
-            <FormHelperText display="flex" alignItems="center" gap="3px">
+            <FormHelperText
+              display="flex"
+              alignItems="center"
+              gap="3px"
+              color="gray.500"
+            >
               <Icon fontSize="sm" as={InfoIcon} />
 
-              <Text as="span" fontSize="xs">
+              <Text as="span" fontSize="xs" fontWeight={500}>
                 We use this for recognition when the resource is published
               </Text>
             </FormHelperText>
