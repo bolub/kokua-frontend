@@ -4,7 +4,7 @@ import { NavItemCollapse } from "./NavItemCollapse";
 import { NavItemsGroupContainer } from "./NavItemsGroupContainer";
 import { SuggestResource } from "./SuggestResource/SuggestResource";
 import { Feedback } from "./feedback/Feedback";
-import { Framework, Language } from "@/utils/api";
+import { Framework, Language } from "@/components/DataLayer";
 
 export const Sidebar = ({
   frameworks,

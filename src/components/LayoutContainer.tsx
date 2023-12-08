@@ -4,7 +4,7 @@ import { Box, Container, Flex, useDisclosure } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import { Sidebar } from "@/containers/homepage/components/Sidebar/Sidebar";
 import { SidebarMobileContainer } from "@/containers/homepage/components/Sidebar/SidebarMobileContainer";
-import { Framework, Language } from "@/utils/api";
+import { Framework, Language } from "./DataLayer";
 
 export const LayoutContainer = ({
   children,
