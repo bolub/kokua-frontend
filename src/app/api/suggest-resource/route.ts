@@ -1,5 +1,5 @@
 import { SuggestionNotification } from "@/emails/SuggestionNotification";
-import { sendEmail } from "@/utils/email";
+import { defaultEmailFrom, sendEmail } from "@/utils/email";
 import { z } from "zod";
 import { client } from "../../../../sanity/lib/client";
 import { v4 as uuidv4 } from "uuid";
@@ -46,6 +46,7 @@ export async function POST(request: Request) {
 
     await Promise.allSettled([
       sendEmail({
+        from: defaultEmailFrom,
         to: [details.email],
         subject: "Thanks for the suggestion 🙂",
         react: SuggestionNotification({
@@ -56,8 +57,10 @@ export async function POST(request: Request) {
             url: details.resource_url,
           },
         }),
+        text: "",
       }),
       sendEmail({
+        from: defaultEmailFrom,
         to: ["abiol5202@gmail.com"],
         subject: `Resource suggestion from ${details.fullname}`,
         react: SuggestionNotification({
@@ -70,6 +73,7 @@ export async function POST(request: Request) {
           isAdmin: true,
           resourceId: createdSuggestion._id,
         }),
+        text: "",
       }),
     ]);
 

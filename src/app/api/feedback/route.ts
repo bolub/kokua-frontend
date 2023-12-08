@@ -1,4 +1,4 @@
-import { sendEmail } from "@/utils/email";
+import { defaultEmailFrom, sendEmail } from "@/utils/email";
 import { z } from "zod";
 import { client } from "../../../../sanity/lib/client";
 import { ReceiveFeedback } from "@/emails/ReceiveFeedback";
@@ -19,11 +19,13 @@ export async function POST(request: Request) {
     });
 
     await sendEmail({
+      from: defaultEmailFrom,
       to: ["abiol5202@gmail.com"],
       subject: `Feedback for Kokua`,
       react: ReceiveFeedback({
         message: details.message,
       }),
+      text: "",
     });
 
     return Response.json({
