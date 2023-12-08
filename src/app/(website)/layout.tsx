@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "Kokua is a place for developers to explore different resources for their daily tasks",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
