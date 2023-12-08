@@ -18,6 +18,7 @@ import { ImageDisplay } from "./ImageDisplay";
 import { Resource } from "../resource-data-section/types";
 import { LikeButton } from "./LikeButton";
 import { ShareButton } from "./ShareButton";
+import { SuggestedIndicator } from "./SuggestedIndicator";
 
 export const ContentContainer = ({
   children,
@@ -31,8 +32,16 @@ export const ContentContainer = ({
 };
 
 const ResourceCard = (props: Resource) => {
-  const { name, subtitle, tags, content_type, external_url, _id, upvotes } =
-    props;
+  const {
+    name,
+    subtitle,
+    tags,
+    content_type,
+    external_url,
+    _id,
+    upvotes,
+    suggestedBy,
+  } = props;
 
   return (
     <LinkBox as="article" pos="relative">
@@ -84,9 +93,10 @@ const ResourceCard = (props: Resource) => {
         </ContentContainer>
 
         <ContentContainer mt="32px">
-          <HStack>
+          <HStack justifyContent="space-between">
             <LikeButton resourceId={_id} upvotes={upvotes} />
-            {/* <ShareButton /> */}
+
+            {suggestedBy && <SuggestedIndicator data={suggestedBy} />}
           </HStack>
         </ContentContainer>
       </Flex>
