@@ -3,7 +3,7 @@ import { useFormState } from "react-dom";
 import { useState } from "react";
 import { PersonalDetailsSection } from "./PersonalDetailsSection";
 import { ResourceDetailsSection } from "./ResourceDetailsSection";
-import { SuggestResourceAction } from "./suggestResourceAction";
+import { SuggestResourceAction } from "./SRAction";
 
 const initialState = {
   message: "",
