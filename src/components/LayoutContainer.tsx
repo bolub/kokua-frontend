@@ -52,7 +52,9 @@ export const LayoutContainer = ({
       </Box>
 
       <Box overflowY="auto" w="100%" pt="24px" pb="64px">
-        <Container maxW="1150px">{children}</Container>
+        <Container px={{ base: "24px", sm: "52px" }} maxW="1150px">
+          {children}
+        </Container>
       </Box>
     </Flex>
   );

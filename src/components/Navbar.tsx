@@ -8,7 +8,7 @@ const Navbar = ({ children }: { children?: ReactNode }) => {
   return (
     <chakra.nav borderBottomWidth="1px" borderColor="gray.300">
       <Flex
-        px={{ base: "24px", lg: "32px" }}
+        px={{ base: "24px", sm: "52px" }}
         w="full"
         height="8vh"
         alignItems="center"
