@@ -21,12 +21,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       </style>
 
       <CacheProvider>
-        <PlausibleProvider
-          domain="kokua.wiki"
-          scriptProps={{
-            src: "https://plausible.io/js/script.manual.js",
-          }}
-        >
+        <PlausibleProvider domain="kokua.wiki">
           <ChakraProvider theme={theme}>
             {children}
 
