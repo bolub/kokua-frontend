@@ -6,6 +6,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { DM_Sans } from "next/font/google";
 import PlausibleProvider from "next-plausible";
 import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
+import Script from "next/script";
 
 const dm_sans = DM_Sans({ subsets: ["latin"] });
 
@@ -21,7 +22,39 @@ export function Providers({ children }: { children: React.ReactNode }) {
       </style>
 
       <CacheProvider>
-        <PlausibleProvider domain="kokua.wiki">
+        <PlausibleProvider
+          domain="kokua.wiki"
+          scriptProps={{
+            src: "https://plausible.io/js/script.manual.js",
+          }}
+        >
+          <Script id="show-banner">
+            {`window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }`}
+          </Script>
+
+          <Script id="show-banner">
+            {`
+            
+            function prepareUrl(params) {
+              const url = new URL(location.href)
+              const queryParams = new URLSearchParams(location.search)
+              let customUrl = url.protocol + "//" + url.hostname + url.pathname.replace(/\/$/, '')
+              
+              if(params){
+                for (const paramName of params) {
+                  const paramValue = queryParams.get(paramName)
+                  if (paramValue) customUrl = customUrl + '/' + paramValue
+                }
+              }
+
+              return customUrl
+            }
+            plausible('pageview', { u: prepareUrl(["tag", "query"]) + window.location.search })
+          
+
+            `}
+          </Script>
+
           <ChakraProvider theme={theme}>
             {children}
 
