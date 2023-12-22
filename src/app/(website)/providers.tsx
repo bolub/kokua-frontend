@@ -47,33 +47,29 @@ export function Providers({ children }: { children: React.ReactNode }) {
         src="https://plausible.io/js/script.manual.js"
       />
 
-      <Script
-        id="plausible-setup"
-        dangerouslySetInnerHTML={{
-          __html: `
-        window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
-        `,
-        }}
-      />
+      <Script id="plausible-setup">
+        {`window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }`}
+      </Script>
 
-      <Script
-        id="plausible-tag-setup"
-        dangerouslySetInnerHTML={{
-          __html: `
+      <Script id="plausible-tag-setup">
+        {`
           function prepareUrl(params) {
             const url = new URL(location.href)
             const queryParams = new URLSearchParams(location.search)
             let customUrl = url.protocol + "//" + url.hostname + url.pathname.replace(/\/$/, '')
-            for (const paramName of params) {
+
+            console.log(params)
+            
+            params.forEach(paramName =>{
               const paramValue = queryParams.get(paramName)
               if (paramValue) customUrl = customUrl + '/' + paramValue
-            }
+            })
+
             return customUrl
           }
-          plausible('pageview', { u: prepareUrl(["query", "tag", ... ]) + window.location.search })
-        `,
-        }}
-      />
+          plausible('pageview', { u: prepareUrl(["query", "tag" ]) + window.location.search })
+        `}
+      </Script>
 
       <CacheProvider>
         {/* <PlausibleProvider domain="kokua.wiki"> */}
