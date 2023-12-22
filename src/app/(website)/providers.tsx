@@ -45,13 +45,14 @@ export function Providers({ children }: { children: React.ReactNode }) {
         defer
         data-domain="kokua.wiki"
         src="https://plausible.io/js/script.manual.js"
+        strategy="afterInteractive"
       />
 
-      <Script id="plausible-setup">
+      <Script strategy="afterInteractive" id="plausible-setup">
         {`window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }`}
       </Script>
 
-      <Script id="plausible-tag-setup">
+      <Script strategy="afterInteractive" id="plausible-tag-setup">
         {`
           function prepareUrl(params) {
             const url = new URL(location.href)
