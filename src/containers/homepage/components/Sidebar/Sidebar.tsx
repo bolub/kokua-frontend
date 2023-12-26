@@ -116,6 +116,11 @@ export const Sidebar = ({
               label: "Fullstack",
               href: "?tag=fullstack",
             },
+            {
+              id: "mobile",
+              label: "Mobile",
+              href: "?tag=mobile",
+            },
           ]}
           onClickItem={onClickItem}
         />
