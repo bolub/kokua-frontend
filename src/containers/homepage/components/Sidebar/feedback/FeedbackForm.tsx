@@ -28,7 +28,7 @@ const SubmitButton = () => {
       colorScheme="brand"
       isLoading={pending}
     >
-      Submit Resource
+      Send Feedback
     </Button>
   );
 };
