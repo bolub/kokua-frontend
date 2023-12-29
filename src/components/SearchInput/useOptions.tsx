@@ -14,7 +14,20 @@ async function getTags({
   const query = `
   *[_type == "tag" ${searchFilterAction}]{
       _id,
-      name
+      name,
+      _updatedAt
+  }
+`;
+
+  return client.fetch(query);
+}
+
+export async function getTagsForSiteMap(): Promise<Tag[]> {
+  const query = `
+  *[_type == "tag"]{
+      _id,
+      name,
+      _updatedAt
   }
 `;
 

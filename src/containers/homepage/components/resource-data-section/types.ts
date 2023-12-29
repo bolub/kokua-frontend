@@ -9,6 +9,7 @@ export type ContentType =
 export type Tag = {
   _id: string;
   name: string;
+  _updatedAt?: Date;
 };
 
 export type Suggestion = {
