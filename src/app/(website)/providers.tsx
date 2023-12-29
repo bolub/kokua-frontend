@@ -40,51 +40,19 @@ export function Providers({ children }: { children: React.ReactNode }) {
         }}
       />
 
-      <Script
-        id="plausible"
-        defer
-        data-domain="kokua.wiki"
-        src="https://plausible.io/js/script.manual.js"
-        strategy="afterInteractive"
-      />
-
-      <Script strategy="afterInteractive" id="plausible-setup">
-        {`window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }`}
-      </Script>
-
-      <Script strategy="afterInteractive" id="plausible-tag-setup">
-        {`
-          function prepareUrl(params) {
-            const url = new URL(location.href)
-            const queryParams = new URLSearchParams(location.search)
-            let customUrl = url.protocol + "//" + url.hostname + url.pathname.replace(/\/$/, '')
-
-            console.log(params)
-            
-            params.forEach(paramName =>{
-              const paramValue = queryParams.get(paramName)
-              if (paramValue) customUrl = customUrl + '/' + paramValue
-            })
-
-            return customUrl
-          }
-          plausible('pageview', { u: prepareUrl(["query", "tag" ]) + window.location.search })
-        `}
-      </Script>
-
       <CacheProvider>
-        {/* <PlausibleProvider domain="kokua.wiki"> */}
-        <ChakraProvider theme={theme}>
-          {children}
+        <PlausibleProvider domain="kokua.wiki">
+          <ChakraProvider theme={theme}>
+            {children}
 
-          <ProgressBar
-            height="4px"
-            color="#0018E7"
-            options={{ showSpinner: false }}
-            shallowRouting
-          />
-        </ChakraProvider>
-        {/* </PlausibleProvider> */}
+            <ProgressBar
+              height="4px"
+              color="#0018E7"
+              options={{ showSpinner: false }}
+              shallowRouting
+            />
+          </ChakraProvider>
+        </PlausibleProvider>
       </CacheProvider>
     </>
   );
