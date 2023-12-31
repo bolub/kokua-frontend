@@ -4,12 +4,11 @@ import {
   Box,
   Flex,
   Heading,
-  LinkBox,
-  LinkOverlay,
   Text,
   Tooltip,
   BoxProps,
   HStack,
+  Link,
 } from "@chakra-ui/react";
 import TagsSection from "../TagsSection";
 import { ContentTypeDisplay } from "./ContentTypeDisplay";
@@ -17,7 +16,6 @@ import { ReactNode } from "react";
 import { ImageDisplay } from "./ImageDisplay";
 import { Resource } from "../resource-data-section/types";
 import { LikeButton } from "./LikeButton";
-import { ShareButton } from "./ShareButton";
 import { SuggestedIndicator } from "./SuggestedIndicator";
 
 export const ContentContainer = ({
@@ -44,7 +42,14 @@ const ResourceCard = (props: Resource) => {
   } = props;
 
   return (
-    <LinkBox as="article" pos="relative">
+    <Link
+      href={external_url}
+      isExternal
+      pos="relative"
+      _hover={{
+        textDecor: "none",
+      }}
+    >
       <Flex
         borderRadius={"2xl"}
         borderColor={"gray.300"}
@@ -64,24 +69,24 @@ const ResourceCard = (props: Resource) => {
           </Tooltip>
         </ContentContainer>
 
-        <LinkOverlay href={external_url} isExternal>
-          <ContentContainer>
-            <Heading
-              as="h2"
-              fontSize={"18px"}
-              fontWeight={"bold"}
-              noOfLines={2}
-              lineHeight="28px"
-            >
-              {name}
-            </Heading>
-          </ContentContainer>
-        </LinkOverlay>
+        <ContentContainer>
+          <Heading
+            as="h2"
+            fontSize={"18px"}
+            fontWeight={"bold"}
+            noOfLines={2}
+            lineHeight="28px"
+          >
+            {name}
+          </Heading>
+        </ContentContainer>
 
         <ContentContainer mt="14px" mb="32px">
-          <Text fontSize="sm" fontWeight={"500"} noOfLines={2}>
-            {subtitle}
-          </Text>
+          <Tooltip label={subtitle}>
+            <Text fontSize="sm" fontWeight={"500"} noOfLines={2}>
+              {subtitle}
+            </Text>
+          </Tooltip>
         </ContentContainer>
 
         <Box mt="auto" px="14px">
@@ -100,7 +105,7 @@ const ResourceCard = (props: Resource) => {
           </HStack>
         </ContentContainer>
       </Flex>
-    </LinkBox>
+    </Link>
   );
 };
 
