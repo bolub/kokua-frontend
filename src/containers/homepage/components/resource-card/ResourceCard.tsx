@@ -8,7 +8,7 @@ import {
   Tooltip,
   BoxProps,
   HStack,
-  Link,
+  Link as ChakraLink,
 } from "@chakra-ui/react";
 import TagsSection from "../TagsSection";
 import { ContentTypeDisplay } from "./ContentTypeDisplay";
@@ -42,7 +42,7 @@ const ResourceCard = (props: Resource) => {
   } = props;
 
   return (
-    <Link
+    <ChakraLink
       href={external_url}
       isExternal
       pos="relative"
@@ -105,7 +105,7 @@ const ResourceCard = (props: Resource) => {
           </HStack>
         </ContentContainer>
       </Flex>
-    </Link>
+    </ChakraLink>
   );
 };
 
