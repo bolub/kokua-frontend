@@ -22,7 +22,8 @@ export const LikeButton = ({
       <Button
         bgColor={hasLiked ? "rgba(0, 24, 231, 0.1)" : ""}
         color={hasLiked ? "rgb(0, 24, 231)" : ""}
-        onClick={() => {
+        onClick={(e) => {
+          e.preventDefault();
           if (!hasLiked) {
             increaseResourceCount();
           }
