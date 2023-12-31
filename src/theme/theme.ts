@@ -7,6 +7,7 @@ import { colors } from "./foundations/colors";
 import { containerTheme } from "./components/Container";
 import { tagTheme } from "./components/Tag";
 import { inputTheme } from "./components/Input";
+import { tooltipTheme } from "./components/Tooltip";
 
 export const theme = extendTheme({
   colors,
@@ -17,5 +18,6 @@ export const theme = extendTheme({
     Container: containerTheme,
     Tag: tagTheme,
     Input: inputTheme,
+    Tooltip: tooltipTheme,
   },
 });
