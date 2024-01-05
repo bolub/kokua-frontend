@@ -15,32 +15,37 @@ import { queryIds } from "./useQueryParams";
 import { useQueryParamsActions } from "@/hooks/useQueryParamsActions";
 import { chakraStyles, componentsDesktop, SelectOption } from "./components";
 import { useOptions } from "./useOptions";
+import { usePlausible } from "next-plausible";
 
 export const SearchInput = () => {
   const { setMultipleQueryParams } = useQueryParamsActions();
   const { defaultOptions, queryOptions, promiseOptions } = useOptions();
 
-  const onChange = (optionValues: OnChangeValue<SelectOption, true>) => {
-    const searchValuesToArrayOfStrings = optionValues
-      .filter((option) => option?.__isNew__ === true)
-      .map((option) => option.label)
-      .join("&");
+  const plausible = usePlausible();
 
-    const tagValuesToArrayOfStrings = optionValues
+  const onChange = (optionValues: OnChangeValue<SelectOption, true>) => {
+    const allSearchValues = optionValues
+      .filter((option) => option?.__isNew__ === true)
+      .map((option) => option.label);
+
+    const allTagValues = optionValues
       .filter((option) => !option?.__isNew__)
-      .map((option) => option.label)
-      .join("&");
+      .map((option) => option.label);
 
     setMultipleQueryParams([
       {
         name: queryIds.query,
-        value: searchValuesToArrayOfStrings,
+        value: allSearchValues.join("&"),
       },
       {
         name: queryIds.tag,
-        value: tagValuesToArrayOfStrings,
+        value: allTagValues.join("&"),
       },
     ]);
+
+    plausible("pageview", {
+      props: { tag: allTagValues.join("&"), search: allSearchValues.join("&") },
+    });
   };
 
   return (
