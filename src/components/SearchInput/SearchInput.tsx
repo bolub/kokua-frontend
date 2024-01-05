@@ -44,7 +44,7 @@ export const SearchInput = () => {
     ]);
 
     plausible("pageview", {
-      props: { tag: allTagValues.join("&"), search: allSearchValues.join("&") },
+      props: { tag: allTagValues.join("&"), query: allSearchValues.join("&") },
     });
   };
 
