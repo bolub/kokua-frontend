@@ -3,7 +3,12 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["cdn.jsdelivr.net", "emojipedia-us.s3.amazonaws.com"],
+    dangerouslyAllowSVG: true,
+    domains: [
+      "cdn.jsdelivr.net",
+      "emojipedia-us.s3.amazonaws.com",
+      "api.producthunt.com",
+    ],
   },
 };
 

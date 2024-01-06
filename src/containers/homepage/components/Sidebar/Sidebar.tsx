@@ -1,10 +1,11 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text, Link as ChakraLink } from "@chakra-ui/react";
 import Link from "next/link";
 import { NavItemCollapse } from "./NavItemCollapse";
 import { NavItemsGroupContainer } from "./NavItemsGroupContainer";
 import { SuggestResource } from "./SuggestResource/SuggestResource";
 import { Feedback } from "./feedback/Feedback";
 import { Framework, Language } from "@/components/DataLayer";
+import Image from "next/image";
 
 export const Sidebar = ({
   frameworks,
@@ -145,6 +146,20 @@ export const Sidebar = ({
 
         <Feedback />
       </NavItemsGroupContainer>
+
+      <Box mt="auto">
+        <ChakraLink
+          href="https://www.producthunt.com/posts/kokua?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-kokua"
+          isExternal
+        >
+          <Image
+            src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=376101&theme=dark"
+            alt="Kokua - Free&#0032;resources&#0032;to&#0032;reach&#0032;your&#0032;full&#0032;potential | Product Hunt"
+            width={250}
+            height={54}
+          />
+        </ChakraLink>
+      </Box>
     </Flex>
   );
 };
