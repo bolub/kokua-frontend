@@ -12,6 +12,10 @@ const baseStyle = definePartsStyle({
     fontWeight: "bold",
     textTransform: "capitalize",
     transition: "all .3s",
+    _hover: {
+      bgColor: "brand.900",
+      color: "white",
+    },
   },
 });
 
