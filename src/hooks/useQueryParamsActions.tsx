@@ -31,7 +31,7 @@ export const useQueryParamsActions = () => {
       }
     });
 
-    router.replace(`/?${search.toString()}`);
+    router.replace(`/?${search.toString()}`, { scroll: false });
   };
 
   const removeQueryParam = (name: string) => {
