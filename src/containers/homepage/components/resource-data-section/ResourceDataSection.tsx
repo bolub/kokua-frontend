@@ -14,11 +14,6 @@ const ResourceDataSection: FC<{
   const decodedParams = getResourceParams(params);
   const { result: resources, total } = await getResources(decodedParams);
 
-  console.log({
-    resources,
-    total,
-  });
-
   return (
     <Box mt="10px">
       <Header
