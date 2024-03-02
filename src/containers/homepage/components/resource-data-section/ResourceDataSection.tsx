@@ -15,13 +15,13 @@ const ResourceDataSection: FC<{
   const { result: resources, total } = await getResources(decodedParams);
 
   const hasFilters = params.query || params.tag;
-  const test = hasFilters
+  const label = hasFilters
     ? `${resources?.length} resources`
     : `  ${resources?.length} of ${total} resources`;
 
   return (
     <Box mt="10px">
-      <Header query={params.query} tag={params.tag} label={test} />
+      <Header query={params.query} tag={params.tag} label={label} />
 
       <SimpleGrid columns={{ base: 1, md: 2, xl: 3 }} spacing="24px">
         {resources?.map((resource) => {
