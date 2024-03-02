@@ -63,6 +63,11 @@ export const getResources = async ({
   const totalResourcesToDisplay =
     (!!total ? parseInt(total) : undefined) || PAGE_SIZE;
 
+  const hasFilters = search.length > 0 || tag.length > 0;
+
+  const displayResourceString =
+    hasFilters && `[0...${totalResourcesToDisplay}]`;
+
   const filterAction = actions({
     search,
     tag,
@@ -71,7 +76,7 @@ export const getResources = async ({
   const query = `
     *[_type == "resource" ${
       filterAction() || ""
-    } ] | order(_createdAt desc) [0...${totalResourcesToDisplay}] {
+    } ] | order(_createdAt desc) ${displayResourceString} {
         _id,
         'slug': slug.current,
         name,
