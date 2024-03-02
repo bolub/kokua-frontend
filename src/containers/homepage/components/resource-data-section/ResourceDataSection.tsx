@@ -4,22 +4,22 @@ import ResourceCard from "../resource-card/ResourceCard";
 
 import { Header } from "../Header";
 import { SearchParams } from "@/app/(website)/page";
-import { getData } from "./api";
+import { getResources } from "./api";
+import { NextButton } from "../NextButton";
+import { getResourceParams } from "../../utils";
 
 const ResourceDataSection: FC<{
   params: SearchParams;
 }> = async ({ params }) => {
-  const resources = await getData({
-    search: decodeURIComponent(params.query || "").split("&"),
-    tag: decodeURIComponent(params.tag || "").split("&"),
-  });
+  const decodedParams = getResourceParams(params);
+  const { result: resources, total } = await getResources(decodedParams);
 
   return (
     <Box mt="10px">
       <Header
         query={params.query}
         tag={params.tag}
-        length={resources?.length}
+        label={`${resources?.length} of ${total} resources`}
       />
 
       <SimpleGrid columns={{ base: 1, md: 2, xl: 3 }} spacing="24px">
@@ -27,6 +27,8 @@ const ResourceDataSection: FC<{
           return <ResourceCard key={resource._id} {...resource} />;
         })}
       </SimpleGrid>
+
+      {resources.length < total && <NextButton resources={resources} />}
 
       {resources?.length === 0 && (
         <Center h="60vh" maxW="500px" mx="auto" textAlign="center">

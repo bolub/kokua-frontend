@@ -4,6 +4,7 @@ import { Metadata, ResolvingMetadata } from "next";
 export type SearchParams = {
   query?: string;
   tag?: string;
+  total?: string;
 };
 
 type HomePageProps = {

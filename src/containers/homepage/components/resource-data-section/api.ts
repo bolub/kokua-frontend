@@ -1,13 +1,14 @@
 import { client } from "../../../../../sanity/lib/client";
+import { PAGE_SIZE } from "../../utils";
 import { Resource } from "./types";
 
-export const getData = ({
-  search = [],
-  tag = [],
-}: {
+type Queries = {
   search?: string[];
   tag?: string[];
-}): Promise<Resource[]> => {
+  total?: string;
+};
+
+const actions = ({ search = [], tag = [] }: Queries) => {
   const searchFilter = search?.length > 0 && search[0] !== "" ? search : null;
   const tagFilter = tag?.length > 0 && tag[0] !== "" ? tag : null;
 
@@ -51,8 +52,26 @@ export const getData = ({
     }
   };
 
+  return filterAction;
+};
+
+export const getResources = async ({
+  search = [],
+  tag = [],
+  total,
+}: Queries) => {
+  const totalResourcesToDisplay =
+    (!!total ? parseInt(total) : undefined) || PAGE_SIZE;
+
+  const filterAction = actions({
+    search,
+    tag,
+  });
+
   const query = `
-    *[_type == "resource" ${filterAction() || ""}] | order(_createdAt desc) {
+    *[_type == "resource" ${
+      filterAction() || ""
+    } ] | order(_createdAt desc) [0...${totalResourcesToDisplay}] {
         _id,
         'slug': slug.current,
         name,
@@ -71,5 +90,15 @@ export const getData = ({
       }
     `;
 
-  return client.fetch(query);
+  const countQuery = `
+    count(*[_type == 'resource'])
+    `;
+
+  const result = await client.fetch<Resource[]>(query);
+  const count = await client.fetch<number>(countQuery);
+
+  return {
+    result,
+    total: count,
+  };
 };
