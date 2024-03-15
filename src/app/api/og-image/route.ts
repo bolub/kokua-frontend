@@ -25,6 +25,10 @@ export async function GET(request: NextRequest) {
     return Response.json({
       message: "success",
       absoluteOgImageUrl,
+      headers: {
+        "Access-Control-Allow-Origin": "https://www.kokua.wiki",
+        "Access-Control-Allow-Methods": "GET",
+      },
     });
   } catch (error) {
     return Response.json({ error });
