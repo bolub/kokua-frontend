@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { baseUrl } from "@/utils/api";
 
 export const usePreviewImage = ({ url }: { url: string }) => {
   const [previewImage, setPreviewImage] = useState("");
