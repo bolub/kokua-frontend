@@ -17,6 +17,8 @@ import { chakraStyles, componentsDesktop, SelectOption } from "./components";
 import { useOptions } from "./useOptions";
 import { usePlausible } from "next-plausible";
 
+import { useEffect, useState } from "react";
+
 export const SearchInput = () => {
   const { setMultipleQueryParams } = useQueryParamsActions();
   const { defaultOptions, queryOptions, promiseOptions } = useOptions();
@@ -48,6 +50,12 @@ export const SearchInput = () => {
     });
   };
 
+  const [wrappedDocument, setWrappedDocument] = useState<Document>();
+
+  useEffect(() => {
+    setWrappedDocument(document);
+  }, []);
+
   return (
     <chakra.section mb="32px">
       <Box mt="10px" w="full">
@@ -59,7 +67,7 @@ export const SearchInput = () => {
           <AsyncCreatableSelect
             variant="search"
             name="search"
-            menuPortalTarget={document.body}
+            menuPortalTarget={wrappedDocument?.body}
             chakraStyles={chakraStyles}
             placeholder="Search..."
             formatCreateLabel={(userInput) => `Search for "${userInput}"`}
