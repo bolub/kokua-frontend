@@ -1,3 +1,4 @@
+import { serverBaseUrl } from "@/utils/api";
 import axios from "axios";
 import { load } from "cheerio";
 import { NextRequest } from "next/server";
@@ -20,13 +21,13 @@ export async function GET(request: NextRequest) {
     const ogImageUrl = ogImageMetaTag.attr("content") as string;
 
     // If the URL is relative, resolve it to absolute URL
-    const absoluteOgImageUrl = new URL(ogImageUrl, url).href;
+    const absoluteOgImageUrl = ogImageUrl ? new URL(ogImageUrl, url).href : "";
 
     return Response.json({
       message: "success",
       absoluteOgImageUrl,
       headers: {
-        "Access-Control-Allow-Origin": "https://www.kokua.wiki",
+        "Access-Control-Allow-Origin": serverBaseUrl,
         "Access-Control-Allow-Methods": "GET",
       },
     });
