@@ -1,4 +1,4 @@
-import { Box, Center, Image as ChakraImage, Text } from "@chakra-ui/react";
+import { Center, Image as ChakraImage, Text } from "@chakra-ui/react";
 import { usePreviewImage } from "./usePreviewImage";
 
 const generateRandomColor = () => {
