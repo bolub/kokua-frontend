@@ -7,7 +7,9 @@ export const usePreviewImage = ({ url }: { url: string }) => {
 
   useEffect(() => {
     const getPreviewData = async () => {
-      const response = await axios.get(`${baseUrl}/api/og-image?url=${url}`);
+      const response = await axios.get(
+        `https://kokua.wiki/api/og-image?url=${url}`
+      );
 
       setPreviewImage(response.data.absoluteOgImageUrl);
     };
