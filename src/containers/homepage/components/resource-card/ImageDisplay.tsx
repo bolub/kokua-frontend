@@ -1,5 +1,6 @@
 import { Center, Image as ChakraImage, Text } from "@chakra-ui/react";
 import { usePreviewImage } from "./usePreviewImage";
+import { useState } from "react";
 
 const generateRandomColor = () => {
   // Generate random background color
@@ -25,10 +26,11 @@ export const ImageDisplay = ({ url, alt }: { url: string; alt: string }) => {
   const previewImage = usePreviewImage({ url });
 
   const { background, text } = generateRandomColor();
+  const [hasError, setHasError] = useState(false);
 
   return (
     <>
-      {previewImage ? (
+      {!hasError && previewImage ? (
         <ChakraImage
           src={previewImage}
           w="full"
@@ -37,6 +39,7 @@ export const ImageDisplay = ({ url, alt }: { url: string; alt: string }) => {
           alt={alt}
           rounded="xl"
           onError={(e) => {
+            setHasError(true);
             e.currentTarget.src = "/Placeholder.png";
           }}
         />
