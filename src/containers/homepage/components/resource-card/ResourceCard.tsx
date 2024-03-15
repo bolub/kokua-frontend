@@ -64,9 +64,7 @@ const ResourceCard = (props: Resource) => {
         h="full"
       >
         <ContentContainer px="24px" mb="20px">
-          <Tooltip label={content_type}>
-            <ContentTypeDisplay contentType={content_type} />
-          </Tooltip>
+          <ContentTypeDisplay contentType={content_type} />
         </ContentContainer>
 
         <ContentContainer>
