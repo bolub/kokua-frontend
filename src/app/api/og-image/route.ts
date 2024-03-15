@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
     const response = await axios.get(url);
     const html = response.data;
 
-    // Parse HTML using Cheerioo
+    // Parse HTML using Cheerio
     const $ = load(html);
 
     // Find OG image meta tag
