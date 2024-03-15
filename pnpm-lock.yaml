@@ -26,9 +26,15 @@ dependencies:
   '@sanity/vision':
     specifier: '3'
     version: 3.20.2(@babel/runtime@7.23.4)(@codemirror/lint@6.4.2)(@codemirror/state@6.3.2)(@codemirror/theme-one-dark@6.1.2)(@lezer/common@1.1.1)(codemirror@6.0.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.1.1)
+  axios:
+    specifier: ^1.6.7
+    version: 1.6.7
   chakra-react-select:
     specifier: ^4.7.6
     version: 4.7.6(@chakra-ui/form-control@2.2.0)(@chakra-ui/icon@3.2.0)(@chakra-ui/layout@2.3.1)(@chakra-ui/media-query@3.3.0)(@chakra-ui/menu@2.2.1)(@chakra-ui/spinner@2.1.0)(@chakra-ui/system@2.6.2)(@emotion/react@11.11.1)(@types/react@18.2.39)(react-dom@18.2.0)(react@18.2.0)
+  cheerio:
+    specifier: 1.0.0-rc.12
+    version: 1.0.0-rc.12
   dexie:
     specifier: ^3.2.4
     version: 3.2.4
@@ -3459,6 +3465,16 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
+  /axios@1.6.7:
+    resolution: {integrity: sha512-/hDJGff6/c7u0hDkvkGxR/oy6CbCs8ziCsC7SqmhjfozqiJGc8Z11wrv9z9lYfY4K8l+H9TpjcMDX0xOZmx+RA==}
+    dependencies:
+      follow-redirects: 1.15.6
+      form-data: 4.0.0
+      proxy-from-env: 1.1.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /axobject-query@3.2.1:
     resolution: {integrity: sha512-jsyHu61e6N4Vbz/v18DHwWYKK0bSWLqn47eeDSKPB7m8tqMHF9YJ+mhIk2lVteyZrY8tnSj/jHOv4YiTCuCJgg==}
     dependencies:
@@ -3660,6 +3676,19 @@ packages:
       parse5: 7.1.2
       parse5-htmlparser2-tree-adapter: 7.0.0
       tslib: 2.6.2
+    dev: false
+
+  /cheerio@1.0.0-rc.12:
+    resolution: {integrity: sha512-VqR8m68vM46BNnuZ5NtnGBKIE/DfN0cRIzg9n40EIq9NOv90ayxLBXA8fXC5gquFRGJSTRqBq25Jt2ECLR431Q==}
+    engines: {node: '>= 6'}
+    dependencies:
+      cheerio-select: 2.1.0
+      dom-serializer: 2.0.0
+      domhandler: 5.0.3
+      domutils: 3.1.0
+      htmlparser2: 8.0.2
+      parse5: 7.1.2
+      parse5-htmlparser2-tree-adapter: 7.0.0
     dev: false
 
   /chokidar@3.5.3:
@@ -4858,6 +4887,16 @@ packages:
         optional: true
     dependencies:
       debug: 4.3.4
+    dev: false
+
+  /follow-redirects@1.15.6:
+    resolution: {integrity: sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
     dev: false
 
   /for-each@0.3.3:
@@ -6625,6 +6664,10 @@ packages:
 
   /proto-list@1.2.4:
     resolution: {integrity: sha512-vtK/94akxsTMhe0/cbfpR+syPuszcuwhqVjJq26CuNDgFGj682oRBXOP5MJpv2r7JtE8MsiepGIqvvOTBwn2vA==}
+    dev: false
+
+  /proxy-from-env@1.1.0:
+    resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
     dev: false
 
   /psl@1.9.0:
