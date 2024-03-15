@@ -27,7 +27,10 @@ export async function GET(request: NextRequest) {
       message: "success",
       absoluteOgImageUrl,
       headers: {
-        "Access-Control-Allow-Origin": serverBaseUrl,
+        "Access-Control-Allow-Origin":
+          process.env.NODE_ENV === "production"
+            ? "https://www.kokua.wiki"
+            : serverBaseUrl,
         "Access-Control-Allow-Methods": "GET",
       },
     });
