@@ -26,9 +26,7 @@ const ResourceDataSection: FC<{
         })}
       </SimpleGrid>
 
-      {/* {!hasFilters && resources.length < total && ( */}
-      <NextButton resources={resources} />
-      {/* )} */}
+      {resources.length < total && <NextButton resources={resources} />}
 
       {resources?.length === 0 && (
         <Center h="60vh" maxW="500px" mx="auto" textAlign="center">
