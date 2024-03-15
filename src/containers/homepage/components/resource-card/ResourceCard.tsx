@@ -95,15 +95,13 @@ const ResourceCard = (props: Resource) => {
           <TagsSection data={tags} />
         </ContentContainer>
 
-        {/*
-
         <ContentContainer mt="32px">
           <HStack justifyContent="space-between">
             <LikeButton resourceId={_id} upvotes={upvotes} />
 
             {suggestedBy && <SuggestedIndicator data={suggestedBy} />}
           </HStack>
-        </ContentContainer> */}
+        </ContentContainer>
       </Flex>
     </ChakraLink>
   );
