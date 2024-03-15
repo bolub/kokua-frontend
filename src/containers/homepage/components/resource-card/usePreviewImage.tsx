@@ -1,18 +1,15 @@
-import { getLinkPreview } from "link-preview-js";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { baseUrl } from "@/utils/api";
 
 export const usePreviewImage = ({ url }: { url: string }) => {
   const [previewImage, setPreviewImage] = useState("");
 
   useEffect(() => {
     const getPreviewData = async () => {
-      try {
-        const data = await getLinkPreview(url);
-        setPreviewImage(
-          // @ts-ignore
-          (data?.images && data?.images[0]) || ""
-        );
-      } catch (error) {}
+      const response = await axios.get(`${baseUrl}/api/og-image?url=${url}`);
+
+      setPreviewImage(response.data.absoluteOgImageUrl);
     };
 
     getPreviewData();
