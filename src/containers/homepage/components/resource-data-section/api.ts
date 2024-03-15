@@ -63,10 +63,7 @@ export const getResources = async ({
   const totalResourcesToDisplay =
     (!!total ? parseInt(total) : undefined) || PAGE_SIZE;
 
-  const hasFilters = search.length > 0 || tag.length > 0;
-
-  const displayResourceString =
-    hasFilters && `[0...${totalResourcesToDisplay}]`;
+  const displayResourceString = `[0...${totalResourcesToDisplay}]`;
 
   const filterAction = actions({
     search,
@@ -96,7 +93,7 @@ export const getResources = async ({
     `;
 
   const countQuery = `
-    count(*[_type == 'resource'])
+    count(*[_type == 'resource' ${filterAction() || ""}])
     `;
 
   const result = await client.fetch<Resource[]>(query);
