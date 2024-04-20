@@ -43,6 +43,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
       <CacheProvider>
         <MetricalpReactProvider
+          allowCustomElmEvents
           tid={process.env.NEXT_PUBLIC_METRICALP_TID as string}
         >
           <PlausibleProvider domain="kokua.wiki">

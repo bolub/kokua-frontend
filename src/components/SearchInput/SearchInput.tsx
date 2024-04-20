@@ -16,6 +16,7 @@ import { useQueryParamsActions } from "@/hooks/useQueryParamsActions";
 import { chakraStyles, componentsDesktop, SelectOption } from "./components";
 import { useOptions } from "./useOptions";
 import { usePlausible } from "next-plausible";
+import { useMetricalp } from "@metricalp/react";
 
 import { useEffect, useState } from "react";
 
@@ -24,6 +25,7 @@ export const SearchInput = () => {
   const { defaultOptions, queryOptions, promiseOptions } = useOptions();
 
   const plausible = usePlausible();
+  const metricalpEvent = useMetricalp();
 
   const onChange = (optionValues: OnChangeValue<SelectOption, true>) => {
     const allSearchValues = optionValues
@@ -47,6 +49,12 @@ export const SearchInput = () => {
 
     plausible("pageview", {
       props: { tag: allTagValues.join("&"), query: allSearchValues.join("&") },
+    });
+
+    metricalpEvent({ type: "filter_resources", tag: allTagValues.join("&") });
+    metricalpEvent({
+      type: "filter_resources",
+      search: allSearchValues.join("&"),
     });
   };
 
