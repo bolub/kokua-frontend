@@ -7,6 +7,7 @@ import { DM_Sans } from "next/font/google";
 import PlausibleProvider from "next-plausible";
 import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 import Script from "next/script";
+import { MetricalpReactProvider } from "@metricalp/react";
 
 const dm_sans = DM_Sans({ subsets: ["latin"] });
 
@@ -41,18 +42,22 @@ export function Providers({ children }: { children: React.ReactNode }) {
       />
 
       <CacheProvider>
-        <PlausibleProvider domain="kokua.wiki">
-          <ChakraProvider theme={theme}>
-            {children}
+        <MetricalpReactProvider
+          tid={process.env.NEXT_PUBLIC_METRICALP_TID as string}
+        >
+          <PlausibleProvider domain="kokua.wiki">
+            <ChakraProvider theme={theme}>
+              {children}
 
-            <ProgressBar
-              height="4px"
-              color="#0018E7"
-              options={{ showSpinner: false }}
-              shallowRouting
-            />
-          </ChakraProvider>
-        </PlausibleProvider>
+              <ProgressBar
+                height="4px"
+                color="#0018E7"
+                options={{ showSpinner: false }}
+                shallowRouting
+              />
+            </ChakraProvider>
+          </PlausibleProvider>
+        </MetricalpReactProvider>
       </CacheProvider>
     </>
   );
