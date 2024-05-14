@@ -1,20 +1,18 @@
 import { Providers } from "../(website)/providers";
 import { DataLayer } from "@/components/DataLayer";
 
-export default function RootLayout({
+export default function WebsiteLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
     <>
-      <html lang="en">
-        <body>
-          <Providers>
-            <DataLayer>{children}</DataLayer>
-          </Providers>
-        </body>
-      </html>
+      <main>
+        <Providers>
+          <DataLayer>{children}</DataLayer>
+        </Providers>
+      </main>
     </>
   );
 }
