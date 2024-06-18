@@ -1,5 +1,4 @@
 /** @type {import('next').NextConfig} */
-
 const nextConfig = {
   reactStrictMode: true,
   images: {
@@ -11,5 +10,12 @@ const nextConfig = {
     ],
   },
 };
+
+if (process.env.MIGHTYMELD) {
+  const { options } = require("@mightymeld/swc-plugin/options");
+  nextConfig.experimental = {
+    swcPlugins: [["@mightymeld/swc-plugin", options()]],
+  };
+}
 
 module.exports = nextConfig;
