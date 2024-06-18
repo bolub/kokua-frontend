@@ -5,5 +5,6 @@
   ],
   "web_server_url": "http://localhost:3000",
   "editor": "url:vscode://file/%FILENAME:%LINE:%COLUMN",
-  "run": "npm run dev"
+  "run": "npm run dev",
+  "prefab_dir": "src/prefabs"
 }
