@@ -16,8 +16,10 @@ const TagsSection: FC<{
   return (
     <Wrap spacingX="12px" spacingY={"7px"}>
       {data?.map((t) => {
+        if (!t) return;
+
         return (
-          <WrapItem key={t._id}>
+          <WrapItem key={t?._id}>
             <ChakraTag
               onClick={(e) => {
                 e.preventDefault();
@@ -26,7 +28,7 @@ const TagsSection: FC<{
                 router.push(`/?${search.toString()}`);
               }}
             >
-              {t.name}
+              {t?.name}
             </ChakraTag>
           </WrapItem>
         );
