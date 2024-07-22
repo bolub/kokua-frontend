@@ -16,6 +16,8 @@ const ResourceDataSection: FC<{
 
   const label = `${resources?.length} of ${total} resources`;
 
+  console.log(label);
+
   return (
     <Box mt="10px">
       <Header query={params.query} tag={params.tag} label={label} />
